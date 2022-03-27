@@ -1,7 +1,7 @@
 # Portofolio-App
 
 ## Title
-Home 
+TADAIMA 
 
 ## Overview
 This is my portfolio app, which is designed to facilitate managing a house and building a stress-free living environment. The potential users are family members or friends who share an accommodation. Providing a virtual forum and visualising individual schedules, this app enables housemates to easily keep updated and allocate house chores accordingly.
