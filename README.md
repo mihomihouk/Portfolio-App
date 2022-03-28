@@ -1,34 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Portofolio-App
 
-## Getting Started
+## Title
+TADAIMA 
 
-First, run the development server:
+## Overview
+This is my portfolio app, which is designed to facilitate managing a house and building a stress-free living environment. The potential users are family members or friends who share an accommodation. Providing a virtual forum and visualising individual schedules, this app enables housemates to easily keep updated and allocate house chores accordingly.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Target Users
+- People living with others 
+- Housemates and families who want to improve communication among themselves 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Background
+### Problems
+- Not sure when who is out / in the house
+- No records for descisions & discussions
+- Difficult to manage chore allocations
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Solutions (Main Features of this App)
+- Shared calender to keep everyone updated about others' schedule
+- Discussion feed to raise issues, leave comments, and record descions that have been made
+- Housemate Rota that shows assignees and their tasks for each week
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Main Functions
+- Create, Read, Update, Delete
+- Comment
+- Sort, Filter, 
+- Login, Signup, Logout via Authentication System
+- Store user & Different Sets of Information on a Cloud Database
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Development
+- Developer: Miho Inagaki
+- Project Period: 28 March 2022 - 18 Apr 2022 (4weeks)
 
-## Learn More
+## Languages, Libraries, Frameworks, Tools
+- React
+- Next.js
+- Firebase
+- Agile
+- Material-UI
 
-To learn more about Next.js, take a look at the following resources:
+## Similar Apps
+### Family Organizer - Calendar 
+- iOS | https://apps.apple.com/us/app/family-organizer-calendar/id978882773?ign-mpt=uo%3D8
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Tody
+- iOS | https://play.google.com/store/apps/details?id=com.looploop.tody&hl=en
+- Android | https://play.google.com/store/apps/details?id=com.looploop.tody&hl=en
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### OurHome
+- Android | https://play.google.com/store/apps/details?id=com.getfairshare.ourhome&hl=en_US
+- iOS | https://apps.apple.com/us/app/ourhome-chores-and-rewards/id879717020
 
-## Deploy on Vercel
+### Splitwise
+- Android | https://play.google.com/store/apps/details?id=com.Splitwise.SplitwiseMobile
+- iOS | https://apps.apple.com/us/app/splitwise/id458023433
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Our Groceries Shopping List
+- Android | https://play.google.com/store/apps/details?id=com.headcode.ourgroceries
+- iOS | https://apps.apple.com/us/app/our-groceries-shopping-list/id325851015
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Information
+## Release URL
+???
