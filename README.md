@@ -12,14 +12,25 @@ This is my portfolio app, which is designed to facilitate managing a house and b
 
 ## Background
 ### Problems
-- Not sure when who is out / in the house
 - No records for descisions & discussions
-- Difficult to manage chore allocations
+- Difficult to keep track on everyone's events (holiday)
 
 ### Solutions (Main Features of this App)
 - Shared calender to keep everyone updated about others' schedule
 - Discussion feed to raise issues, leave comments, and record descions that have been made
-- Housemate Rota that shows assignees and their tasks for each week
+
+## Pages & Function
+
+```
+tadaima
+|- Signup (Inputs: Housemate-Name, Email, Password | Signup Button)
+|- Login (Inputs: Email, Password | Login Button)
+|- Dashbord (Overview???????)
+|- Discussion (List: Title, "started by miho 20 hours ago" | Category-Filter | Title-Searchbar | Sorting: Settled, Open)
+    |-Create Discussion (Inputs: Title, Markdown Detail, Select Category | Add-Discussion Button)
+    |-Indivisual Discussion Detail (Detail & Edit Window | Edit Button | Comment-List | Create-Comment Modal | Delete this Discussion Button)
+|-Calender (Calendar | Add-new-events Modal | Month Pagenator | Housemate-Filter)
+```
 
 ## Main Functions
 - Create, Read, Update, Delete
@@ -35,6 +46,7 @@ This is my portfolio app, which is designed to facilitate managing a house and b
 ## Languages, Libraries, Frameworks, Tools
 - React
 - Next.js
+- Typescript
 - Firebase
 - Agile
 - Material-UI
