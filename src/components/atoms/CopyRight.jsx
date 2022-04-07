@@ -9,7 +9,7 @@ const CopyRight = ({props}) => {
       <Typography variant="body2" color="text.secondary" align="center" {...props}>
         {'Copyright © '}
         <Link color="inherit" href="https://github.com/mihomihouk">
-          miho's GitHub
+          miho
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}
