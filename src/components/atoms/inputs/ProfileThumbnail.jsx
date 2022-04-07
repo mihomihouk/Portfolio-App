@@ -12,7 +12,6 @@ const ProfileThumbnail = () => {
         fullWidth
         name="profile image"
         type="file"
-        helperText=""
       />
     </>
   )
