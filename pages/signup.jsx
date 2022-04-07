@@ -9,7 +9,6 @@ import CopyRight from '../src/components/atoms/CopyRight'
 import UserName from '../src/components/atoms/inputs/UserName'
 import Password from '../src/components/atoms/inputs/Password'
 import Email from '../src/components/atoms/inputs/Email'
-import RememberMe from '../src/components/atoms/inputs/RememberMe'
 import ProfileThumbnail from '../src/components/atoms/inputs/ProfileThumbnail' 
 
 function Login() {
@@ -48,7 +47,6 @@ function Login() {
               <Email/>
               <Password/>
               <ProfileThumbnail/>
-              <RememberMe/>
               <LoginButton action="Sign up"/>
               <CopyRight sx={{ mt: 5 }} />
             </Box>
