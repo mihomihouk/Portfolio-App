@@ -1,14 +1,13 @@
 import React from 'react'
 
 //styles
-import { Box, Checkbox, FormControlLabel, Grid, Link, Paper,TextField, Typography  } from '@mui/material' 
+import { Box, Grid, Link, Paper, Typography } from '@mui/material' 
 
 //components
 import LoginButton from '../src/components/atoms/buttons/LoginButton'
 import CopyRight from '../src/components/atoms/CopyRight'
 import Password from '../src/components/atoms/inputs/Password'
 import Email from '../src/components/atoms/inputs/Email'
-import RememberMe from '../src/components/atoms/inputs/Email'
 
 
 function Login() {
@@ -45,7 +44,6 @@ function Login() {
             <Box component="form" noValidate sx={{ mt: 1 }}>
               <Email/>
               <Password/>
-              <RememberMe/>
               <LoginButton action="Login"/>
               <Grid container>
                 <Grid item xs>
