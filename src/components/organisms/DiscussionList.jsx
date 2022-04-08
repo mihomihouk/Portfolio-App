@@ -2,25 +2,14 @@ import React from 'react'
 import Link from "next/link"
 
 //styles
-import { Divider, Grid, List, ListItem, ListItemText, Paper, Typography} from "@mui/material"
+import { Divider, List, ListItem, ListItemText, Paper, Typography} from "@mui/material"
 
-function DiscussionList() {
-
-  const discussionList = [
-    {
-      title: "Home Party",
-      id:1
-    },
-    {
-      title: "Clean Backyard",
-      id:2
-    }
-  ]
+function DiscussionList({discussions}) {
 
   return (
     <>
       <List sx={{height:"20%", width:"100%"}}>
-        {discussionList.map(item => (
+        {discussions.map(item => (
           <ListItem key={item.id}>
             <Link href={`/discussion/${item.id}`}>
               <Paper sx={{height:"100%", width:"100%"}}>

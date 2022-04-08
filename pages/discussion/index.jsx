@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from "next/router"
-
+import { useCollection } from "../../src/hooks/useCollection"
 
 //styles
 import { Container, Box, Stack } from '@mui/material'
@@ -14,14 +14,19 @@ import Searchbar from "../../src/components/atoms/Searchbar"
 import DiscussionList from "../../src/components/organisms/DiscussionList"
 import Sidebar from "../../src/components/organisms/Sidebar"
 
+
 function index() {
 
   const router = useRouter()
+
+  const { documents: discussions } = useCollection("discussions")
+
 
   const handleClick = (e) => {
     e.preventDefault()
     router.push("/discussion/new")
   }
+
 
   return (
     <>
@@ -54,7 +59,7 @@ function index() {
               <Searchbar/>
             </Box>
             <Box sx={{height: "80%"}}>
-              <DiscussionList/>
+              {discussions && <DiscussionList discussions={discussions}/>}
             </Box>
           </Stack>
         </Container>
