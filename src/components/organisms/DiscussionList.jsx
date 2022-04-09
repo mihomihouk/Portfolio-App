@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from "next/link"
+import formatDistanceToNow from "date-fns/formatDistanceToNow"
 
 //styles
 import { Divider, List, ListItem, ListItemText, Paper, Typography} from "@mui/material"
@@ -18,7 +19,7 @@ function DiscussionList({discussions}) {
                   </ListItemText>
                   <Divider/>
                   <ListItemText>
-                    <Typography variant="body2" component="span" sx={{px:2}}>Started 2 days ago</Typography>
+                    <Typography variant="body2" component="span" sx={{px:2}}>started {formatDistanceToNow(item.createdAt.toDate(), { addSuffix: true })}</Typography>
                   </ListItemText>
                 </Paper>
             </Link>
