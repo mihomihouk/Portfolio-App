@@ -28,7 +28,6 @@ function New() {
 
     const ref = collection(db, "discussions")
 
-    try { 
       await addDoc(ref, {
       title: newTitle, 
       detail: newDetail,
@@ -41,9 +40,6 @@ function New() {
       setNewCategory("")
       router.push("/discussion")
 
-    } catch(err) {
-      console.log(err)
-    }
 
   }
 

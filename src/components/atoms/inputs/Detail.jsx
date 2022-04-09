@@ -5,7 +5,7 @@ import { TextField } from "@mui/material"
 
 function Detail(props) {
 
-  const { size, rows } = props
+  const { size, rows, onChange } = props
 
   return (
     <>
@@ -15,6 +15,7 @@ function Detail(props) {
         multiline
         rows={rows}
         fullWidth
+        onChange={onChange}
       />
     </>
   )

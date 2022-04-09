@@ -4,10 +4,12 @@ import React from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material';
 
-function DeleteButton() {
+function DeleteButton(props) {
+
+  const { onClick } = props
   return (
     <>
-      <IconButton>
+      <IconButton onClick={onClick}>
         <DeleteIcon/>
       </IconButton>
     </>
