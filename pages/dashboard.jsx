@@ -11,15 +11,10 @@ import Sidebar from '../src/components/organisms/Sidebar'
 import OnlineUsers from '../src/components/organisms/OnlineUsers'
 
 const Dashboard = () => {
-  const [ mobileModalOpen, setMobileModalOpen ] = useState(false)
-
-  const handleDrawerToggle = () => {
-    setMobileModalOpen(!mobileModalOpen)
-  }
-
+ 
   return (
     <>
-      <Header pageTitle="Dashboard" open={mobileModalOpen} handleDrawerToggle={handleDrawerToggle}/>
+      <Header />
       <Grid container sx={{display:'flex'}}>
         <Grid   
           item 
@@ -28,7 +23,7 @@ const Dashboard = () => {
           sx={{ flexShrink: { sm: 0 } }}
           aria-label="mailbox folders"
         >
-          <Sidebar handleDrawerToggle={handleDrawerToggle}/>
+          <Sidebar/>
         </Grid>
         <Grid item container xs={8} sx={{ flexGrow: 1, p: 3, my: 15, display: 'flex', justifyContent:"center"}}>
           <RotaList/>
