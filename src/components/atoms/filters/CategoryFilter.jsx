@@ -23,10 +23,10 @@ function CategoryFilter() {
           onChange={handleChange}
         >
           <MenuItem value="" disabled>Categories</MenuItem>
-          <MenuItem value={1}>All</MenuItem>
-          <MenuItem value={2}>Announcements</MenuItem>
-          <MenuItem value={3}>Ideas</MenuItem>
-          <MenuItem value={4}>Questions</MenuItem>
+          <MenuItem value="All">All</MenuItem>
+          <MenuItem value="Announcements">Announcements</MenuItem>
+          <MenuItem value="Ideas">Ideas</MenuItem>
+          <MenuItem value="Questions">Questions</MenuItem>
         </Select>
     </>
   )
