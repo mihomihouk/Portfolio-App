@@ -1,9 +1,12 @@
 import { useRouter } from "next/router"
 import React,{useState} from "react"
+import { useDocument } from "../../src/hooks/useDocument"
 
 //styles
-import { Chip, Divider, Box, Typography, List, Stack, Container } from "@mui/material"
-import LightbulbIcon from '@mui/icons-material/Lightbulb'
+import { Chip, Divider, Box, Typography, List, Stack, Container, FormControl, Input } from "@mui/material"
+import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates'
+import CampaignIcon from '@mui/icons-material/Campaign'
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark'
 
 //components
 import Header from "../../src/components/organisms/Header"
@@ -18,14 +21,42 @@ import CancelButton from "../../src/components/atoms/buttons/CancelButton"
 import Detail from "../../src/components/atoms/inputs/Detail"
 import CategorySelector from "../../src/components/atoms/selectors/CategorySelector"
 
+
+
+const DiscussionIcon = ({document}) => {
+  switch (document.category){
+    case 1:
+      return <CampaignIcon fontSize="large"/>;
+    case 2:
+      return <TipsAndUpdatesIcon fontSize="large"/>;
+    case 3:
+      return <QuestionMarkIcon fontSize="large"/>;
+    default:
+      return null;
+  }
+}
+
+
 const About = () => {
   const router = useRouter()
+  const { id } = router.query
+
+  const { error, document } = useDocument("discussions", id)
 
   const [isEditingTitle, setIsEditingTitle] = useState(false)
   const [isEditingDetail, setIsEditingDetail] = useState(false)
   const [isEditingComment, setIsEditingComment] = useState(false)
   
   const [category, setCategory] = useState('');
+
+  if (error) {
+    return <Typography>{error}</Typography>
+  }
+  if (!document) {
+    return <Typography>Loading...</Typography>
+  }
+
+  
 
   const handleChange = (event) => {
     setCategory(event.target.value)
@@ -44,14 +75,14 @@ const About = () => {
           </Box>
           <Stack spacing={1}>
             <Box sx={{display:"flex", justifyContent: "space-between", alignItems: "center", height:"10%"}}>
-              <Box sx={{display:"flex", alignItems: "center"}}>
+              <Box sx={{display:"flex", alignItems: "center", width: "70%"}}>
               {!isEditingTitle ? (
                 <>
                   <Box>
-                    <LightbulbIcon fontSize="large"/>
+                    <DiscussionIcon document={document}/>
                   </Box>
                   <Box sx={{px:2}}>
-                    <Typography variant="h4" component="h2">Title</Typography>
+                    <Typography variant="h4" component="h2">{document.title}</Typography>
                   </Box>
                   <Box>
                     <EditButton onClick={()=>setIsEditingTitle(true)}/>
@@ -61,13 +92,22 @@ const About = () => {
               ):
               (
                 <>
-                  <Stack spacing={1}>
+                  <Stack spacing={1} sx={{width:"100%"}}>
                     <Box>
                       <CategorySelector onChange={handleChange} category={category}/>
                     </Box>
-                    <Box sx={{display:"flex"}}>
+                    <Box sx={{display:"flex", alignItems:"center"}}>
                       <Box sx={{width:"100%"}}>
-                        <Title size="small"/>
+                        <FormControl
+                          required
+                          size="small"
+                          sx={{width:"100%"}}
+                        >
+                            <Input
+                              placeholder="Title"
+                              onChange={(e) => setNewTitle(e.target.value)}
+                            />
+                        </FormControl>
                       </Box>
                       <Box sx={{display: "flex",justifyContent:"flex-end",px:2}}>
                         <Box sx={{mr:2}}>
@@ -90,7 +130,7 @@ const About = () => {
             {!isEditingDetail? (
               <>
                 <Box sx={{height:"20%"}}>
-                  <DiscussionCard onClick={()=>setIsEditingDetail(true)}/>
+                  <DiscussionCard onClick={()=>setIsEditingDetail(true)} document={document}/>
                 </Box>
               </>
             ):(

@@ -9,7 +9,7 @@ import DeleteButton from "../atoms/buttons/DeleteButton"
 
 function DiscussionCard(props) {
 
-  const { onClick } = props
+  const { onClick, document } = props
 
   return (
     <>
@@ -32,7 +32,7 @@ function DiscussionCard(props) {
         </Box>
         <Box sx={{p:1, height: "70%"}}>
           <Typography>
-            aaaaaaaaaaaaaaaaaaaaa
+            {document.detail}
           </Typography>
         </Box>
       </Paper>

@@ -24,9 +24,9 @@ function CategoryFilter() {
         >
           <MenuItem value="" disabled>Categories</MenuItem>
           <MenuItem value="All">All</MenuItem>
-          <MenuItem value="Announcements">Announcements</MenuItem>
-          <MenuItem value="Ideas">Ideas</MenuItem>
-          <MenuItem value="Questions">Questions</MenuItem>
+          <MenuItem value="Announcement">Announcement</MenuItem>
+          <MenuItem value="Idea">Idea</MenuItem>
+          <MenuItem value="Question">Question</MenuItem>
         </Select>
     </>
   )

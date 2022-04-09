@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { db } from "../../src/firebase/config"
 
 //firebase imports
-import { collection, onSnapshot, orderBy, query} from "firebase/firestore"
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore"
 
 export const useCollection = (c, order) => {
   const [documents, setDocuments] = useState(null)
