@@ -19,7 +19,10 @@ function index() {
 
   const router = useRouter()
 
-  const { documents: discussions } = useCollection("discussions")
+  const { documents: discussions } = useCollection(
+    "discussions",
+    ["createdAt", "desc"]
+  )
 
 
   const handleClick = (e) => {

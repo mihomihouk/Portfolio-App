@@ -2,13 +2,17 @@ import { useState, useEffect } from "react"
 import { db } from "../../src/firebase/config"
 
 //firebase imports
-import { collection, onSnapshot } from "firebase/firestore"
+import { collection, onSnapshot, orderBy, query} from "firebase/firestore"
 
-export const useCollection = (c) => {
+export const useCollection = (c, order) => {
   const [documents, setDocuments] = useState(null)
 
   useEffect(() => {
     let ref = collection(db, c)
+
+    if(order){
+      ref = query(ref,orderBy(...order))
+    }
 
     const unsub = onSnapshot(ref, (snapshot) => {
       let results = []
@@ -19,7 +23,7 @@ export const useCollection = (c) => {
     })
 
     return () => unsub()
-  },[c])
+  },[c, orderBy])
 
   return { documents }
 }
