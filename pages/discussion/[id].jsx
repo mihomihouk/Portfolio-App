@@ -173,7 +173,7 @@ const About = () => {
               }
               </Box>
               <Box>
-                <CommentModal/>
+                <CommentModal document={document}/>
               </Box>
             </Box>
             {!isEditingDetail? (
@@ -206,7 +206,7 @@ const About = () => {
             <Box container sx={{ pt: 3, height:"60%", width: "100%"}} >
               <List sx={{width: "100%"}}>
                 {!isEditingComment ? (
-                  <CommentCard onClick={()=>setIsEditingComment(true)}/>
+                  <CommentCard document={document} onClick={()=>setIsEditingComment(true)}/>
                 ):(
                   <Stack spacing={2}>
                     <Box>

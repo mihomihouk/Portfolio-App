@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 
 //firebase imports
 import { db } from "../../src/firebase/config"
-import { collection, addDoc, serverTimestamp } from "firebase/firestore"
+import { collection, addDoc, Timestamp } from "firebase/firestore"
 
 //styles
 import { Box, Button, Container, FormControl, Input, Stack, TextField, Typography } from '@mui/material'
@@ -28,19 +28,20 @@ function New() {
 
     const ref = collection(db, "discussions")
 
-      await addDoc(ref, {
-      title: newTitle, 
-      detail: newDetail,
-      category: newCategory,
-      createdAt: serverTimestamp()
-      })
+    const unsub = await addDoc(ref, {
+    title: newTitle, 
+    detail: newDetail,
+    category: newCategory,
+    createdAt: Timestamp.fromDate(new Date()),
+    comments: []
+    })
 
-      setNewTitle("")
-      setNewDetail("")
-      setNewCategory("")
-      router.push("/discussion")
+    setNewTitle("")
+    setNewDetail("")
+    setNewCategory("")
+    router.push("/discussion")
 
-
+    return () => unsub()
   }
 
   const handleCancel = () => {
