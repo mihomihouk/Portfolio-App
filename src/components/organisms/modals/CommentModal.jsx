@@ -37,8 +37,7 @@ function DiscussionModal(props) {
     }
 
     const docRef = doc(db, "discussions", document.id)
-
-
+  
     await updateDoc(docRef, {
       comments: [...document.comments, commentToAdd]
     })

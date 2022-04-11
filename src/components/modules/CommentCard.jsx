@@ -1,6 +1,9 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
 
+//firebase 
+import { db } from "../../firebase/config"
+import { doc, updateDoc, Timestamp } from "firebase/firestore"
 
 //styles
 import { Avatar, Box, List, ListItemAvatar, ListItemText, ListItem, Paper, Stack, Typography } from "@mui/material"
@@ -8,15 +11,62 @@ import { Avatar, Box, List, ListItemAvatar, ListItemText, ListItem, Paper, Stack
 //components
 import EditButton from "../atoms/buttons/EditButton"
 import DeleteButton from "../atoms/buttons/DeleteButton"
+import Detail from "../atoms/inputs/Detail"
+import CancelButton from '../atoms/buttons/CancelButton'
+import UpdateButton from '../atoms/buttons/UpdateButton'
 
 function CommentCard(props) {
 
-  const { document, onClick } = props
+  const { document } = props
+
+  const [isEditingComment, setIsEditingComment] = useState(false)
+  const [newComment, setNewComment] = useState("")
+  const [editingCommentId, setEditingCommentId] = useState("")
+
+  const handleEditComment = (id) => {
+    setEditingCommentId(id)
+    setIsEditingComment(true)
+  }
+
+
+  const handleDelete = async(id) => {
+
+    const ref = doc(db, "discussions", document.id)
+    const newComments = document.comments.filter(comment=> comment.id !== id)
+
+    await updateDoc(ref, {
+      comments: newComments
+    })
+
+  }
+
+  const handleCancelComment = () => {
+    setEditingCommentId("")
+    setNewComment("")
+    setIsEditingComment(false)
+  }
+
+  const handleUpdateComment = async() => {
+
+    const ref = doc(db, "discussions", document.id)
+    const newComments = document.comments.map(comment => (
+      comment.id === editingCommentId ? {...comment, content: newComment, updatedAt: Timestamp.fromDate(new Date())} : comment 
+    ))
+
+    await updateDoc(ref, {
+      comments: newComments
+    })
+
+    setEditingCommentId("")
+    setNewComment("")
+    setIsEditingComment(false)
+  }
 
   return (
     <>
-     <List>
-      {document.comments.map(comment => (
+    {!isEditingComment ? (
+      <List>
+      {document.comments && document.comments.map(comment => (
       <ListItem key={comment.id}>
         <Paper
           elevation={3}
@@ -29,10 +79,10 @@ function CommentCard(props) {
               </ListItemAvatar>
               <Box sx={{display:"flex"}}>
                 <Box>
-                  <EditButton onClick={onClick}/>
+                  <EditButton onClick={() => handleEditComment(comment.id)}/>
                 </Box>
                 <Box>
-                  <DeleteButton/>
+                  <DeleteButton onClick={() => handleDelete(comment.id)}/>
                 </Box>
               </Box>
             </Box>
@@ -52,7 +102,23 @@ function CommentCard(props) {
         </Paper>
       </ListItem>
       ))} 
-     </List>
+      </List>
+    ):(
+      <Stack spacing={2}>
+        <Box>
+          <Detail onChange={(e) => setNewComment(e.target.value)} rows={5}/> 
+        </Box>
+        <Box sx={{display:"flex", justifyContent: "flex-end"}}>
+          <Box>
+            <CancelButton onClick={handleCancelComment}/>
+          </Box>
+          <Box>
+            <UpdateButton　onClick={() => handleUpdateComment(document.comments.id)}/>
+          </Box>
+        </Box>
+      </Stack>
+    ) 
+    }
     </>
   )
 }
