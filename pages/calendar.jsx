@@ -1,47 +1,53 @@
-import React from "react";
-// import EventModal from "./components/EventModal";
+import React, {useState} from "react";
+import CalendarModal from "../src/components/organisms/modals/CalendarModal"
+import FullCalendar, { DateSelectArg } from "@fullcalendar/react"
+import dayGridPlugin from "@fullcalendar/daygrid"
+import interactionPlugin from "@fullcalendar/interaction"
 
 //styles 
 
-import { Grid } from "@mui/material"
+import { Box, Container } from "@mui/material"
 
 //components
-import CalendarHeader from "../src/components/organisms/Calendar/CalendarHeader"
-import CalendarSidebar from "../src/components/organisms/Calendar/CalendarSidebar"
-import MainCalendar from "../src/components/organisms/Calendar/MainCalendar"
 import Header from "../src/components/organisms/Header";
 import Sidebar from "../src/components/organisms/Sidebar"
 
 
 function calendar() {
 
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+
+  const handleDateClick = (DateSelectArg) => {
+    console.log(DateSelectArg)
+    handleOpen()
+
+  }
+
   return (
     <>
       {/* ここに新規作成用モーダル */}
-      {/* <EventModal /> */}
-      <Grid container>
-        <Grid >
+      <CalendarModal open={open} handleOpen={handleOpen} handleClose={handleClose}/>
+      <Box>
+        <Box>
           <Header/> 
-        </Grid>
-        <Grid container sx={{pt:9}}>
-          <Grid container item sx={{alignItems:"center", display: "flex", justifyContent: "space-between", px: "20px", width: "60%"}}> 
-            <CalendarHeader />
-          </Grid>
-          <Grid container item sx={{display:'flex', pl:2}}>
+        </Box>
+        <Container maxWidth="md" sx={{pt:9, width:"100%"}}>
+          {/* <Box sx={{display:'flex', height:"100%", width:"100%"}}>  */}
             {/* メイン */}
-            <Grid item xs={2} >
+            <Box >
               <Sidebar/>
-            </Grid>
-            <Grid container item xs={8} sx={{height:"100vh", display: "flex", flexDirection: "column"}}>
-              <MainCalendar/>
-            </Grid>
+            </Box>
+            <FullCalendar
+              plugins={[dayGridPlugin, interactionPlugin]}
+              initialEvents={[{ title: "initial event", start: new Date() }]}
+              dateClick={handleDateClick}
+            />
             {/* 左のサイドバー */}
-            <Grid item xs={4}>
-              <CalendarSidebar />
-            </Grid>
-          </Grid> 
-        </Grid>
-      </Grid>
+           {/* </Box>  */}
+         </Container> 
+      </Box>
     </>
   );
   

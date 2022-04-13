@@ -1,59 +1,51 @@
-import React from 'react'
+import React,{useState} from 'react'
 
 //styles
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
-import { Button, Chip, Grid, List, ListItem, ListItemButton } from "@mui/material"
+import { Box, List,Typography, ListItem, ListItemText } from "@mui/material"
+import CheckIcon from '@mui/icons-material/Check'
 
-// const labelsClasses = [
-//   "indigo",
-//   "gray",
-//   "green",
-//   "blue",
-//   "red",
-//   "purple",
-// ];
-
+const labelsClasses = [
+  "indigo",
+  "gray",
+  "green",
+  "blue",
+  "red",
+  "purple",
+];
 function TagSelector() {
+  const [selectedEvent, setSelectedEvent] = useState("")
+  const [selectedLabel, setSelectedLabel] = useState(
+    selectedEvent
+      ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
+      : labelsClasses[0]
+  );
 
   return (
     <>
-      <Grid item xs={2}>
+      <Box>
         <LocalOfferIcon />
-      </Grid>
-      <Grid item xs={10}>
-        <List sx={{display:"flex", justifyContent:"space-between", width:1}}>
-          <ListItem> 
-            <ListItemButton>
-              <Chip label="EF" sx={{bgcolor:"indigo"}}/>
-            </ListItemButton>
+      </Box>
+      <Box >
+        <List sx={{display:"flex"}}>
+        {labelsClasses.map((lblClass, i) => (
+          <ListItem
+            key={i}
+            onClick={() => setSelectedLabel(lblClass)}
+          > 
+            <ListItemText variant="body2" component="span"
+              sx={{bgcolor:`${lblClass}`, width:"24px", height:"24px", borderRadius:"100%", display:"flex", alignItems:"center", cursor: "pointer"}}
+            >
+              {selectedLabel === lblClass && (
+                <Typography >
+                  <CheckIcon size="sm" sx={{color:"white"}}/>
+                </Typography>
+              )}
+            </ListItemText>
           </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Chip label="EY" sx={{bgcolor:"gray"}}/>
-            </ListItemButton>
-            </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Chip label="L" sx={{bgcolor:"green"}}/>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-            <Chip label="M" sx={{bgcolor:"purple"}}/>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Chip label="N" sx={{bgcolor:"red"}}/>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <Chip label="S" sx={{bgcolor:"blue"}}/>
-            </ListItemButton>
-          </ListItem>
+        ))}
         </List>
-      </Grid>
+      </Box>
 
     </>
   )
