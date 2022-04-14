@@ -6,18 +6,17 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 
-const EventTime = () => {
-  const [value, setValue] = useState(null);
+const EventTime = (props) => {
+
+  const { date, onChange } = props
 
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
           sx={{width:"100%"}}
-          value={value}
-          onChange={(newValue) => {
-            setValue(newValue);
-          }}
+          value={date}
+          onChange={onChange}
           renderInput={(params) => <TextField {...params} sx={{width:"100%"}}/>}
         />
       </LocalizationProvider>

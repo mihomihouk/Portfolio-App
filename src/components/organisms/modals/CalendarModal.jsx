@@ -1,11 +1,14 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { db } from "../../../firebase/config"
+
+//firebase
+import { addDoc, collection } from "firebase/firestore"
 
 //styles
-import { Grid, TextField, Box, Stack } from "@mui/material"
+import { Grid, TextField, Typography, Box, Stack, List } from "@mui/material"
 import Modal from '@mui/material/Modal'
 import NotesIcon from '@mui/icons-material/Notes'
-import AccessTimeIcon from '@mui/icons-material/AccessTime'
-
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
 
 //components
@@ -15,9 +18,58 @@ import AddButton from "../../atoms/buttons/AddButton"
 import EventTime from "../../modules/EventTime"
 import TagSelector from "../../modules/TagSelector"
 
+
+const labelsClasses = [
+  "indigo",
+  "gray",
+  "green",
+  "blue",
+  "red",
+  "purple",
+];
+
 function CalendarModal(props) {
 
   const { open, handleClose } = props
+
+  const [title, setTitle] = useState("")
+  const [startDate, setStartDate] = useState("")
+  const [endDate, setEndDate] = useState("")
+  const [detail, setDetail] = useState("")
+  const [label, setLabel] = useState()
+
+ const handleClickClose = () => {
+   handleClose()
+   setTitle("")
+   setStartDate("")
+   setEndDate("")
+   setDetail("")
+   setLabel("")
+ }
+
+ const handleSubmit = async(e) => {
+   e.preventDefault()
+
+  const ref = collection(db, "events")
+
+  const unsub = await addDoc(ref, {
+    title, 
+    detail,
+    startDate,
+    endDate,
+    label,
+    id: Math.random()
+  })
+
+  handleClose()
+  setTitle("")
+  setStartDate("")
+  setEndDate("")
+  setDetail("")
+  setLabel("")
+
+  return () => unsub()
+ }
 
   return (
     <>
@@ -25,34 +77,44 @@ function CalendarModal(props) {
         open={open}
         onClose={handleClose}
       >
-        <Stack spacing={1.5} sx={{
+        <Stack spacing={1} sx={{
           position: "absolute",
           top:"50%", left:"50%",
           transform:"translate(-50%,-50%)",
           width:"40%",
-          height:"60%",
+          height:"70%",
           bgcolor: "background.paper",
           border: "2px solid #000", 
           boxShadow: 24, 
           p:"3%",
           }}>
           <Box sx={{display:"flex",justifyContent:"flex-end"}}>
-            <CloseButton/>
+            <CloseButton onClick={handleClickClose}/>
           </Box>
             <Box >
-              <Title/>
+              <Title title={title} onChange={(e) => setTitle(e.target.value)}/>
             </Box>
             <Box fullWidth sx={{display: "flex",alignItems: "center"}}>
               <Grid container sx={{alignItems: "center"}}>
-                <Grid item xs={1} >
-                  <AccessTimeIcon/>
+                <Grid item xs={2} >
+                  <Typography>From</Typography>
                 </Grid>
-                <Grid item sx={{width:"100%"}} xs={11} >
-                  <EventTime />
+                <Grid item sx={{width:"100%"}} xs={10} >
+                  <EventTime onChange={(newValue)=> setStartDate(newValue)} date={startDate}/>
                 </Grid>
               </Grid>
             </Box>
-            <Box sx={{ display: "flex",}} >
+            <Box fullWidth sx={{display: "flex",alignItems: "center"}}>
+              <Grid container sx={{alignItems: "center"}}>
+                <Grid item xs={2} >
+                  <Typography>To</Typography>
+                </Grid>
+                <Grid item sx={{width:"100%"}} xs={10} >
+                  <EventTime onChange={(newValue)=> setEndDate(newValue)} date={endDate}/>
+                </Grid>
+              </Grid>
+            </Box>
+            <Box sx={{ display: "flex"}} >
               <Grid container sx={{alignItems: "center"}}>
                 <Grid item xs={1} >
                   <NotesIcon/>
@@ -60,18 +122,27 @@ function CalendarModal(props) {
                 <Grid item xs={11} >
                   <TextField 
                     label="Description"
-                    multiline
                     fullWidth
-                    maxRows={4}
+                    value={detail} 
+                    onChange={(e) => setDetail(e.target.value)}
                   />
                 </Grid>
               </Grid>
             </Box>
             <Box sx={{ display: "flex", alignItems: "center"}} >
-              <TagSelector/>
-            </Box>
+              <Box>
+                <LocalOfferIcon />
+              </Box>
+              <Box >
+                <List sx={{display:"flex"}}>
+                {labelsClasses.map((lblClass, i) => (
+                  <TagSelector lblClass={lblClass} key={i} label={label} onClick={() => setLabel(lblClass)}/>
+                ))}
+                </List>
+              </Box>        
+               </Box>
           <Box>
-            <AddButton/>
+            <AddButton onClick={handleSubmit}/>
           </Box>
         </Stack>
       </Modal>

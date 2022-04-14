@@ -5,7 +5,7 @@ import { TextField } from '@mui/material'
 
 function Title(props) {
 
-  const { size, onChange } = props
+  const { title, size, onChange } = props
 
   return (
     <>
@@ -15,6 +15,7 @@ function Title(props) {
         fullWidth
         label="Title"
         name="title"
+        value={title}
         autoFocus
         onChange={onChange}
       />
