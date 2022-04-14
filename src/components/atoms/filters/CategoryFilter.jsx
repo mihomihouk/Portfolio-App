@@ -1,26 +1,22 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 //styles
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
-function CategoryFilter() {
+function CategoryFilter(props) {
 
-  const [category, setCategory] = useState('');
-
-  const handleChange = (event) => {
-    setCategory(event.target.value);
-  };
+  const { currentCategory, changeCategoryFilter } = props
 
 
   return (
     <>
         <Select
           sx={{width:170, height: 30}}
-          value={category}
+          value={currentCategory}
           displayEmpty
           defaultValue="All"
-          onChange={handleChange}
+          onChange={changeCategoryFilter}
         >
           <MenuItem value="" disabled>Categories</MenuItem>
           <MenuItem value="All">All</MenuItem>

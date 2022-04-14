@@ -5,27 +5,23 @@ import React, {useState} from 'react'
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
-function StatusFilter() {
+function StatusFilter(props) {
 
-  const [category, setCategory] = useState('');
-
-  const handleChange = (event) => {
-    setCategory(event.target.value);
-  };
+  const { changeStatusFilter, currentStatus } = props
 
   return (
     <>
       <Select
         sx={{width:170, height: 30}}
-        value={category}
+        value={currentStatus}
         displayEmpty
         defaultValue="All"
-        onChange={handleChange}
+        onChange={changeStatusFilter}
       >
         <MenuItem value="" disabled>Status</MenuItem>
-        <MenuItem value={1}>All</MenuItem>
-        <MenuItem value={2}>Open</MenuItem>
-        <MenuItem value={3}>Settled</MenuItem>
+        <MenuItem value="all">All</MenuItem>
+        <MenuItem value="open">Open</MenuItem>
+        <MenuItem value="settled">Settled</MenuItem>
       </Select>
     </>
   )

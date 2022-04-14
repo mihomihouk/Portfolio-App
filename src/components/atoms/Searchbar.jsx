@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{ useState } from 'react'
 
 //styles
 import SearchIcon from '@mui/icons-material/Search';
@@ -48,7 +48,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 
-function Searchbar() {
+function Searchbar(props) {
+
+  const { onChange, currentSearch } = props
   const [searched, setSearched] = useState("")
 
   // const handleSearch = (searchedVal) => {
@@ -64,6 +66,8 @@ function Searchbar() {
         <StyledInputBase
           placeholder="Search…"
           inputProps={{ 'aria-label': 'search' }}
+          value={currentSearch}
+          onChange={onChange}
         />
       </Search>
     </>

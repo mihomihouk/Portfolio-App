@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{ useEffect, useState } from 'react'
 import { useRouter } from "next/router"
 import { useCollection } from "../../src/hooks/useCollection"
 
@@ -13,17 +13,100 @@ import CreateButton from "../../src/components/atoms/buttons/CreateButton"
 import Searchbar from "../../src/components/atoms/Searchbar"
 import DiscussionList from "../../src/components/organisms/DiscussionList"
 import Sidebar from "../../src/components/organisms/Sidebar"
+import { areArraysEqual } from '@mui/lab/node_modules/@mui/base'
 
 
-function index() {
+function Main() {
 
   const router = useRouter()
 
-  const { documents: discussions } = useCollection(
+  const [currentCategory, setCurrentCategory] = useState("")
+  const [currentStatus, setCurrentStatus] = useState('')
+  const [currentSearch, setCurrentSearch] = useState("")
+  const [discussions, setDiscussions] = useState([])
+
+  const { documents } = useCollection(
     "discussions",
-    ["createdAt", "desc"]
+    ["createdAt", "desc"],
   )
 
+  const changeStatusFilter = (e) => {
+    setCurrentStatus(e.target.value)
+  }
+
+  const changeCategoryFilter = (e) => {
+    setCurrentCategory(e.target.value)
+  }
+
+  //category filtering
+  const filterByCategory = (array) => {
+    if(!array) {
+      return
+    }
+    const filteredArray = array.filter(item => {
+      switch(currentCategory) {
+        case "All":
+          return areArraysEqual
+        case "Announcement":
+        case "Idea":
+        case "Question":
+          return item.category === currentCategory
+        default:
+          return array
+      }
+    }) 
+    return filteredArray
+  }
+
+  //status filtering
+  const filterByStatus = (array) => {
+    if(!array) {
+      return
+    }
+    const filteredArray = array.filter(item => {
+      switch(currentStatus) {
+        case "All":
+          return array
+        case "open":
+        case "settled":
+          return item.status === currentStatus
+        default:
+          return array
+      }
+    })
+    return filteredArray
+}
+
+  //searchbar filtering
+  const handleChangeSeachbar = (e) => {
+    let formattedSearch = e.target.value.toLowerCase()
+    setCurrentSearch(formattedSearch)
+  }
+
+  // //searchbar filtering
+  const filterBySearch = (array) => {
+    if(!array){
+      return
+    }
+    const FilteredArray = array.filter(item => {
+      if (currentSearch === ""){
+        return array
+      }else{
+        return item.title.toLowerCase().includes(currentSearch)
+      }
+    })
+    return FilteredArray
+  }
+
+  useEffect(()=>{
+    if(!documents){
+      return;
+    }
+    const firstFilter = filterByCategory(documents)
+    const secondFilter = filterByStatus(firstFilter)
+    const thirdFilter = filterBySearch(secondFilter)
+    setDiscussions(thirdFilter)
+  },[currentCategory, currentStatus, currentSearch, documents])
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -44,12 +127,14 @@ function index() {
           <Stack spacing={1}>
             <Box sx={{display:"flex", justifyContent: "space-between", aligns: "center", height:"10%"}} >
               <Box sx={{display:"flex"}}>
-                <Box sx={{px: 1}}>
-                  <CategoryFilter/>
-                </Box>
-                <Box>
-                  <StatusFilter/>
-                </Box>
+                <>
+                  <Box sx={{px: 1}}>
+                    <CategoryFilter currentCategory={currentCategory} changeCategoryFilter={changeCategoryFilter}/>
+                  </Box>
+                  <Box>
+                    <StatusFilter currentStatus={currentStatus} changeStatusFilter={changeStatusFilter}/>
+                  </Box>
+                </>
               </Box>
               <Box>
                 <CreateButton
@@ -59,7 +144,7 @@ function index() {
               </Box>
             </Box>
             <Box sx={{height:"10%"}}>
-              <Searchbar/>
+              <Searchbar onChange={handleChangeSeachbar} currentSearch={currentSearch}/>
             </Box>
             <Box sx={{height: "80%"}}>
               {discussions && <DiscussionList discussions={discussions}/>}
@@ -71,4 +156,4 @@ function index() {
   )
 }
 
-export default index
+export default Main

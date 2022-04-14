@@ -7,7 +7,7 @@ import { db } from "../../src/firebase/config"
 import { doc, updateDoc } from "firebase/firestore"
 
 //styles
-import { Chip, Divider, Box, Typography, List, Stack, Container, FormControl, Input } from "@mui/material"
+import { Button, Chip, Divider, Box, Typography, List, Stack, Container, FormControl, Input } from "@mui/material"
 import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates'
 import CampaignIcon from '@mui/icons-material/Campaign'
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark'
@@ -48,11 +48,12 @@ const About = () => {
 
   const [isEditingTitle, setIsEditingTitle] = useState(false)
   const [isEditingDetail, setIsEditingDetail] = useState(false)
-  const [isEditingComment, setIsEditingComment] = useState(false)
   
   const [newTitle, setNewTitle] = useState('')
   const [newCategory, setNewCategory] = useState('')
   const [newDetail, setNewDetail] = useState('')
+
+  const [open, setOpen] = useState(true)
 
   if (error) {
     return <Typography>{error}</Typography>
@@ -105,7 +106,32 @@ const About = () => {
     setIsEditingDetail(false)
 
   }
-  
+
+  const handleCloseDiscussion = async(e) => {
+    e.preventDefault()
+
+    setOpen(!open)
+      
+    const docRef = doc(db, "discussions", id)
+
+    await updateDoc(docRef, {
+      status: "settled"
+    })
+    
+  }
+
+  const handleReopenDiscussion = async(e) => {
+    e.preventDefault()
+
+    setOpen(!open)
+
+    const docRef = doc(db, "discussions", id)
+
+    await updateDoc(docRef, {
+      status: "open"
+    })
+
+  }
 
 
   return(
@@ -200,29 +226,37 @@ const About = () => {
               </>
             )
             }
+            <Box sx={{display:"flex", justifyContent:"flex-end"}}>
+              {open? (
+                <Button onClick={handleCloseDiscussion}>Close This Discussion</Button>
+              ):(
+                <Button onClick={handleReopenDiscussion}>Reopen This Discussion</Button>
+              )}
+            </Box>
             <Divider variant="middle" sx={{pt:2}}>
               <Chip label="COMMENT" />
             </Divider>
             <Box container sx={{ pt: 3, height:"60%", width: "100%"}} >
               <List sx={{width: "100%"}}>
-                {!isEditingComment ? (
+                <CommentCard document={document}/>
+                {/* {!isEditingComment ? (
                   <CommentCard document={document} onClick={()=>setIsEditingComment(true)}/>
                 ):(
                   <Stack spacing={2}>
                     <Box>
-                      <Detail rows={5}/> 
+                      <Detail onChange={(e) => setNewComment(e.target.value)} rows={5}/> 
                     </Box>
                     <Box sx={{display:"flex", justifyContent: "flex-end"}}>
                       <Box>
-                        <CancelButton onClick={()=>setIsEditingComment(false)}/>
+                        <CancelButton onClick={handleCancelComment}/>
                       </Box>
                       <Box>
-                        <UpdateButton　onClick={()=>setIsEditingComment(false)}/>
+                        <UpdateButton　onClick={() => handleUpdateComment(document.comments.id)}/>
                       </Box>
                     </Box>
                   </Stack>
                 ) 
-                }
+                } */}
               </List>
             </Box>
           </Stack>

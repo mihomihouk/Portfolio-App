@@ -33,6 +33,7 @@ function New() {
     detail: newDetail,
     category: newCategory,
     createdAt: Timestamp.fromDate(new Date()),
+    status: "open",
     comments: []
     })
 
@@ -50,6 +51,7 @@ function New() {
     setNewCategory("")
     router.push("/discussion")
   }
+
 
   return (
     <>

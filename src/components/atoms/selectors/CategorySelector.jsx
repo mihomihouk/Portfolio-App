@@ -18,9 +18,9 @@ function CategorySelector(props) {
         onChange={onChange}
       >
         <MenuItem value="" disabled>Categories</MenuItem>
-        <MenuItem value={1}>Announcements</MenuItem>
-        <MenuItem value={2}>Ideas</MenuItem>
-        <MenuItem value={3}>Questions</MenuItem>
+        <MenuItem value="Announcement">Announcement</MenuItem>
+        <MenuItem value="Idea">Idea</MenuItem>
+        <MenuItem value="Question">Question</MenuItem>
       </Select>
     </>
   )
