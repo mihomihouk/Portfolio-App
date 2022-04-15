@@ -7,12 +7,11 @@ import CheckIcon from '@mui/icons-material/Check'
 
 function TagSelector(props) {
 
-  const { lblClass, key, label, onClick } = props
+  const { lblClass, label, onClick } = props
 
   return (
     <>
       <ListItem
-        key={key}
         onClick={onClick}
       > 
         <ListItemText variant="body2" component="span"
