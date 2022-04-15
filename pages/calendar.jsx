@@ -3,49 +3,66 @@ import CalendarModal from "../src/components/organisms/modals/CalendarModal"
 import FullCalendar, { DateSelectArg } from "@fullcalendar/react"
 import dayGridPlugin from "@fullcalendar/daygrid"
 import interactionPlugin from "@fullcalendar/interaction"
+import { db } from "../src/firebase/config"
+import { useCollection } from "../src/hooks/useCollection"
 
 //styles 
-
 import { Box, Container } from "@mui/material"
 
 //components
 import Header from "../src/components/organisms/Header";
 import Sidebar from "../src/components/organisms/Sidebar"
+import { format } from "date-fns";
 
 
-function calendar() {
+function Calendar() {
+
+  const { documents } = useCollection("events")
 
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
-  const handleDateClick = (DateSelectArg) => {
-    console.log(DateSelectArg)
+  const handleDateClick = () => {
     handleOpen()
 
   }
 
+  const handleEventDrop = () => {
+   
+  }
+  
+  const events = documents ? documents.map(item => (
+    {
+      title:item.title,
+      start:item.start.toDate(),
+      end:item.end.toDate(),
+      color:item.label
+    }
+  )):null
+
+
   return (
     <>
-      {/* ここに新規作成用モーダル */}
       <CalendarModal open={open} handleOpen={handleOpen} handleClose={handleClose}/>
       <Box>
         <Box>
           <Header/> 
         </Box>
         <Container maxWidth="md" sx={{pt:9, width:"100%"}}>
-          {/* <Box sx={{display:'flex', height:"100%", width:"100%"}}>  */}
-            {/* メイン */}
-            <Box >
-              <Sidebar/>
-            </Box>
-            <FullCalendar
-              plugins={[dayGridPlugin, interactionPlugin]}
-              initialEvents={[{ title: "initial event", start: new Date() }]}
-              dateClick={handleDateClick}
-            />
-            {/* 左のサイドバー */}
-           {/* </Box>  */}
+          <Box >
+            <Sidebar/>
+          </Box>
+          <FullCalendar
+            plugins={[dayGridPlugin, interactionPlugin]}
+            initialView="dayGridMonth"
+            dateClick={handleDateClick}
+            editable={true}
+            selectable={true}
+            eventDrop={handleEventDrop}
+            events={events}
+            displayEventTime={false}
+          />
          </Container> 
       </Box>
     </>
@@ -53,4 +70,4 @@ function calendar() {
   
 }
 
-export default calendar
+export default Calendar

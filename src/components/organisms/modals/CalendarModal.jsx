@@ -55,8 +55,8 @@ function CalendarModal(props) {
   const unsub = await addDoc(ref, {
     title, 
     detail,
-    startDate,
-    endDate,
+    start:startDate,
+    end:endDate,
     label,
     id: Math.random()
   })
