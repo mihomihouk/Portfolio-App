@@ -6,32 +6,44 @@ import { collection, onSnapshot, orderBy, query, where } from "firebase/firestor
 
 export const useCollection = (c, newOrder, newQuery) => {
   const [documents, setDocuments] = useState(null)
+  const [isPending, setIsPending] = useState(false)
+  const [error, setError] = useState(null)
 
   const q = useRef(newQuery).current
   const order = useRef(newOrder).current
 
   useEffect(() => {
-    let ref = collection(db, c)
+    const fetchData = async() => {
+      setIsPending(true)
 
-    if(order){
-      ref = query(ref,orderBy(...order))
-    }
-
-    if(q){
-      ref = query(ref,where(...q))
-    }
-
-    const unsub = onSnapshot(ref, (snapshot) => {
-      let results = []
-      snapshot.docs.forEach(doc => {
-        results.push({...doc.data(), id:doc.id})
-      })
-      setDocuments(results)
-    })
-
-    return () => unsub()
-
+      try{
+        let ref = collection(db, c)
+        if(order){
+          ref = query(ref,orderBy(...order))
+        }
+    
+        if(q){
+          ref = query(ref,where(...q))
+        }
+    
+        const unsub = onSnapshot(ref, (snapshot) => {
+          let results = []
+          snapshot.docs.forEach(doc => {
+            results.push({...doc.data(), id:doc.id})
+          })
+          setDocuments(results)
+        })
+        return () => unsub()
+        setIsPending(false)
+        setError(null)
+      } catch (error) {
+        setIsPending(false)
+        setError("Could not fetch the data")
+        console.log(error.message)
+      }
+   }
+   fetchData()
   },[c, order, q])
 
-  return { documents }
+  return { documents, isPending, error }
 }
