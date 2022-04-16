@@ -11,8 +11,8 @@ function EditButton(props) {
 
   return (
     <>
-      <IconButton onClick={onClick}>
-        <EditIcon/>
+      <IconButton disableRipple onClick={onClick}>
+        <EditIcon />
       </IconButton>
     </>
   )
