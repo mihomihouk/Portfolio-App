@@ -30,6 +30,7 @@ function Calendar() {
 
   const events = documents ? documents.map(item => (
     {
+      id:item.id,
       title:item.title,
       start:item.start.toDate(),
       end:item.end.toDate(),

@@ -1,5 +1,9 @@
 import React from 'react'
 
+//firebase 
+import { db } from "../../../firebase/config"
+import { doc, deleteDoc } from "firebase/firestore"
+
 //styles
 import { Grid, Typography, Box, Stack, Divider } from "@mui/material"
 import Modal from '@mui/material/Modal'
@@ -25,6 +29,20 @@ function CalendarEditModal(props) {
 
   const { open, handleClose, eventToEdit } = props
 
+  const handleDelete = () => {
+    if (
+      window.confirm(`Are you sure you want to delete "${eventToEdit.title}"?`)
+    ) {
+      const dbDelete = async(id) => {
+        const ref = doc(db, "events", id)
+        await deleteDoc(ref)
+      }
+      dbDelete(eventToEdit.id)
+      eventToEdit.remove()
+      handleClose()
+    }
+  }
+
   return (
     <>
       <Modal
@@ -44,7 +62,7 @@ function CalendarEditModal(props) {
           }}>
           <Box sx={{display:"flex",justifyContent:"flex-end"}}>
             <EditButton/>
-            <DeleteButton/>
+            <DeleteButton onClick={handleDelete}/>
             <CloseButton onClick={handleClose}/>
           </Box>
             <Box >
