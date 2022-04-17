@@ -1,4 +1,5 @@
-import React from 'react'
+import React,{ useState } from 'react'
+import { useSignup } from "../src/hooks/useSignup"
 
 //styles
 import { Box, Grid, Paper, Typography } from '@mui/material' 
@@ -11,7 +12,17 @@ import Password from '../src/components/atoms/inputs/Password'
 import Email from '../src/components/atoms/inputs/Email'
 import ProfileThumbnail from '../src/components/atoms/inputs/ProfileThumbnail' 
 
-function Login() {
+function Signup() {
+
+  const { error, signup } = useSignup()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    signup(email, password)
+  }
+  
   return (
     <>
       <Grid container component="main" sx={{ height: '100vh' }}>
@@ -44,10 +55,11 @@ function Login() {
             </Typography>
             <Box component="form" noValidate sx={{ mt: 1 }}>
               <UserName/>
-              <Email/>
-              <Password/>
+              <Email value={email} onChange={(e) => setEmail(e.target.value)}/>
+              <Password value={password} onChange={(e) => setPassword(e.target.value)}/>
               <ProfileThumbnail/>
-              <LoginButton action="Sign up"/>
+              <LoginButton action="Sign up" onClick={handleSubmit}/>
+              {error && <Typography>{error}</Typography>}
               <CopyRight sx={{ mt: 5 }} />
             </Box>
           </Box>
@@ -57,4 +69,4 @@ function Login() {
   )
 }
 
-export default Login
+export default Signup

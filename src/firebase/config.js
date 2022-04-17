@@ -1,5 +1,6 @@
 import { initializeApp, getApps } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
+import { getAuth } from "firebase/auth"
 
 !getApps().length &&
 initializeApp ({
@@ -11,10 +12,10 @@ initializeApp ({
   appId:process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 });
 
-
-
 // init firestore
 const db = getFirestore()
 
+// init firebase auth
+const auth = getAuth()
 
-export { db }
+export { db, auth }

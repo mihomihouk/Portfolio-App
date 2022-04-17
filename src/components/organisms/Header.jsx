@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {  useState } from 'react'
 import { useRecoilState } from "recoil"
 
 //hooks
@@ -8,10 +8,20 @@ import { navbarState } from "../../hooks/NavbarState"
 import { AppBar, Box, IconButton, Toolbar, Avatar } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 
-const Header = () => {
-  const [ open, setOpen ] = useRecoilState(navbarState)
+//components
+import ProfileCard from "../organisms/modals/ProfileCard"
 
-  const handleDrawerToggle = () => {
+const Header = () => {
+
+  
+
+  const [ open, setOpen ] = useRecoilState(navbarState)
+  const [openProfileCard, setOpenProfileCard] = useState(false)
+
+  const handleProfileCardOpen = () => setOpenProfileCard(true)
+  const handleProfileCardClose = () => setOpenProfileCard(false)
+
+  const handleNavbarToggle = () => {
     setOpen (!open)
   }
 
@@ -29,16 +39,17 @@ const Header = () => {
                   sx={{
                     marginRight: '36px'
                   }}
-                  onClick={handleDrawerToggle}
+                  onClick={handleNavbarToggle}
                 >
                   <MenuIcon />
                 </IconButton>
               </Box>
               <Box sx={{justifyContent:"flex-end"}}>
                 <IconButton color="inherit">
-                  <Avatar />
+                  <Avatar onClick={handleProfileCardOpen}/>
                 </IconButton>
               </Box>
+              <ProfileCard open={openProfileCard} handleClose={handleProfileCardClose}/>
             </Box>
           </Toolbar>
         </AppBar>

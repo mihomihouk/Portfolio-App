@@ -3,7 +3,10 @@ import React from 'react'
 //styles
 import { TextField } from '@mui/material'
 
-function Password() {
+function Password(props) {
+
+  const { value, onChange } = props
+
   return (
     <>
       <TextField
@@ -15,6 +18,8 @@ function Password() {
         type="password"
         autoComplete="current-password"
         helperText=""
+        value={value}
+        onChange={onChange}
       />
     </>
   )

@@ -2,7 +2,8 @@ import React from 'react'
 import { Button } from '@mui/material'
 
 
-const LoginButton = ({action}) => {
+const LoginButton = (props) => {
+  const { action, onClick} = props
   return (
     <>
       <Button
@@ -10,6 +11,7 @@ const LoginButton = ({action}) => {
         fullWidth
         variant="contained"
         sx={{ mt: 3, mb: 2 }}
+        onClick={onClick}
       >
         {action}
       </Button>

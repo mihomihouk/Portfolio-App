@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useLogin } from "../src/hooks/useLogin"
 
 //styles
 import { Box, Grid, Link, Paper, Typography } from '@mui/material' 
@@ -11,6 +12,17 @@ import Email from '../src/components/atoms/inputs/Email'
 
 
 function Login() {
+
+  const { login, error } = useLogin()
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    login(email, password)
+  }
+  
   return (
     <>
       <Grid container component="main" sx={{ height: '100vh' }}>
@@ -38,13 +50,14 @@ function Login() {
               alignItems: 'center',
             }}
           >
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h5" >
               Log in
             </Typography>
             <Box component="form" noValidate sx={{ mt: 1 }}>
               <Email/>
               <Password/>
-              <LoginButton action="Login"/>
+              <LoginButton action="Login" onClick={handleSubmit}/>
+              {error && <Typography>{error}</Typography>}
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">

@@ -9,6 +9,8 @@ function CreateButton(props) {
 
   const {onClick, title} = props
 
+  
+
   return (
     <>
       <Button 
@@ -18,7 +20,6 @@ function CreateButton(props) {
           bgcolor: "#f57f17",
           fontWeight:"bold", 
           ":hover":{ bgcolor:"#ffb04c"}
-
          }}
          onClick={onClick}
       >

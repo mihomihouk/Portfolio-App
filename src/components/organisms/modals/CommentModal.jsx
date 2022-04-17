@@ -9,7 +9,6 @@ import { Box, Modal, Stack } from "@mui/material"
 
 
 //components
-import Title from "../../atoms/inputs/Title"
 import CloseButton from "../../atoms/buttons/CloseButton"
 import Detail from '../../atoms/inputs/Detail'
 import AddButton from "../../atoms/buttons/AddButton"
