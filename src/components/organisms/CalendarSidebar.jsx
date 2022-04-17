@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { useRecoilState } from "recoil"
+
+//hooks
+import { labelState } from "../../hooks/LabelState"
 
 //styes
 import { Checkbox, FormControlLabel, List, ListItem, ListItemText, Stack, Typography } from '@mui/material'
@@ -43,18 +47,32 @@ function CalendarSidebar(props) {
 
   const { documents, isPending, error } = props
 
-  const [labelArray, setLabelArray] = useState([])
+  const [ labels, setLabels ] = useRecoilState(labelState)
 
   useEffect(()=>{
     let newArray = []
     documents && documents.forEach(item => {
-      console.log(item.label)
       if(!newArray.includes(item.label)){
-        newArray.push(item.label)
+        newArray.push({
+          color:item.label,
+          checked: true
+        })
       }
     })
-    setLabelArray(newArray)
+    setLabels(newArray)
   },[documents])
+
+  const handleChangeLabels = (selectedLabel) => {
+    if(selectedLabel.checked){
+      setLabels(labels.map(label => 
+        label === selectedLabel ? {...label, checked:false} : label
+      ))
+    }else{
+      setLabels(labels.map(label => 
+        label === selectedLabel ? {...label, checked:true} : label
+      ))
+    }
+  }
 
   return (
       <>
@@ -63,10 +81,10 @@ function CalendarSidebar(props) {
           <List>
           {isPending && <Typography>Loading...</Typography>}
           {error && <Typography>{error}</Typography>}
-          {labelArray && labelArray.map(label => ( 
-            <ListItem key={label}>
+          {labels && labels.map(label => ( 
+            <ListItem key={label.color}>
               <ListItemText>
-                <FormControlLabel color={label} control={<BpCheckbox defaultChecked label={label}/>} label={label}/>
+                <FormControlLabel color={label.color} control={<BpCheckbox defaultChecked label={label.color} onChange={() => handleChangeLabels(label)}/>} label={label.color}/>
               </ListItemText>
             </ListItem>
             ))} 

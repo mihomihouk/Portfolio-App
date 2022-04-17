@@ -1,11 +1,15 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import { useCollection } from "../src/hooks/useCollection"
+import { useRecoilState } from "recoil"
+
+//hooks
+import { labelState } from "../src/hooks/LabelState"
+
+//styles 
+import { Box, Grid } from "@mui/material"
 import FullCalendar, { EventClickArg} from "@fullcalendar/react"
 import dayGridPlugin from "@fullcalendar/daygrid"
 import interactionPlugin from "@fullcalendar/interaction"
-import { useCollection } from "../src/hooks/useCollection"
-
-//styles 
-import { Box, Container, Grid } from "@mui/material"
 
 //components
 import Header from "../src/components/organisms/Header";
@@ -18,6 +22,8 @@ import CalendarSidebar from "../src/components/organisms/CalendarSidebar";
 function Calendar() {
 
   const { documents } = useCollection("events")
+  const [ labels, setLabels ] = useRecoilState(labelState)
+  const [events, setEvents] = useState([])
 
   const [openCreateModal, setOpenCreateModal] = useState(false)
   const handleOpenCreateModal = () => setOpenCreateModal(true)
@@ -26,19 +32,29 @@ function Calendar() {
   const [openEditModal, setOpenEditModal] = useState(false)
   const handleOpenEditModal = () => setOpenEditModal(true)
   
-
   const [eventToEdit,setEventToEdit] = useState("")
 
-  const events = documents ? documents.map(item => (
-    {
-      id:item.id,
-      title:item.title,
-      start:item.start.toDate(),
-      end:item.end.toDate(),
-      color:item.label,
-      description:item.description
+  useEffect(() => {
+    if(!documents){
+      return null
     }
-  )):null
+    const selectedLabels =labels.filter(label => label.checked).map(label => label.color)//["blue","green"]
+    const filteredEvents = documents.filter(item => {
+      return selectedLabels.includes(item.label)
+    })
+    const formattedEvents = filteredEvents.map(item => (
+      {
+        id:item.id,
+        title:item.title,
+        start:item.start.toDate(),
+        end:item.end.toDate(),
+        color:item.label,
+        description:item.description
+      }
+    ))
+    setEvents(formattedEvents)
+  },[documents, labels])
+
 
   //Click date to open modal
   const handleDateClick = () => {
@@ -66,7 +82,7 @@ function Calendar() {
           <Header/> 
         </Box>
         <Box>
-            <Sidebar/>
+            <Sidebar labels={labels} setLabels={setLabels}/>
           </Box>
         <Grid container sx={{pt:9, px:4, width:"100%", display:"flex", alignItems:"center"}}>
           <Grid item xs={2}>
