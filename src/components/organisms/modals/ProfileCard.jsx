@@ -8,7 +8,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 const ProfileCard = (props) => {
 
-  const { logout } = useLogout()
+  const { logout, isPending } = useLogout()
 
   const { open, handleClose } = props
 
@@ -38,19 +38,33 @@ const ProfileCard = (props) => {
           </Box>
         </Box>
         <Box>
-          <Button
-           startIcon={<LogoutIcon />}
-           color="error"
-           sx={{
-            color:"#f57f17", 
-            borderRadius:"12px",
-            px:2
-           }}
-           variant="outlined"
-           onClick={logout}
+          {!isPending &&<Button
+            startIcon={<LogoutIcon />}
+            color="error"
+            sx={{
+              color:"#f57f17", 
+              borderRadius:"12px",
+              px:2
+            }}
+            variant="outlined"
+            onClick={logout}
           >
             Logout
-          </Button>
+          </Button>}
+          {isPending &&<Button
+            startIcon={<LogoutIcon />}
+            color="error"
+            sx={{
+              color:"#f57f17", 
+              borderRadius:"12px",
+              px:2
+            }}
+            variant="outlined"
+            disabled
+          >
+            Logging out...
+          </Button>}
+          
         </Box>
       </Stack>
     </Modal>

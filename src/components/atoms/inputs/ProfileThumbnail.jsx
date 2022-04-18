@@ -3,7 +3,9 @@ import React from 'react'
 //styles
 import { TextField } from '@mui/material'
 
-const ProfileThumbnail = () => {
+const ProfileThumbnail = (props) => {
+
+  const { onChange } = props
   return (
     <>
       <TextField
@@ -12,6 +14,7 @@ const ProfileThumbnail = () => {
         fullWidth
         name="profile image"
         type="file"
+        onChange={onChange}
       />
     </>
   )

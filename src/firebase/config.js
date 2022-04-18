@@ -1,9 +1,10 @@
 import { initializeApp, getApps } from "firebase/app"
 import { getFirestore } from "firebase/firestore"
 import { getAuth } from "firebase/auth"
+import {  getStorage } from "firebase/storage"
 
-!getApps().length &&
-initializeApp ({
+ const firebaseApp  = !getApps().length &&
+ initializeApp ({
   apiKey:process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain:process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   projectId:process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
@@ -18,4 +19,7 @@ const db = getFirestore()
 // init firebase auth
 const auth = getAuth()
 
-export { db, auth }
+// init firebase storage
+const storage = getStorage()
+
+export { db, auth, storage }

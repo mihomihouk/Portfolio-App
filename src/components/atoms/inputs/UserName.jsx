@@ -3,7 +3,8 @@ import React from 'react'
 //styles
 import { TextField } from '@mui/material'
 
-function UserName() {
+function UserName(props) {
+  const { value, onChange } = props
   return (
     <>
       <TextField
@@ -14,6 +15,8 @@ function UserName() {
         name="userName"
         helperText=""
         autoFocus
+        value={value}
+        onChange={onChange}
       />
     </>
   )

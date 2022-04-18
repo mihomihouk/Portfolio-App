@@ -14,13 +14,38 @@ import ProfileThumbnail from '../src/components/atoms/inputs/ProfileThumbnail'
 
 function Signup() {
 
-  const { error, signup } = useSignup()
+  const { error, isPending, signup } = useSignup()
+  const [displayName, setDisplayName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [thumbnail, setThumbnail] = useState(null)
+  const[thumbnailError, setThumbnailError] = useState("")
+
+  const handleFileChange = (e) => {
+    let selected = e.target.files[0]
+    console.log(selected)
+
+    if(!selected){
+      setThumbnailError("Please select a file")
+      return
+    }
+    if(!selected.type.includes("image")){
+      setThumbnailError("Selected file must be an image")
+      return
+    }
+    if(selected.size > 100000){
+      setThumbnailError("Image file size must be less than 100kb")
+      return
+    }
+
+    setThumbnailError(null)
+    setThumbnail(selected)
+
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    signup(email, password)
+    signup(email, password, displayName, thumbnail)
   }
   
   return (
@@ -54,11 +79,13 @@ function Signup() {
               Sign up
             </Typography>
             <Box component="form" noValidate sx={{ mt: 1 }}>
-              <UserName/>
+              <UserName value={displayName} onChange={(e) => setDisplayName(e.target.value)}/>
               <Email value={email} onChange={(e) => setEmail(e.target.value)}/>
               <Password value={password} onChange={(e) => setPassword(e.target.value)}/>
-              <ProfileThumbnail/>
-              <LoginButton action="Sign up" onClick={handleSubmit}/>
+              <ProfileThumbnail onChange={handleFileChange}/>
+              {thumbnailError && <Typography>{thumbnailError}</Typography>}
+              {!isPending &&<LoginButton action="Sign up" onClick={handleSubmit}/>}
+              {isPending && <LoginButton isPending={isPending} action="Loading"/>}
               {error && <Typography>{error}</Typography>}
               <CopyRight sx={{ mt: 5 }} />
             </Box>

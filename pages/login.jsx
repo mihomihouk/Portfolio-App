@@ -13,7 +13,7 @@ import Email from '../src/components/atoms/inputs/Email'
 
 function Login() {
 
-  const { login, error } = useLogin()
+  const { error, isPending, login } = useLogin()
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -54,9 +54,10 @@ function Login() {
               Log in
             </Typography>
             <Box component="form" noValidate sx={{ mt: 1 }}>
-              <Email/>
-              <Password/>
-              <LoginButton action="Login" onClick={handleSubmit}/>
+              <Email onChange={(e)=>setEmail(e.target.value)} value={email}/>
+              <Password onChange={(e)=>setPassword(e.target.value)} value={password}/>
+              {!isPending && <LoginButton action="Login" onClick={handleSubmit}/>}
+              {isPending && <LoginButton isPending={isPending} action="Logging in"/>}
               {error && <Typography>{error}</Typography>}
               <Grid container>
                 <Grid item xs>
