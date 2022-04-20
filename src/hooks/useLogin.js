@@ -13,6 +13,7 @@ export const useLogin = () => {
   const [error, setError] = useState(null)
   const [isPending, setIsPending] = useState(false)
   const setUser = useSetRecoilState(userState)
+  const router = useRouter()
 
   const login = async(email, password) => {
     try {
@@ -28,9 +29,9 @@ export const useLogin = () => {
         online: true
       })
 
-      setIsPending(false)
-      setUser(res.user)
-      router.push("/dashboard")
+      await setIsPending(false)
+      await setUser(res.user)
+      await router.push("/dashboard")
 
     }catch(error){
 

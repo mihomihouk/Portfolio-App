@@ -40,9 +40,9 @@ export const useSignup = () => {
 
       await setDoc(docRef, data)
       
-      setIsPending(false)
-      setError(null)
-      router.push("/dashboard")
+      await setIsPending(false)
+      await setError(null)
+      await router.push("/dashboard")
 
     } catch (error){
 

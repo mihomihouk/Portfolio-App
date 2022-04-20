@@ -28,9 +28,9 @@ export const useLogout = () => {
       })
       
       await signOut(auth)
-      setIsPending(false)
-      resetUser()
-      router.push("/login")
+      await setIsPending(false)
+      await resetUser()
+      await router.push("/login")
       
     }catch(error){
 
