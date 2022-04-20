@@ -3,7 +3,7 @@ import { useCollection } from "../src/hooks/useCollection"
 import { useRecoilState } from "recoil"
 
 //hooks
-import { labelState } from "../src/hooks/LabelState"
+import { labelState } from "../src/context/LabelState"
 
 //styles 
 import { Box, Grid } from "@mui/material"

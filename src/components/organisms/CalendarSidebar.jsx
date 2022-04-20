@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useRecoilState } from "recoil"
 
 //hooks
-import { labelState } from "../../hooks/LabelState"
+import { labelState } from "../../context/LabelState"
 
 //styes
 import { Checkbox, FormControlLabel, List, ListItem, ListItemText, Stack, Typography } from '@mui/material'

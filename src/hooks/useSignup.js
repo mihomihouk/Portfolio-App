@@ -1,14 +1,17 @@
-import React, { useState } from "react"
+import { useState } from "react"
+import { useRouter } from "next/router"
 
 //firebase 
 import { auth, storage, db } from "../firebase/config"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
-import { collection, doc, setDoc } from "firebase/firestore"
+import { doc, setDoc } from "firebase/firestore"
+
 
 export const useSignup = () => {
   const [error, setError] = useState(null)
   const [isPending, setIsPending] = useState(false)
+  const router = useRouter()
 
   const signup = async(email, password, displayName, thumbnail) => {
     setError(null)
@@ -39,6 +42,7 @@ export const useSignup = () => {
       
       setIsPending(false)
       setError(null)
+      router.push("/dashboard")
 
     } catch (error){
 

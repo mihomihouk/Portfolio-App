@@ -2,7 +2,7 @@ import React, {  useState } from 'react'
 import { useRecoilState } from "recoil"
 
 //hooks
-import { navbarState } from "../../hooks/NavbarState"
+import { navbarState } from "../../context/NavbarState"
 
 //styles
 import { AppBar, Box, IconButton, Toolbar, Avatar } from '@mui/material'
@@ -45,8 +45,8 @@ const Header = () => {
                 </IconButton>
               </Box>
               <Box sx={{justifyContent:"flex-end"}}>
-                <IconButton color="inherit">
-                  <Avatar onClick={handleProfileCardOpen}/>
+                <IconButton color="inherit" onClick={handleProfileCardOpen}>
+                  <Avatar />
                 </IconButton>
               </Box>
               <ProfileCard open={openProfileCard} handleClose={handleProfileCardClose}/>

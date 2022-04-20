@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import { useLogin } from "../src/hooks/useLogin"
 
 //styles
-import { Box, Grid, Link, Paper, Typography } from '@mui/material' 
+import { Box, Grid, Paper, Typography } from '@mui/material' 
 
 //components
 import LoginButton from '../src/components/atoms/buttons/LoginButton'
 import CopyRight from '../src/components/atoms/CopyRight'
 import Password from '../src/components/atoms/inputs/Password'
 import Email from '../src/components/atoms/inputs/Email'
+import Link from '../src/Link'
 
 
 function Login() {
@@ -66,7 +67,7 @@ function Login() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

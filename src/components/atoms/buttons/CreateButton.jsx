@@ -9,8 +9,6 @@ function CreateButton(props) {
 
   const {onClick, title} = props
 
-  
-
   return (
     <>
       <Button 

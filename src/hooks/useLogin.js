@@ -1,4 +1,8 @@
 import { useState } from "react"
+import { userState } from "../context/userState"
+import { useSetRecoilState } from "recoil"
+import { useRouter } from "next/router"
+
 
 //firebase 
 import { db, auth } from "../firebase/config"
@@ -8,6 +12,7 @@ import { doc, updateDoc } from "firebase/firestore"
 export const useLogin = () => {
   const [error, setError] = useState(null)
   const [isPending, setIsPending] = useState(false)
+  const setUser = useSetRecoilState(userState)
 
   const login = async(email, password) => {
     try {
@@ -24,6 +29,8 @@ export const useLogin = () => {
       })
 
       setIsPending(false)
+      setUser(res.user)
+      router.push("/dashboard")
 
     }catch(error){
 

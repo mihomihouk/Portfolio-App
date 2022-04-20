@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil"
 import { useRouter } from 'next/router'
 
 //hooks
-import { navbarState } from "../../hooks/NavbarState"
+import { navbarState } from "../../context/NavbarState"
 
 //styles
 import {  Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, MenuItem } from '@mui/material'
@@ -14,8 +14,6 @@ import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates'
 
 //components
 import Link from '../../Link'
-
-
 
 const Sidebar = () => {
   const [ open, setOpen ] = useRecoilState(navbarState)
