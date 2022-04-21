@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { db } from "../../../firebase/config"
+import { auth, db } from "../../../firebase/config"
 
 //firebase
 import { addDoc, collection } from "firebase/firestore"
@@ -31,6 +31,7 @@ const labelsClasses = [
 function CalendarModal(props) {
 
   const { open, handleClose } = props
+  const currentUser = auth.currentUser
 
   const [title, setTitle] = useState("")
   const [startDate, setStartDate] = useState("")
@@ -58,7 +59,12 @@ function CalendarModal(props) {
     start:startDate,
     end:endDate,
     label,
-    id: Math.random()
+    id: Math.random(),
+    user:{
+      displayName: currentUser.displayName,
+      photoURL: currentUser.photoURL,
+      id: currentUser.uid
+    }
   })
 
   handleClose()

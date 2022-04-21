@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil"
 import { labelState } from "../src/context/LabelState"
 
 //styles 
-import { Box, Grid } from "@mui/material"
+import { Box, Grid, Stack, Typography } from "@mui/material"
 import FullCalendar, { EventClickArg} from "@fullcalendar/react"
 import dayGridPlugin from "@fullcalendar/daygrid"
 import interactionPlugin from "@fullcalendar/interaction"
@@ -21,7 +21,7 @@ import CalendarSidebar from "../src/components/organisms/CalendarSidebar";
 
 function Calendar() {
 
-  const { documents } = useCollection("events")
+  const { documents, error, isPending } = useCollection("events")
   const [ labels, setLabels ] = useRecoilState(labelState)
   const [events, setEvents] = useState([])
 
@@ -49,6 +49,9 @@ function Calendar() {
         start:item.start.toDate(),
         end:item.end.toDate(),
         color:item.label,
+        extendedProps: {
+          userThumbnail: item.user.photoURL
+        },
         description:item.description
       }
     ))
@@ -89,16 +92,20 @@ function Calendar() {
             <CalendarSidebar documents={documents}/>
           </Grid>
           <Grid item xs={10} sx={{pl:2}}>
-            <FullCalendar
-              plugins={[dayGridPlugin, interactionPlugin]}
-              initialView="dayGridMonth"
-              dateClick={handleDateClick}
-              editable={true}
-              eventClick={handleEventClick}
-              selectable={true}
-              events={events}
-              displayEventTime={false}
-            />
+            <Stack>
+              <FullCalendar
+                plugins={[dayGridPlugin, interactionPlugin]}
+                initialView="dayGridMonth"
+                dateClick={handleDateClick}
+                editable={true}
+                eventClick={handleEventClick}
+                selectable={true}
+                events={events}
+                displayEventTime={false}
+              />
+              {error && <Typography>{error}</Typography>}
+              {isPending && <Typography>Loading...</Typography>}
+            </Stack>
           </Grid>
          </Grid> 
       </Box>

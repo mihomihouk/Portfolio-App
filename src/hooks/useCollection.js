@@ -15,7 +15,7 @@ export const useCollection = (c, newOrder, newQuery) => {
   useEffect(() => {
     const fetchData = async() => {
       setIsPending(true)
-
+      setError(null)
       try{
         let ref = collection(db, c)
         if(order){
@@ -27,19 +27,20 @@ export const useCollection = (c, newOrder, newQuery) => {
         }
     
         const unsub = onSnapshot(ref, (snapshot) => {
-          let results = []
-          snapshot.docs.forEach(doc => {
-            results.push({...doc.data(), id:doc.id})
-          })
-          setDocuments(results)
+            let results = []
+            snapshot.docs.forEach(doc => {
+              results.push({...doc.data(), id:doc.id})
+            })
+            setDocuments(results)
+            setError(null)
+          setIsPending(false)
         })
         return () => unsub()
-        setIsPending(false)
-        setError(null)
+
       } catch (error) {
+        
         setIsPending(false)
         setError("Could not fetch the data")
-        console.log(error.message)
       }
    }
    fetchData()
