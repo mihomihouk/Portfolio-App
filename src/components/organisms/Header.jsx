@@ -1,20 +1,21 @@
 import React, {  useState } from 'react'
-import { useRecoilState } from "recoil"
+import { useRecoilState ,  useRecoilValue } from "recoil"
 
-//hooks
+//contexts
+import { userState } from "../../context/userState"
 import { navbarState } from "../../context/NavbarState"
 
 //styles
-import { AppBar, Box, IconButton, Toolbar, Avatar } from '@mui/material'
+import { AppBar, Box, IconButton, Toolbar } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 
 //components
 import ProfileCard from "../organisms/modals/ProfileCard"
+import UserAvatar from '../atoms/UserAvatar'
 
 const Header = () => {
 
-  
-
+  const user = useRecoilValue(userState)
   const [ open, setOpen ] = useRecoilState(navbarState)
   const [openProfileCard, setOpenProfileCard] = useState(false)
 
@@ -25,6 +26,7 @@ const Header = () => {
     setOpen (!open)
   }
 
+  console.log(user)
 
   return (
     <>
@@ -46,7 +48,7 @@ const Header = () => {
               </Box>
               <Box sx={{justifyContent:"flex-end"}}>
                 <IconButton color="inherit" onClick={handleProfileCardOpen}>
-                  <Avatar />
+                  {user && <UserAvatar src={user.photoURL} sx={{width: "50px", height: "50px"}}/> }
                 </IconButton>
               </Box>
               <ProfileCard open={openProfileCard} handleClose={handleProfileCardClose}/>

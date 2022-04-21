@@ -1,16 +1,21 @@
 import React from 'react'
 import { useLogout } from "../../../hooks/useLogout"
+import { useRecoilValue } from "recoil"
+
+//contexts
+import { userState } from "../../../context/userState"
 
 //styles
-import { Avatar, Box, Modal, Stack,Typography, Button } from "@mui/material"
-import LogoutIcon from '@mui/icons-material/Logout';
-
+import { Box, Modal, Stack,Typography, Button } from "@mui/material"
+import LogoutIcon from '@mui/icons-material/Logout'
+import UserAvatar from "../../../components/atoms/UserAvatar"
 
 const ProfileCard = (props) => {
 
-  const { logout, isPending } = useLogout()
-
+  const user = useRecoilValue(userState)
   const { open, handleClose } = props
+  const { logout, isPending } = useLogout()
+  console.log(UserAvatar)
 
   return (
     <Modal
@@ -31,10 +36,10 @@ const ProfileCard = (props) => {
       }}>
         <Box sx={{display: "flex", flexDirection:"column", textAlign: 'center'}}>
           <Box>
-            <Avatar/>
+            {user && <UserAvatar src={user.photoURL}/>}
           </Box>
           <Box>
-            <Typography>User Name</Typography>
+            {user && <Typography>{user.displayName}</Typography>}
           </Box>
         </Box>
         <Box>
