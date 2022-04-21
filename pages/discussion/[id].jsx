@@ -8,9 +8,6 @@ import { doc, updateDoc } from "firebase/firestore"
 
 //styles
 import { Button, Chip, Divider, Box, Typography, List, Stack, Container, FormControl, Input } from "@mui/material"
-import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates'
-import CampaignIcon from '@mui/icons-material/Campaign'
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark'
 
 //components
 import Header from "../../src/components/organisms/Header"
@@ -23,22 +20,7 @@ import UpdateButton from "../../src/components/atoms/buttons/UpdateButton"
 import CancelButton from "../../src/components/atoms/buttons/CancelButton"
 import Detail from "../../src/components/atoms/inputs/Detail"
 import CategorySelector from "../../src/components/atoms/selectors/CategorySelector"
-
-
-
-const DiscussionIcon = ({document}) => {
-  switch (document.category){
-    case 1:
-      return <CampaignIcon fontSize="large"/>;
-    case 2:
-      return <TipsAndUpdatesIcon fontSize="large"/>;
-    case 3:
-      return <QuestionMarkIcon fontSize="large"/>;
-    default:
-      return null;
-  }
-}
-
+import DiscussionIcon from "../../src/components/atoms/DiscussionIcon"
 
 const About = () => {
   const router = useRouter()
@@ -133,7 +115,6 @@ const About = () => {
 
   }
 
-
   return(
     <>
       <Box>
@@ -146,7 +127,7 @@ const About = () => {
           </Box>
           <Stack spacing={1}>
             <Box sx={{display:"flex", justifyContent: "space-between", alignItems: "center", height:"10%"}}>
-              <Box sx={{display:"flex", alignItems: "center", width: "70%"}}>
+              <Box sx={{display:"flex", alignItems: "center"}}>
               {!isEditingTitle ? (
                 <>
                   <Box>
@@ -239,24 +220,6 @@ const About = () => {
             <Box container sx={{ pt: 3, height:"60%", width: "100%"}} >
               <List sx={{width: "100%"}}>
                 <CommentCard document={document}/>
-                {/* {!isEditingComment ? (
-                  <CommentCard document={document} onClick={()=>setIsEditingComment(true)}/>
-                ):(
-                  <Stack spacing={2}>
-                    <Box>
-                      <Detail onChange={(e) => setNewComment(e.target.value)} rows={5}/> 
-                    </Box>
-                    <Box sx={{display:"flex", justifyContent: "flex-end"}}>
-                      <Box>
-                        <CancelButton onClick={handleCancelComment}/>
-                      </Box>
-                      <Box>
-                        <UpdateButton　onClick={() => handleUpdateComment(document.comments.id)}/>
-                      </Box>
-                    </Box>
-                  </Stack>
-                ) 
-                } */}
               </List>
             </Box>
           </Stack>

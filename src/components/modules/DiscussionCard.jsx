@@ -21,7 +21,6 @@ function DiscussionCard(props) {
 
       const ref = doc(db, "discussions", id)
       await deleteDoc(ref)
-    
 
     router.push("/discussion")
     
@@ -35,7 +34,7 @@ function DiscussionCard(props) {
       >
         <Box sx={{display:"flex", justifyContext:"space-between", width:"100%", height:"30%"}}>
           <Box sx={{pl: 1, pt:1, width: "100%"}}>
-            <Avatar sx={{width: 30, height: 30}}/>
+            <Avatar src={document.user.photoURL} sx={{width: 35, height: 35}}/>
           </Box>
           <Box sx={{display:"flex"}}>
             <Box>

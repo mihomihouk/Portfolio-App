@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import { useRouter } from "next/router"
 
 //firebase imports
-import { db } from "../../src/firebase/config"
+import { db, auth } from "../../src/firebase/config"
 import { collection, addDoc, Timestamp } from "firebase/firestore"
 
 //styles
@@ -22,6 +22,7 @@ function New() {
   const [newDetail, setNewDetail] = useState("")
   const [newCategory, setNewCategory] = useState("")
 
+  const user = auth.currentUser
 
   const handleSubmit = async(e) => {
     e.preventDefault()
@@ -31,6 +32,11 @@ function New() {
     const unsub = await addDoc(ref, {
     title: newTitle, 
     detail: newDetail,
+    user: {
+      id: user.uid,
+      displayName: user.displayName,
+      photoURL: user.photoURL
+    },
     category: newCategory,
     createdAt: Timestamp.fromDate(new Date()),
     status: "open",
@@ -72,16 +78,16 @@ function New() {
                 <CategorySelector onChange={(e) => setNewCategory(e.target.value)} category={newCategory}/>
               </Box>
               <Box sx={{width:"70%"}}>
-                 <FormControl 
-                  required
-                  size="small"
-                  sx={{width:"100%"}}
-                 >
-                    <Input
-                      placeholder="Title"
-                      onChange={(e) => setNewTitle(e.target.value)}
-                    />
-                 </FormControl>
+                <FormControl 
+                required
+                size="small"
+                sx={{width:"100%"}}
+                >
+                  <Input
+                    placeholder="Title"
+                    onChange={(e) => setNewTitle(e.target.value)}
+                  />
+                </FormControl>
               </Box>
             </Box>
             <Box>

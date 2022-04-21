@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { db } from "../../../firebase/config"
+import { auth, db } from "../../../firebase/config"
 
 //firebase
 import { doc, Timestamp, updateDoc } from "firebase/firestore"
@@ -20,6 +20,8 @@ function DiscussionModal(props) {
   const [open, setOpen] = useState(false)
   const [newComment, setNewComment] = useState("")
 
+  const user = auth.currentUser
+
   const handleOpen = () => setOpen(true)
   const handleClose = () => {
     setNewComment("")
@@ -32,7 +34,12 @@ function DiscussionModal(props) {
     const commentToAdd = {
       content: newComment,
       createdAt: Timestamp.fromDate(new Date()),
-      id: Math.random()
+      id: Math.random(),
+      user: {
+        id:user.uid,
+        photoURL: user.photoURL,
+        displayName:user.displayName
+      }
     }
 
     const docRef = doc(db, "discussions", document.id)

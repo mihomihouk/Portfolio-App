@@ -75,7 +75,7 @@ function CommentCard(props) {
           <Stack sx={{pl:1, width:"100%"}}>
             <Box sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>  
               <ListItemAvatar>
-                <Avatar sx={{width: 25, height: 25}}/>
+                <Avatar sx={{width:25, height:25}} src={comment.user.photoURL}/>
               </ListItemAvatar>
               <Box sx={{display:"flex"}}>
                 <Box>
