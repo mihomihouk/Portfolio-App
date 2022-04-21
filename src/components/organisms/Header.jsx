@@ -6,12 +6,11 @@ import { userState } from "../../context/userState"
 import { navbarState } from "../../context/NavbarState"
 
 //styles
-import { AppBar, Box, IconButton, Toolbar } from '@mui/material'
+import { Avatar, AppBar, Box, IconButton, Toolbar } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 
 //components
 import ProfileCard from "../organisms/modals/ProfileCard"
-import UserAvatar from '../atoms/UserAvatar'
 
 const Header = () => {
 
@@ -48,7 +47,7 @@ const Header = () => {
               </Box>
               <Box sx={{justifyContent:"flex-end"}}>
                 <IconButton color="inherit" onClick={handleProfileCardOpen}>
-                  {user && <UserAvatar src={user.photoURL} sx={{width: "50px", height: "50px"}}/> }
+                  {user && <Avatar src={user.photoURL} sx={{width: "50px", height: "50px"}}/> }
                 </IconButton>
               </Box>
               <ProfileCard open={openProfileCard} handleClose={handleProfileCardClose}/>

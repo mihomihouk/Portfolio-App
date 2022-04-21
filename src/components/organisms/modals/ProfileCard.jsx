@@ -6,16 +6,14 @@ import { useRecoilValue } from "recoil"
 import { userState } from "../../../context/userState"
 
 //styles
-import { Box, Modal, Stack,Typography, Button } from "@mui/material"
+import { Avatar, Box, Modal, Stack,Typography, Button } from "@mui/material"
 import LogoutIcon from '@mui/icons-material/Logout'
-import UserAvatar from "../../../components/atoms/UserAvatar"
 
 const ProfileCard = (props) => {
 
   const user = useRecoilValue(userState)
   const { open, handleClose } = props
   const { logout, isPending } = useLogout()
-  console.log(UserAvatar)
 
   return (
     <Modal
@@ -36,7 +34,7 @@ const ProfileCard = (props) => {
       }}>
         <Box sx={{display: "flex", flexDirection:"column", textAlign: 'center'}}>
           <Box>
-            {user && <UserAvatar src={user.photoURL}/>}
+            {user && <Avatar src={user.photoURL}/>}
           </Box>
           <Box>
             {user && <Typography>{user.displayName}</Typography>}

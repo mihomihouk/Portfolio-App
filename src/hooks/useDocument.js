@@ -14,7 +14,6 @@ export const useDocument = (c, id) => {
     const unsub = onSnapshot(docRef, (doc) => {
       setDocument({...doc.data(), id:doc.id})
     },(err) => {
-      console.log(err.message)
       setError("failed to get document")
     })
 

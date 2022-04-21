@@ -64,6 +64,7 @@ const Sidebar = () => {
           <Link 
             href={item.path}
             key={item.id} 
+            sx={{textDecoration:"none"}}
           >
               <MenuItem selected={activeRoute(item.path, router.pathname)}>
                 <ListItem button>

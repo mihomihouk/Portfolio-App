@@ -5,7 +5,7 @@ import { db, auth } from "../../../firebase/config"
 import { doc, deleteDoc, updateDoc } from "firebase/firestore"
 
 //styles
-import { Grid, Box, Divider, Modal, List, Stack, TextField, Typography } from "@mui/material"
+import { Avatar, Grid, Box, Divider, Modal, List, Stack, TextField, Typography } from "@mui/material"
 import NotesIcon from '@mui/icons-material/Notes'
 import LocalOfferIcon from '@mui/icons-material/LocalOffer'
 import PersonIcon from '@mui/icons-material/Person'
@@ -18,7 +18,6 @@ import CloseButton from "../../atoms/buttons/CloseButton"
 import AddButton from '../../atoms/buttons/AddButton'
 import TagSelector from '../../modules/TagSelector'
 import EventTime from '../../modules/EventTime'
-import UserAvatar from '../../atoms/UserAvatar'
 
 const labelsClasses = [
   "indigo",
@@ -105,8 +104,8 @@ function CalendarEditModal(props) {
             p:"3%"
           }}
         >
-         {!isEditing ? (
-           <>
+        {!isEditing ? (
+          <>
             <Box sx={{display:"flex",justifyContent:"flex-end"}}>
               <EditButton onClick={() => setIsEditing(true)}/>
               <DeleteButton onClick={handleDelete}/>
@@ -145,7 +144,7 @@ function CalendarEditModal(props) {
                 <PersonIcon/>
               </Grid>
               <Grid item xs={10} >
-                {eventToEdit && <UserAvatar  sx={{width: "24px", height: "24px"}} src={eventToEdit.extendedProps.userThumbnail}/>}
+                {eventToEdit && <Avatar  sx={{width: "24px", height: "24px"}} src={eventToEdit.extendedProps.userThumbnail}/>}
               </Grid>
             </Grid>
               <Grid container sx={{ display: "flex", alignItems: "center", width: "100%"}} >
@@ -160,7 +159,7 @@ function CalendarEditModal(props) {
                   </Typography>
                 </Grid>        
               </Grid>
-           </>
+          </>
         ) : (
           <>
             <Box sx={{display:"flex",justifyContent:"flex-end"}}>
