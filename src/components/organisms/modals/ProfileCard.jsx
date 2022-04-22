@@ -20,7 +20,7 @@ const ProfileCard = (props) => {
       open={open}
       onClose={handleClose}
       >
-      <Stack spacing={1} sx={{
+      <Stack spacing={4} sx={{
         position: "absolute",
         top:"35%", 
         left:"75%",
@@ -30,22 +30,22 @@ const ProfileCard = (props) => {
         bgcolor: "background.paper",
         border: "2px solid #000", 
         boxShadow: 24, 
-        p:"3%"
+        p:"3%",
+        m:"auto",
+        textAlign:"center"
       }}>
-        <Box sx={{display: "flex", flexDirection:"column", textAlign: 'center'}}>
-          <Box>
-            {user && <Avatar src={user.photoURL}/>}
-          </Box>
-          <Box>
-            {user && <Typography>{user.displayName}</Typography>}
-          </Box>
+        <Box sx={{mx:"auto"}}>
+          {user && <Avatar sx={{width:"100px", height:"100px"}} src={user.photoURL}/>}
+        </Box>
+        <Box>
+          {user && <Typography variant="h5">{user.displayName}</Typography>}
         </Box>
         <Box>
           {!isPending &&<Button
             startIcon={<LogoutIcon />}
             color="error"
             sx={{
-              color:"#f57f17", 
+              color:"primary", 
               borderRadius:"12px",
               px:2
             }}
@@ -67,7 +67,6 @@ const ProfileCard = (props) => {
           >
             Logging out...
           </Button>}
-          
         </Box>
       </Stack>
     </Modal>
