@@ -26,7 +26,7 @@ const About = () => {
   const router = useRouter()
   const { id } = router.query
 
-  const { error, document } = useDocument("discussions", id)
+  const { document, isPending, error } = useDocument("discussions", id)
 
   const [isEditingTitle, setIsEditingTitle] = useState(false)
   const [isEditingDetail, setIsEditingDetail] = useState(false)
@@ -36,13 +36,6 @@ const About = () => {
   const [newDetail, setNewDetail] = useState('')
 
   const [open, setOpen] = useState(true)
-
-  if (error) {
-    return <Typography>{error}</Typography>
-  }
-  if (!document) {
-    return <Typography>Loading...</Typography>
-  }
 
   const handleChangeCategory = (event) => {
     setNewCategory(event.target.value)
@@ -125,6 +118,9 @@ const About = () => {
           <Box>
             <Sidebar/>
           </Box>
+          {isPending && <Typography>Loading...</Typography>}
+          {error&& <Typography>{error}</Typography>}
+          {document &&
           <Stack spacing={1}>
             <Box sx={{display:"flex", justifyContent: "space-between", alignItems: "center", height:"10%"}}>
               <Box sx={{display:"flex", alignItems: "center"}}>
@@ -219,11 +215,11 @@ const About = () => {
             </Divider>
             <Box container sx={{ pt: 3, height:"60%", width: "100%"}} >
               <List sx={{width: "100%"}}>
-                <CommentCard document={document}/>
+                <CommentCard document={document} error={error} isPending={isPending}/>
               </List>
             </Box>
           </Stack>
-          
+          }
         </Container>
       </Box>
     </>

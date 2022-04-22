@@ -25,7 +25,7 @@ function Main() {
   const [currentSearch, setCurrentSearch] = useState("")
   const [discussions, setDiscussions] = useState([])
 
-  const { documents } = useCollection(
+  const { documents, error, isPending } = useCollection(
     "discussions",
     ["createdAt", "desc"],
   )
@@ -147,7 +147,7 @@ function Main() {
               <Searchbar onChange={handleChangeSeachbar} currentSearch={currentSearch}/>
             </Box>
             <Box sx={{height: "80%"}}>
-              {discussions && <DiscussionList discussions={discussions}/>}
+              {discussions && <DiscussionList discussions={discussions} error={error} isPending={isPending} />}
             </Box>
           </Stack>
         </Container>

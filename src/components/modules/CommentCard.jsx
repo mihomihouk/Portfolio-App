@@ -2,7 +2,7 @@ import React,{ useState } from 'react'
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
 
 //firebase 
-import { db } from "../../firebase/config"
+import { auth, db } from "../../firebase/config"
 import { doc, updateDoc, Timestamp } from "firebase/firestore"
 
 //styles
@@ -17,11 +17,13 @@ import UpdateButton from '../atoms/buttons/UpdateButton'
 
 function CommentCard(props) {
 
-  const { document } = props
+  const { document, isPending, error } = props
 
   const [isEditingComment, setIsEditingComment] = useState(false)
   const [newComment, setNewComment] = useState("")
   const [editingCommentId, setEditingCommentId] = useState("")
+
+  const user = auth.currentUser
 
   const handleEditComment = (id) => {
     setEditingCommentId(id)
@@ -64,6 +66,9 @@ function CommentCard(props) {
 
   return (
     <>
+    {isPending && <Typography>Loading...</Typography>}
+    {error&& <Typography>{error}</Typography>}
+    {!isPending && document.comments.length ===0 && <Typography>No comments yet!</Typography>}
     {!isEditingComment ? (
       <List>
       {document.comments && document.comments.map(comment => (
@@ -82,8 +87,10 @@ function CommentCard(props) {
                   <EditButton onClick={() => handleEditComment(comment.id)}/>
                 </Box>
                 <Box>
+                {user.uid == document.user.id && (
                   <DeleteButton onClick={() => handleDelete(comment.id)}/>
-                </Box>
+                )}
+                  </Box>
               </Box>
             </Box>
             <ListItemText

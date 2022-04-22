@@ -3,16 +3,20 @@ import Link from "next/link"
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
 
 //styles
-import { Box, Divider, List, ListItem, ListItemText, Paper, Typography} from "@mui/material"
+import { Box, Divider, List, ListItem, ListItemText, Paper, Typography } from "@mui/material"
 
 //components
 import DiscussionIcon from "../atoms/DiscussionIcon"
 
-function DiscussionList({discussions}) {
+function DiscussionList(props) {
+  const { discussions, error, isPending } = props
 
   return (
     <>
-      <List sx={{height:"20%", width:"100%"}}>
+      {isPending && <Typography>Loading...</Typography>}
+      {error&& <Typography>{error}</Typography>}
+      {!isPending && discussions.length ===0 && <Typography>No projects yet!</Typography>}
+      {discussions && <List sx={{height:"20%", width:"100%"}}>
         {discussions.map(item => (
           <ListItem key={item.id} sx={{opacity: item.status === "settled" && 0.4}}>
             <Link href={`/discussion/${item.id}`}>
@@ -32,6 +36,7 @@ function DiscussionList({discussions}) {
           </ListItem>
        ))}
       </List>
+      }
     </>
   )
 }
