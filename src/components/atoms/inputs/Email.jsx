@@ -15,7 +15,6 @@ function Email(props) {
         name="email"
         autoComplete="email"
         helperText=""
-        autoFocus
         value={value}
         onChange={onChange}
       />

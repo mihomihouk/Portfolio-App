@@ -11,6 +11,7 @@ import UserName from '../src/components/atoms/inputs/UserName'
 import Password from '../src/components/atoms/inputs/Password'
 import Email from '../src/components/atoms/inputs/Email'
 import ProfileThumbnail from '../src/components/atoms/inputs/ProfileThumbnail' 
+import Link from '../src/Link'
 
 function Signup() {
 
@@ -87,7 +88,14 @@ function Signup() {
               {!isPending &&<LoginButton action="Sign up" onClick={handleSubmit}/>}
               {isPending && <LoginButton isPending={isPending} action="Loading"/>}
               {error && <Typography>{error}</Typography>}
-              <CopyRight sx={{ mt: 5 }} />
+              <Box sx={{textAlign:"center"}}>
+                <Link href="/login" variant="body2">
+                  <Typography variant="body2" component="span">{"Already have an account? Log In"}</Typography>
+                </Link>
+              </Box>
+              <Box sx={{mt:2}}>
+                <CopyRight />
+              </Box>
             </Box>
           </Box>
         </Grid>

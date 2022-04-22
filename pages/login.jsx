@@ -54,25 +54,20 @@ function Login() {
             <Typography component="h1" variant="h5" >
               Log in
             </Typography>
-            <Box component="form" noValidate sx={{ mt: 1 }}>
+            <Box component="form" noValidate sx={{ mt: 1}}>
               <Email onChange={(e)=>setEmail(e.target.value)} value={email}/>
               <Password onChange={(e)=>setPassword(e.target.value)} value={password}/>
               {!isPending && <LoginButton action="Login" onClick={handleSubmit}/>}
               {isPending && <LoginButton isPending={isPending} action="Logging in"/>}
               {error && <Typography>{error}</Typography>}
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="/signup" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
-              <CopyRight sx={{ mt: 5 }} />
+              <Box sx={{textAlign:"center"}}>
+                <Link href="/signup" variant="body2">
+                  <Typography variant="body2" component="span">{"Don't have an account? Sign Up"}</Typography>
+                </Link>
+              </Box>
+              <Box sx={{mt:2}}>
+                <CopyRight />
+              </Box>
             </Box>
           </Box>
         </Grid>
