@@ -71,7 +71,7 @@ function New() {
           </Box>
           <Stack spacing={2} sx={{height: "100vh", pt:3}} >
             <Box>
-              <Typography variant="h5" sx={{fontWeight:"bold"}}>What's in your mind?</Typography>
+              <Typography variant="h5" sx={{fontWeight:"bold"}}>{"What's in your mind?"}</Typography>
             </Box>
             <Box sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
               <Box> 
