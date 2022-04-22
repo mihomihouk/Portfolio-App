@@ -104,11 +104,11 @@ function CalendarEditModal(props) {
             p:"3%"
           }}
         >
-        {!isEditing ? (
+        {!isEditing && eventToEdit ? (
           <>
             <Box sx={{display:"flex",justifyContent:"flex-end"}}>
               <EditButton onClick={() => setIsEditing(true)}/>
-              <DeleteButton onClick={handleDelete}/>
+              {user.uid === eventToEdit.extendedProps.userID && <DeleteButton onClick={handleDelete}/>}
               <CloseButton onClick={handleClose}/>
             </Box>
             <Box sx={{overflow:"scroll"}}>

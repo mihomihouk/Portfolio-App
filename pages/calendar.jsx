@@ -52,7 +52,8 @@ function Calendar() {
         extendedProps: {
           userThumbnail: item.user.photoURL
         },
-        description:item.description
+        description:item.description,
+        userID:item.user.id
       }
     ))
     setEvents(formattedEvents)
