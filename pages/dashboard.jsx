@@ -1,5 +1,6 @@
 
-import React,{ useState } from 'react'
+import React from 'react'
+import { auth } from "../src/firebase/config"
 
 //styles
 import { Grid } from '@mui/material'
@@ -11,7 +12,8 @@ import Sidebar from '../src/components/organisms/Sidebar'
 import OnlineUsers from '../src/components/organisms/OnlineUsers'
 
 const Dashboard = () => {
- 
+  const user = auth.currentUser
+
   return (
     <>
       <Header />
@@ -29,7 +31,7 @@ const Dashboard = () => {
           <RotaList/>
         </Grid>
         <Grid item xs={2} pt={10}>
-         <OnlineUsers/>
+          {user && <OnlineUsers/>}
         </Grid>
       </Grid>
     </>

@@ -1,26 +1,40 @@
 import React from 'react'
+import { auth } from "../../firebase/config"
+import { useCollection } from "../../hooks/useCollection"
 
 //styles
 
-import { Avatar, List, ListItem, ListItemAvatar, ListItemIcon, ListItemText, Typography } from '@mui/material'
+import { Avatar, Grid, List, ListItem, ListItemAvatar, ListItemIcon, ListItemText, Typography } from '@mui/material'
 
 //components
 import HomeIcon from "../atoms/icons/HomeIcon"
 
 function OnlineUsers() {
+  const { documents, isPending, error } = useCollection("users")
+  const user = auth.currentUser
+
   return (
     <>
-     <Typography component="h2" variant="h5">All Users</Typography>
+     <Typography component="h2" variant="h5">Housemates</Typography>
       <List>
-      {["EdF", "EdY", "Liam", "Miho", "Nuala", "Sophie"].map(user => (
-        <ListItem key={user} >
-          <ListItemIcon>
-            <HomeIcon color="success"/>
-          </ListItemIcon>
-          <ListItemText>{user}</ListItemText>
-          <ListItemAvatar>
-            <Avatar />    
-          </ListItemAvatar>
+      {isPending && <Typography>...Loading</Typography>}
+      {error && <Typography variant="body1" component="span">{error}</Typography>}
+      {documents && documents.map(user => (
+        <ListItem key={user.id} sx={{display:"flex"}}>
+          <Grid container sx={{alignItems:"center"}}>
+            <Grid item xs={3}>
+              {user.online && <HomeIcon color="success"/>}
+            </Grid>
+            <Grid item xs={5}>
+              <ListItemText>{user.displayName}</ListItemText>
+            </Grid>
+            <Grid item xs={4}>
+              <ListItemAvatar>
+                <Avatar src={user.photoURL} />    
+              </ListItemAvatar>
+            </Grid>
+          </Grid>
+          
         </ListItem>
       ))}
       </List>
