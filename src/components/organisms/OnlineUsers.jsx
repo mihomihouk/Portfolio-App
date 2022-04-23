@@ -1,17 +1,15 @@
 import React from 'react'
-import { auth } from "../../firebase/config"
 import { useCollection } from "../../hooks/useCollection"
 
 //styles
 
-import { Avatar, Grid, List, ListItem, ListItemAvatar, ListItemIcon, ListItemText, Typography } from '@mui/material'
+import { Avatar, Grid, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
 
 //components
 import HomeIcon from "../atoms/icons/HomeIcon"
 
 function OnlineUsers() {
   const { documents, isPending, error } = useCollection("users")
-  const user = auth.currentUser
 
   return (
     <>
