@@ -2,15 +2,16 @@ import { useState, useEffect, useRef } from "react"
 import { db } from "../../src/firebase/config"
 
 //firebase imports
-import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore"
+import { collection, onSnapshot, orderBy, limit, query, where } from "firebase/firestore"
 
-export const useCollection = (c, newOrder, newQuery) => {
+export const useCollection = (c, newOrder, newLimit, newQuery) => {
   const [documents, setDocuments] = useState(null)
   const [isPending, setIsPending] = useState(false)
   const [error, setError] = useState(null)
 
-  const q = useRef(newQuery).current
   const order = useRef(newOrder).current
+  const l = useRef(newLimit).current
+  const q = useRef(newQuery).current
 
   useEffect(() => {
     const fetchData = async() => {
@@ -21,18 +22,23 @@ export const useCollection = (c, newOrder, newQuery) => {
         if(order){
           ref = query(ref,orderBy(...order))
         }
+
+        if(l){
+          ref = query(ref, limit(l))
+        }
     
         if(q){
           ref = query(ref,where(...q))
         }
+
     
         const unsub = onSnapshot(ref, (snapshot) => {
-            let results = []
-            snapshot.docs.forEach(doc => {
-              results.push({...doc.data(), id:doc.id})
-            })
-            setDocuments(results)
-            setError(null)
+          let results = []
+          snapshot.docs.forEach(doc => {
+            results.push({...doc.data(), id:doc.id})
+          })
+          setDocuments(results)
+          setError(null)
           setIsPending(false)
         })
         return () => unsub()
@@ -44,7 +50,7 @@ export const useCollection = (c, newOrder, newQuery) => {
       }
    }
    fetchData()
-  },[c, order, q])
+  },[c, order, q, l])
 
   return { documents, isPending, error }
 }
