@@ -1,6 +1,4 @@
 import { useState } from "react"
-import { userState } from "../context/userState"
-import { useResetRecoilState } from "recoil"
 import { useRouter } from "next/router"
 
 //firebase
@@ -9,7 +7,6 @@ import { signOut } from "firebase/auth"
 import { doc, updateDoc } from "firebase/firestore"
 
 export const useLogout = () => {
-  const resetUser = useResetRecoilState(userState)
   const [error, setError] = useState(null)
   const [isPending, setIsPending] = useState(false)
   const router = useRouter()

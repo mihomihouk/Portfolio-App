@@ -1,8 +1,8 @@
 import React, {  useState } from 'react'
-import { useRecoilState ,  useRecoilValue } from "recoil"
+import { useRecoilState} from "recoil"
+import { auth } from "../../firebase/config"
 
 //contexts
-import { userState } from "../../context/userState"
 import { navbarState } from "../../context/NavbarState"
 
 //styles
@@ -14,7 +14,7 @@ import ProfileCard from "../organisms/modals/ProfileCard"
 
 const Header = () => {
 
-  const user = useRecoilValue(userState)
+  const user = auth.currentUser
   const [ open, setOpen ] = useRecoilState(navbarState)
   const [openProfileCard, setOpenProfileCard] = useState(false)
 
@@ -24,8 +24,6 @@ const Header = () => {
   const handleNavbarToggle = () => {
     setOpen (!open)
   }
-
-  console.log(user)
 
   return (
     <>

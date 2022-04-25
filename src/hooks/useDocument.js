@@ -7,19 +7,25 @@ import { doc, onSnapshot } from "firebase/firestore"
 export const useDocument = (c, id) => {
   const [document, setDocument] = useState(null)
   const [error, setError] = useState(null)
+  const [isPending, setIsPending] = useState(true)
 
   useEffect(() => {
-    const docRef = doc(db, c, id)
-
-    const unsub = onSnapshot(docRef, (doc) => {
-      setDocument({...doc.data(), id:doc.id})
-    },(err) => {
-      setError("failed to get document")
-    })
-
-    return () => unsub()
-
+    const fetchData = async() => {
+      setError(null)
+      setIsPending(true)
+      
+      const unsub = await onSnapshot(doc(db, c, id), (doc) => {
+        setDocument({...doc.data(), id:doc.id})
+        setError(null)
+        setIsPending(false)
+      },(err) => {
+        setError("failed to get document")
+        setIsPending(false)
+      })
+      return () => unsub()
+    }
+    fetchData()
   },[c, id])
 
-  return { document, error }
+  return { document, isPending, error }
 }
