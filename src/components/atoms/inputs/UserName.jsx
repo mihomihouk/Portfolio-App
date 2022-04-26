@@ -8,7 +8,6 @@ function UserName(props) {
   return (
     <>
       <TextField
-        margin="normal"
         required
         fullWidth
         label="User Name"

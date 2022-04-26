@@ -2,7 +2,7 @@ import React,{ useState } from 'react'
 import { useSignup } from "../src/hooks/useSignup"
 
 //styles
-import { Box, Grid, Paper, Typography } from '@mui/material' 
+import { Box, Grid, Paper, Stack, Typography } from '@mui/material' 
 
 //components
 import LoginButton from '../src/components/atoms/buttons/LoginButton'
@@ -79,7 +79,7 @@ function Signup() {
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
-            <Box component="form" noValidate sx={{ mt: 1 }}>
+            <Stack component="form" spacing={2} noValidate sx={{ mt: 2 }}>
               <UserName value={displayName} onChange={(e) => setDisplayName(e.target.value)}/>
               <Email value={email} onChange={(e) => setEmail(e.target.value)}/>
               <Password value={password} onChange={(e) => setPassword(e.target.value)}/>
@@ -96,7 +96,7 @@ function Signup() {
               <Box sx={{mt:2}}>
                 <CopyRight />
               </Box>
-            </Box>
+            </Stack>
           </Box>
         </Grid>
       </Grid>

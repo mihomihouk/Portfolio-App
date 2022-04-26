@@ -8,7 +8,6 @@ function Email(props) {
   return (
     <>
       <TextField
-        margin="normal"
         required
         fullWidth
         label="Email Address"
