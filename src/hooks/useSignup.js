@@ -20,6 +20,7 @@ export const useSignup = () => {
     try{
       //signup
       const res = await createUserWithEmailAndPassword(auth, email, password)
+
       // upload user thumbnail
       const uploadPath = `thumbnails/${res.user.uid}/${thumbnail.name}`
       const thumbnailRef = ref(storage, uploadPath)
@@ -30,13 +31,13 @@ export const useSignup = () => {
       await updateProfile(res.user, { displayName, photoURL:imgUrl })
       
       //crete a user document
-      const userDocRef = doc(db, "users", res.user.uid)
       const userData = {
         online: true,
         displayName,
+        id: res.user.uid,
         photoURL: imgUrl,
       }
-      await setDoc(userDocRef, userData)
+      await setDoc(doc(db, "users", res.user.uid), userData)
       await setIsPending(false)
       await setError(null)
       await router.push("/dashboard")
