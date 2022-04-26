@@ -5,7 +5,6 @@ import { useRouter } from "next/router"
 import { auth, storage, db } from "../firebase/config"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
-import { doc, setDoc } from "firebase/firestore"
 
 
 export const useSignup = () => {
@@ -14,14 +13,14 @@ export const useSignup = () => {
   const router = useRouter()
 
   const signup = async(email, password, displayName, thumbnail) => {
+    
     setError(null)
     setIsPending(true)
 
     try{
       //signup
       const res = await createUserWithEmailAndPassword(auth, email, password)
-
-      //upload user thumbnail
+      // upload user thumbnail
       const uploadPath = `thumbnails/${res.user.uid}/${thumbnail.name}`
       const thumbnailRef = ref(storage, uploadPath)
       await uploadBytes(thumbnailRef, thumbnail)
@@ -31,15 +30,13 @@ export const useSignup = () => {
       await updateProfile(res.user, { displayName, photoURL:imgUrl })
       
       //crete a user document
-      const docRef = doc(db, "users", res.user.uid)
-      const data = {
+      const userDocRef = doc(db, "users", res.user.uid)
+      const userData = {
         online: true,
         displayName,
-        photoURL: imgUrl
+        photoURL: imgUrl,
       }
-
-      await setDoc(docRef, data)
-      
+      await setDoc(userDocRef, userData)
       await setIsPending(false)
       await setError(null)
       await router.push("/dashboard")

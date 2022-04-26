@@ -15,13 +15,16 @@ function TagSelector(props) {
         onClick={onClick}
       > 
         <ListItemText variant="body2" component="span"
-          sx={{bgcolor:`${lblClass}`, width:"24px", height:"24px", borderRadius:"100%", display:"flex", alignItems:"center", cursor: "pointer"}}
+          sx={{bgcolor:`${lblClass.color}`, width:"24px", height:"24px", borderRadius:"100%", display:"flex", alignItems:"center", cursor: "pointer"}}
         >
           {label === lblClass && (
             <Typography >
               <CheckIcon size="sm" sx={{color:"white"}}/>
             </Typography>
           )}
+        </ListItemText>
+        <ListItemText sx={{pl:"2px"}}>
+          <Typography>{lblClass.category}</Typography>
         </ListItemText>
       </ListItem>
        

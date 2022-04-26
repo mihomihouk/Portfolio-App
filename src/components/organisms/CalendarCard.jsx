@@ -23,10 +23,10 @@ function CalendarCard() {
     const events = documents.map(item => (
       {
         id:item.id,
-        title:item.title,
+        title:`${item.user.displayName} : ${item.title}`,
         start:item.start.toDate(),
         end:item.end.toDate(),
-        color:item.label,
+        color:item.label.color,
         extendedProps: {
           userThumbnail: item.user.photoURL
         },

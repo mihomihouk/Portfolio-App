@@ -54,7 +54,8 @@ function CalendarSidebar(props) {
     documents && documents.forEach(item => {
       if(!newArray.includes(item.label)){
         newArray.push({
-          color:item.label,
+          color:item.label.color,
+          category:item.label.category,
           checked: true
         })
       }
@@ -84,7 +85,7 @@ function CalendarSidebar(props) {
           {labels && labels.map(label => ( 
             <ListItem key={label.color}>
               <ListItemText>
-                <FormControlLabel color={label.color} control={<BpCheckbox defaultChecked label={label.color} onChange={() => handleChangeLabels(label)}/>} label={label.color}/>
+                <FormControlLabel color={label.color} control={<BpCheckbox defaultChecked label={label.color} onChange={() => handleChangeLabels(label)}/>} label={label.category}/>
               </ListItemText>
             </ListItem>
             ))} 

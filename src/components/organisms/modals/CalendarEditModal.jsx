@@ -62,6 +62,7 @@ function CalendarEditModal(props) {
     setEndDate("")
     setDetail("")
     setLabel("")
+    handleClose()
   }
 
   const handleUpdate = async() => {
@@ -89,7 +90,7 @@ function CalendarEditModal(props) {
     <>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={handleCloseEdit}
       >
         <Stack spacing={1} 
           sx={{

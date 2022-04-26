@@ -40,15 +40,16 @@ function Calendar() {
     }
     const selectedLabels =labels.filter(label => label.checked).map(label => label.color)
     const filteredEvents = documents.filter(item => {
-      return selectedLabels.includes(item.label)
+      return selectedLabels.includes(item.label.color)
     })
+
     const formattedEvents = filteredEvents.map(item => (
       {
         id:item.id,
-        title:item.title,
+        title:`${item.user.displayName} : ${item.title}`,
         start:item.start.toDate(),
         end:item.end.toDate(),
-        color:item.label,
+        color:item.label.color,
         extendedProps: {
           userThumbnail: item.user.photoURL
         },
@@ -58,7 +59,6 @@ function Calendar() {
     ))
     setEvents(formattedEvents)
   },[documents, labels])
-
 
   //Click date to open modal
   const handleDateClick = () => {
@@ -75,7 +75,6 @@ function Calendar() {
     setOpenEditModal(false)
     setEventToEdit("")
   }
-
 
   return (
     <>

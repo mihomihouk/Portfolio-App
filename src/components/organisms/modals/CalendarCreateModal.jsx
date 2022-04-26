@@ -20,12 +20,12 @@ import TagSelector from "../../modules/TagSelector"
 
 
 const labelsClasses = [
-  "indigo",
-  "gray",
-  "green",
-  "blue",
-  "red",
-  "purple",
+  {color:"indigo", category: "Work"},
+  {color:"gray", category: "Family"},
+  {color:"green", category: "Friends"},
+  {color:"blue", category: "Study"},
+  {color:"red", category: "Hobby"},
+  {color:"purple", category: "Other"},
 ];
 
 function CalendarModal(props) {
@@ -139,14 +139,14 @@ function CalendarModal(props) {
               <Box>
                 <LocalOfferIcon />
               </Box>
-              <Box >
+              <Box sx={{ overflow: "scroll"}}>
                 <List sx={{display:"flex"}}>
-                {labelsClasses.map((lblClass, i) => (
-                  <TagSelector lblClass={lblClass} key={i} label={label} onClick={() => setLabel(lblClass)}/>
-                ))}
+                  {labelsClasses.map((lblClass, i) => (
+                    <TagSelector lblClass={lblClass} key={i} label={label} onClick={() => setLabel(lblClass)}/>
+                  ))}
                 </List>
               </Box>        
-               </Box>
+            </Box>
           <Box>
             <AddButton onClick={handleSubmit}/>
           </Box>
