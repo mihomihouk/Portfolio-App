@@ -1,9 +1,6 @@
 import React from 'react'
 import { useLogout } from "../../../hooks/useLogout"
-import { useRecoilValue } from "recoil"
-
-//contexts
-import { userState } from "../../../context/userState"
+import { auth } from "../../../firebase/config"
 
 //styles
 import { Avatar, Box, Modal, Stack,Typography, Button } from "@mui/material"
@@ -11,7 +8,7 @@ import LogoutIcon from '@mui/icons-material/Logout'
 
 const ProfileCard = (props) => {
 
-  const user = useRecoilValue(userState)
+  const user = auth.currentUser
   const { open, handleClose } = props
   const { logout, isPending } = useLogout()
 
