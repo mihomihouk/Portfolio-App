@@ -17,7 +17,6 @@ import {
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import ForumIcon from "@mui/icons-material/Forum";
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 
 //components

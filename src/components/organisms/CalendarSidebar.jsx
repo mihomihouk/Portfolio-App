@@ -7,6 +7,7 @@ import { labelState } from "../../context/LabelState";
 //styes
 import {
   Checkbox,
+  Divider,
   FormControlLabel,
   List,
   ListItem,
@@ -94,6 +95,7 @@ function CalendarSidebar(props) {
         <Typography variant="h5" component="h3">
           Label
         </Typography>
+        <Divider />
         <List>
           {isPending && <Typography>Loading...</Typography>}
           {error && <Typography>{error}</Typography>}

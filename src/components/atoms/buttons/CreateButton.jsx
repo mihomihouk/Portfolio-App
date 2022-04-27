@@ -1,30 +1,32 @@
-import React from 'react'
+import React from "react";
 
 //styles
-import { Button } from "@mui/material"
-import AddIcon from "@mui/icons-material/Add"
-
+import { Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
 function CreateButton(props) {
-
-  const {onClick, title} = props
+  const { onClick, title } = props;
 
   return (
     <>
-      <Button 
-        startIcon={<AddIcon/>} 
+      <Button
+        startIcon={<AddIcon />}
         sx={{
-          color:"white", 
-          bgcolor: "#f57f17",
-          fontWeight:"bold", 
-          ":hover":{ bgcolor:"#ffb04c"}
-         }}
-         onClick={onClick}
+          color: "white",
+          bgcolor: "secondary.main",
+          fontWeight: "bold",
+          ":hover": {
+            bgcolor: "white",
+            color: "secondary.main",
+            border: "2px gray solid",
+          },
+        }}
+        onClick={onClick}
       >
         {title}
       </Button>
     </>
-  )
+  );
 }
 
-export default CreateButton
+export default CreateButton;

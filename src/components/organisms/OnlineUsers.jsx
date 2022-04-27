@@ -5,6 +5,7 @@ import { useCollection } from "../../hooks/useCollection";
 
 import {
   Avatar,
+  Divider,
   Grid,
   List,
   ListItem,
@@ -24,6 +25,7 @@ function OnlineUsers() {
       <Typography component="h2" variant="h5">
         Housemates
       </Typography>
+      <Divider />
       <List>
         {isPending && <Typography>...Loading</Typography>}
         {error && (

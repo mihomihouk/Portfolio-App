@@ -134,7 +134,7 @@ function New() {
                     type="submit"
                     sx={{
                       color: "white",
-                      bgcolor: "#f57f17",
+                      bgcolor: "secondary.main",
                       fontWeight: "bold",
                     }}
                     disabled
@@ -146,9 +146,13 @@ function New() {
                     type="submit"
                     sx={{
                       color: "white",
-                      bgcolor: "#f57f17",
+                      bgcolor: "secondary.main",
                       fontWeight: "bold",
-                      ":hover": { bgcolor: "#ffb04c" },
+                      ":hover": {
+                        bgcolor: "white",
+                        color: "secondary.main",
+                        border: "2px gray solid",
+                      },
                     }}
                     onClick={handleSubmit}
                   >

@@ -22,15 +22,13 @@ function Calendar() {
   const { documents, error, isPending } = useCollection("events");
   const [labels, setLabels] = useRecoilState(labelState);
   const [events, setEvents] = useState([]);
-
   const [openCreateModal, setOpenCreateModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [eventToEdit, setEventToEdit] = useState("");
+
   const handleOpenCreateModal = () => setOpenCreateModal(true);
   const handleCloseCreateModal = () => setOpenCreateModal(false);
-
-  const [openEditModal, setOpenEditModal] = useState(false);
   const handleOpenEditModal = () => setOpenEditModal(true);
-
-  const [eventToEdit, setEventToEdit] = useState("");
 
   useEffect(() => {
     if (!documents) {
