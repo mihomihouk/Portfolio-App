@@ -1,13 +1,11 @@
-import React from 'react'
+import React from "react";
 
 //styles
-import EditIcon from '@mui/icons-material/Edit';
-import { IconButton } from '@mui/material';
-
+import EditIcon from "@mui/icons-material/Edit";
+import { IconButton } from "@mui/material";
 
 function EditButton(props) {
-
-  const { onClick } = props
+  const { onClick } = props;
 
   return (
     <>
@@ -15,7 +13,7 @@ function EditButton(props) {
         <EditIcon />
       </IconButton>
     </>
-  )
+  );
 }
 
-export default EditButton
+export default EditButton;

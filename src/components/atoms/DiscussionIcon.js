@@ -1,13 +1,12 @@
-import React from 'react'
+import React from "react";
 
 //styled
-import { Typography } from '@mui/material'
+import { Typography } from "@mui/material";
 
 const DiscussionIcon = (props) => {
+  const { document } = props;
 
-  const { document } = props
-  
-  switch(document.category){
+  switch (document.category) {
     case "Announcement":
       return <Typography>📢</Typography>;
     case "Idea":
@@ -17,6 +16,6 @@ const DiscussionIcon = (props) => {
     default:
       return null;
   }
-}
+};
 
-export default DiscussionIcon
+export default DiscussionIcon;

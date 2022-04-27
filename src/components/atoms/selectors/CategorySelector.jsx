@@ -1,29 +1,29 @@
-import React from 'react'
+import React from "react";
 
 //styles
-import {  MenuItem, Select } from '@mui/material'
-
+import { MenuItem, Select } from "@mui/material";
 
 function CategorySelector(props) {
-
-  const { onChange, category } = props
+  const { onChange, category } = props;
 
   return (
     <>
       <Select
-        sx={{width:170, height: 30}}
+        sx={{ width: 170, height: 30 }}
         value={category}
         displayEmpty
         defaultValue="All"
         onChange={onChange}
       >
-        <MenuItem value="" disabled>Categories</MenuItem>
+        <MenuItem value="" disabled>
+          Categories
+        </MenuItem>
         <MenuItem value="Announcement">Announcement</MenuItem>
         <MenuItem value="Idea">Idea</MenuItem>
         <MenuItem value="Question">Question</MenuItem>
       </Select>
     </>
-  )
+  );
 }
 
-export default CategorySelector
+export default CategorySelector;

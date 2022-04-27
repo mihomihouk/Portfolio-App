@@ -1,30 +1,30 @@
-import React from 'react'
+import React from "react";
 
 //styles
-import { Grid, Divider } from "@mui/material"
+import { Grid, Divider } from "@mui/material";
 
 //components
-import Messages from '../modules/Messages'
-import MessageInput from '../atoms/inputs/MessageInput'
-import SendButton from '../atoms/buttons/SendButton'
+import Messages from "../modules/Messages";
+import MessageInput from "../atoms/inputs/MessageInput";
+import SendButton from "../atoms/buttons/SendButton";
 
 function MessageFeed() {
   return (
     <>
-      <Grid item sx={{height:"80vh"}}>
-        <Messages/>
+      <Grid item sx={{ height: "80vh" }}>
+        <Messages />
       </Grid>
       <Divider />
-      <Grid container item sx={{height:"20vh"}}>
+      <Grid container item sx={{ height: "20vh" }}>
         <Grid item xs={11}>
-          <MessageInput/>
+          <MessageInput />
         </Grid>
         <Grid item xs={1}>
-          <SendButton/>
+          <SendButton />
         </Grid>
       </Grid>
     </>
-  )
+  );
 }
 
-export default MessageFeed
+export default MessageFeed;

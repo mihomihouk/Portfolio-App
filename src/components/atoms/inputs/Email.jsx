@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
 
 //styles
-import { TextField } from '@mui/material'
+import { TextField } from "@mui/material";
 
 function Email(props) {
-  const { value, onChange } = props
+  const { value, onChange } = props;
   return (
     <>
       <TextField
@@ -18,7 +18,7 @@ function Email(props) {
         onChange={onChange}
       />
     </>
-  )
+  );
 }
 
-export default Email
+export default Email;

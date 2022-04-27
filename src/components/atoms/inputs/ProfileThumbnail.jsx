@@ -1,11 +1,10 @@
-import React from 'react'
+import React from "react";
 
 //styles
-import { TextField } from '@mui/material'
+import { TextField } from "@mui/material";
 
 const ProfileThumbnail = (props) => {
-
-  const { onChange } = props
+  const { onChange } = props;
   return (
     <>
       <TextField
@@ -17,7 +16,7 @@ const ProfileThumbnail = (props) => {
         onChange={onChange}
       />
     </>
-  )
-}
+  );
+};
 
-export default ProfileThumbnail
+export default ProfileThumbnail;

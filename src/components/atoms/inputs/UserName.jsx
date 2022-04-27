@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
 
 //styles
-import { TextField } from '@mui/material'
+import { TextField } from "@mui/material";
 
 function UserName(props) {
-  const { value, onChange } = props
+  const { value, onChange } = props;
   return (
     <>
       <TextField
@@ -18,7 +18,7 @@ function UserName(props) {
         onChange={onChange}
       />
     </>
-  )
+  );
 }
 
-export default UserName
+export default UserName;

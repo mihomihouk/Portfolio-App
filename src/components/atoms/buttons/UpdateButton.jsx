@@ -1,9 +1,8 @@
-import { Button } from '@mui/material'
-import React from 'react'
+import { Button } from "@mui/material";
+import React from "react";
 
 function UpdateButton(props) {
-
-  const { onClick } = props
+  const { onClick } = props;
 
   return (
     <>
@@ -11,13 +10,13 @@ function UpdateButton(props) {
         type="submit"
         fullWidth
         variant="contained"
-        sx={{fontWeight:"bold"}}
+        sx={{ fontWeight: "bold" }}
         onClick={onClick}
       >
         Update
       </Button>
     </>
-  )
+  );
 }
 
-export default UpdateButton
+export default UpdateButton;

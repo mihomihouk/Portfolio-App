@@ -1,15 +1,14 @@
-import React from 'react'
+import React from "react";
 
 //styles
-import { TextField } from "@mui/material"
+import { TextField } from "@mui/material";
 
 function Detail(props) {
-
-  const { size, rows, text, value, onChange } = props
+  const { size, rows, text, value, onChange } = props;
 
   return (
     <>
-      <TextField 
+      <TextField
         size={size}
         label={text}
         multiline
@@ -19,7 +18,7 @@ function Detail(props) {
         onChange={onChange}
       />
     </>
-  )
+  );
 }
 
-export default Detail
+export default Detail;

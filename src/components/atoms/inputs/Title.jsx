@@ -1,11 +1,10 @@
-import React from 'react'
+import React from "react";
 
 //styles
-import { TextField } from '@mui/material'
+import { TextField } from "@mui/material";
 
 function Title(props) {
-
-  const { title, size, onChange } = props
+  const { title, size, onChange } = props;
 
   return (
     <>
@@ -20,7 +19,7 @@ function Title(props) {
         onChange={onChange}
       />
     </>
-  )
+  );
 }
 
-export default Title
+export default Title;

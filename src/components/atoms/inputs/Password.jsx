@@ -1,11 +1,10 @@
-import React from 'react'
+import React from "react";
 
 //styles
-import { TextField } from '@mui/material'
+import { TextField } from "@mui/material";
 
 function Password(props) {
-
-  const { value, onChange } = props
+  const { value, onChange } = props;
 
   return (
     <>
@@ -22,7 +21,7 @@ function Password(props) {
         onChange={onChange}
       />
     </>
-  )
+  );
 }
 
-export default Password
+export default Password;

@@ -1,96 +1,98 @@
-import React,{useState} from 'react'
-import { auth, db } from "../../../firebase/config"
+import React, { useState } from "react";
+import { auth, db } from "../../../firebase/config";
 
 //firebase
-import { doc, Timestamp, updateDoc } from "firebase/firestore"
+import { doc, Timestamp, updateDoc } from "firebase/firestore";
 
 //styles
-import { Box, Modal, Stack } from "@mui/material"
-
+import { Box, Modal, Stack } from "@mui/material";
 
 //components
-import CloseButton from "../../atoms/buttons/CloseButton"
-import Detail from '../../atoms/inputs/Detail'
-import AddButton from "../../atoms/buttons/AddButton"
-import CreateButton from '../../atoms/buttons/CreateButton';
+import CloseButton from "../../atoms/buttons/CloseButton";
+import Detail from "../../atoms/inputs/Detail";
+import AddButton from "../../atoms/buttons/AddButton";
+import CreateButton from "../../atoms/buttons/CreateButton";
 
 function DiscussionModal(props) {
-  const { document } = props
+  const { document } = props;
 
-  const [open, setOpen] = useState(false)
-  const [newComment, setNewComment] = useState("")
+  const [open, setOpen] = useState(false);
+  const [newComment, setNewComment] = useState("");
 
-  const user = auth.currentUser
+  const user = auth.currentUser;
 
-  const handleOpen = () => setOpen(true)
+  const handleOpen = () => setOpen(true);
   const handleClose = () => {
-    setNewComment("")
-    setOpen(false)
-  }
+    setNewComment("");
+    setOpen(false);
+  };
 
-  const handleSubmit = async(e) => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     const commentToAdd = {
       content: newComment,
       createdAt: Timestamp.fromDate(new Date()),
       id: Math.random(),
       user: {
-        id:user.uid,
+        id: user.uid,
         photoURL: user.photoURL,
-        displayName:user.displayName
-      }
-    }
+        displayName: user.displayName,
+      },
+    };
 
-    const docRef = doc(db, "discussions", document.id)
-  
+    const docRef = doc(db, "discussions", document.id);
+
     await updateDoc(docRef, {
-      comments: [...document.comments, commentToAdd]
-    })
+      comments: [...document.comments, commentToAdd],
+    });
 
-    setNewComment("")
-    setOpen(false)
-  }
-  
+    setNewComment("");
+    setOpen(false);
+  };
+
   return (
     <>
-      <CreateButton
-        onClick={handleOpen}
-        title="New Comment"
-      />
-      <Modal
-        open={open}
-        onClose={handleClose}
-      >
-        <Box container sx={{
-          position: "absolute",
-          top:"50%", left:"50%",
-          transform:"translate(-50%,-50%)",
-          width:"40%",
-          height:"60%",
-          bgcolor: "background.paper",
-          border: "2px solid #000", 
-          boxShadow: 24, 
-          display:"flex", 
-          flexDirection:"column",
-          p:"3%",
-          justifyContent:"space-between"
-          }}>
-            <Stack spacing={2}>
-              <Box sx={{display:"flex",justifyContent:"flex-end"}}>
-                <CloseButton onClick={handleClose}/>
-              </Box>
-              <Box sx={{ display: "flex", alignItems: "center"}} >
-                <Detail rows={5} text="Comment" value={newComment} onChange={(e) => setNewComment(e.target.value)}/>
-              </Box>
-              <Box>
-                <AddButton onClick={handleSubmit}/>
-              </Box>
-            </Stack>
+      <CreateButton onClick={handleOpen} title="New Comment" />
+      <Modal open={open} onClose={handleClose}>
+        <Box
+          container
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)",
+            width: "40%",
+            height: "60%",
+            bgcolor: "background.paper",
+            border: "2px solid #000",
+            boxShadow: 24,
+            display: "flex",
+            flexDirection: "column",
+            p: "3%",
+            justifyContent: "space-between",
+          }}
+        >
+          <Stack spacing={2}>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <CloseButton onClick={handleClose} />
+            </Box>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Detail
+                rows={5}
+                text="Comment"
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+              />
+            </Box>
+            <Box>
+              <AddButton onClick={handleSubmit} />
+            </Box>
+          </Stack>
         </Box>
       </Modal>
     </>
-  )
+  );
 }
 
-export default DiscussionModal
+export default DiscussionModal;
