@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 
 //firebase 
 import { auth, storage, db } from "../firebase/config"
+import { setDoc, doc } from "firebase/firestore"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 
@@ -29,7 +30,7 @@ export const useSignup = () => {
 
       //add display name and photoURL to user
       await updateProfile(res.user, { displayName, photoURL:imgUrl })
-      
+
       //crete a user document
       const userData = {
         online: true,
@@ -38,12 +39,12 @@ export const useSignup = () => {
         photoURL: imgUrl,
       }
       await setDoc(doc(db, "users", res.user.uid), userData)
-      await setIsPending(false)
-      await setError(null)
+      setIsPending(false)
+      setError(null)
       await router.push("/dashboard")
 
     } catch (error){
-
+      console.error(error)
       setError("Could not complete signup")
       setIsPending(false)
     }

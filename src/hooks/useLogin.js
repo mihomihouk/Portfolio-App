@@ -26,8 +26,7 @@ export const useLogin = () => {
         online: true
       })
 
-      await setIsPending(false)
-      await setUser(res.user)
+      setIsPending(false)
       await router.push("/dashboard")
 
     }catch(error){
