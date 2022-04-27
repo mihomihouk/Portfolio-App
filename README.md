@@ -63,4 +63,4 @@ tadaima
 
 ## Release URL
 
-?
+https://portfolio-app-ecru.vercel.app/
