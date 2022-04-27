@@ -38,15 +38,9 @@ const Sidebar = () => {
     },
     {
       id:3, 
-      title:"Chat", 
-      path: "/chat", 
-      icon:<ForumIcon/> 
-    },
-    {
-      id:4,
       title:"Discussion", 
       path: "/discussion", 
-      icon:<TipsAndUpdatesIcon/>
+      icon:<TipsAndUpdatesIcon/> 
     }
   ]
 
