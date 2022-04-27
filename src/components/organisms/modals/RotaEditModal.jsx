@@ -58,6 +58,7 @@ function RotaEditModal(props) {
                   value={newCategory}
                   displayEmpty
                   defaultValue="Area"
+                  instanceId="selector"
                   onChange={(e) => setNewCategory(e.target.value)} 
                 >
                   <MenuItem disabled value="">Area</MenuItem>
