@@ -41,13 +41,15 @@ function CalendarCard() {
     <>
       <Box>
         <Box sx={{display:"flex", alignItems:"center", justifyContent:"space-between", pb:1}}>
-          <Typography variant="h5" component="h2" >Events</Typography>
+          <Typography variant="h5" component="h2">Events</Typography>
           <Link href="/calendar" sx={{textDecoration:"none"}}>
             <Button variant="contained" sx={{bgcolor:"gray", color:"white", fontWeight:"bold"}} endIcon={<KeyboardArrowRightIcon/>}>{"View"}</Button>
           </Link>
         </Box>
         <Card raised sx={{borderRadius:"25px"}}>
           <CardContent>
+            {error && <Typography>{error}</Typography>}
+            {isPending && <Typography>...Loading</Typography>}
             <FullCalendar
               plugins={[dayGridPlugin, interactionPlugin]}
               initialView="dayGridMonth"
