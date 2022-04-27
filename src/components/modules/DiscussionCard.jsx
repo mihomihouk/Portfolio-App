@@ -23,7 +23,7 @@ function DiscussionCard(props) {
     const ref = doc(db, "discussions", id);
     await deleteDoc(ref);
 
-    router.push("/discussion");
+    await router.push("/discussion");
   };
 
   return (
@@ -39,17 +39,19 @@ function DiscussionCard(props) {
             }}
           >
             <Box sx={{ pl: 1, pt: 1, width: "100%" }}>
-              <Avatar
-                src={document.user.photoURL}
-                sx={{ width: 35, height: 35 }}
-              />
+              {document.user && (
+                <Avatar
+                  src={document.user.photoURL}
+                  sx={{ width: 35, height: 35 }}
+                />
+              )}
             </Box>
             <Box sx={{ display: "flex" }}>
               <Box>
                 <EditButton onClick={onClick} />
               </Box>
               <Box>
-                {user.uid == document.user.id && (
+                {document.user && user.uid === document.user.id && (
                   <DeleteButton onClick={() => handleDelete(document.id)} />
                 )}
               </Box>

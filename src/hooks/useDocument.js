@@ -14,7 +14,7 @@ export const useDocument = (c, id) => {
       setError(null);
       setIsPending(true);
 
-      const unsub = await onSnapshot(
+      const unsub = onSnapshot(
         doc(db, c, id),
         (doc) => {
           setDocument({ ...doc.data(), id: doc.id });

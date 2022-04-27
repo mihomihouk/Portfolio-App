@@ -81,7 +81,7 @@ function CommentCard(props) {
     <>
       {isPending && <Typography>Loading...</Typography>}
       {error && <Typography>{error}</Typography>}
-      {!isPending && document.comments.length === 0 && (
+      {document.comments && !isPending && document.comments.length === 0 && (
         <Typography>No comments yet!</Typography>
       )}
       {!isEditingComment ? (
