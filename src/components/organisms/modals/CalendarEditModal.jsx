@@ -5,7 +5,7 @@ import { db, auth } from "../../../firebase/config"
 import { doc, deleteDoc, updateDoc } from "firebase/firestore"
 
 //styles
-import { Avatar, Grid, Box, Divider, Modal, List, Stack, TextField, Typography } from "@mui/material"
+import { Avatar, Grid, Box, Divider, Modal, List, Stack, TextField, Typography, Button } from "@mui/material"
 import NotesIcon from '@mui/icons-material/Notes'
 import LocalOfferIcon from '@mui/icons-material/LocalOffer'
 import PersonIcon from '@mui/icons-material/Person'
@@ -217,7 +217,12 @@ function CalendarEditModal(props) {
               </Box>        
             </Box>
             <Box>
-              <AddButton onClick={handleUpdate}/>
+            {!title || !startDate || !endDate ||  !detail || !label ? (
+              <Button type="submit" fullWidth variant="contained" disabled>ADD</Button>
+              ) : (
+                <AddButton onClick={handleSUpdate}/>
+              )
+            }
             </Box>
           </>
         )}

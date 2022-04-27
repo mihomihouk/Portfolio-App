@@ -110,6 +110,19 @@ function New() {
                 <CancelButton onClick={handleCancel} />
               </Box>
               <Box>
+                { !newTitle || !newCategory || !newDetail ?
+                (<Button
+                  type="submit"
+                  sx={{
+                  color:"white", 
+                  bgcolor: "#f57f17",
+                  fontWeight:"bold"
+                  }}
+                  disabled
+                >
+                  Start Discussion
+                </Button>
+                ) : (
                 <Button
                   type="submit"
                   sx={{
@@ -121,7 +134,8 @@ function New() {
                   onClick={handleSubmit}
                 >
                   Start Discussion
-                </Button>
+                </Button>)
+              }
               </Box>
             </Box>
           </Stack>

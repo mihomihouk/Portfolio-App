@@ -135,7 +135,6 @@ const About = () => {
                   <Box>
                     <EditButton onClick={()=>setIsEditingTitle(true)}/>
                   </Box>
-                  
                 </>
               ):
               (

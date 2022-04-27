@@ -5,7 +5,7 @@ import { auth, db } from "../../../firebase/config"
 import { addDoc, collection } from "firebase/firestore"
 
 //styles
-import { Grid, TextField, Typography, Box, Stack, List } from "@mui/material"
+import { Button, Grid, TextField, Typography, Box, Stack, List } from "@mui/material"
 import Modal from '@mui/material/Modal'
 import NotesIcon from '@mui/icons-material/Notes'
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
@@ -148,7 +148,12 @@ function CalendarModal(props) {
               </Box>        
             </Box>
           <Box>
-            <AddButton onClick={handleSubmit}/>
+          {!title || !startDate || !endDate ||  !detail || !label ? (
+            <Button type="submit" fullWidth variant="contained" disabled>ADD</Button>
+            ) : (
+              <AddButton onClick={handleSubmit}/>
+            )
+          }
           </Box>
         </Stack>
       </Modal>

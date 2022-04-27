@@ -2,7 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 
 //firebase 
-import { db } from "../../firebase/config"
+import { auth, db } from "../../firebase/config"
 import { doc, deleteDoc } from "firebase/firestore"
 
 //styles
@@ -17,10 +17,12 @@ function DiscussionCard(props) {
 
   const { onClick, document } = props
 
+  const user = auth.currentUser
+
   const handleDelete = async(id) => {
 
-      const ref = doc(db, "discussions", id)
-      await deleteDoc(ref)
+    const ref = doc(db, "discussions", id)
+    await deleteDoc(ref)
 
     router.push("/discussion")
     
@@ -28,7 +30,7 @@ function DiscussionCard(props) {
 
   return (
     <>
-      <Paper
+      {document && <Paper
         elevation={3}
         sx={{height:"100%"}}
       >
@@ -41,7 +43,9 @@ function DiscussionCard(props) {
               <EditButton onClick={onClick}/>
             </Box>
             <Box>
+              {user.uid == document.user.id && (
               <DeleteButton onClick={() => handleDelete(document.id)}/>
+              )} 
             </Box>
           </Box>
         </Box>
@@ -51,6 +55,7 @@ function DiscussionCard(props) {
           </Typography>
         </Box>
       </Paper>
+    }
     </>
   )
 }
