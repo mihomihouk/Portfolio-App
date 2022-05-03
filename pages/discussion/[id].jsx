@@ -32,6 +32,7 @@ import CancelButton from "../../src/components/atoms/buttons/CancelButton";
 import Detail from "../../src/components/atoms/inputs/Detail";
 import CategorySelector from "../../src/components/atoms/selectors/CategorySelector";
 import DiscussionIcon from "../../src/components/atoms/DiscussionIcon";
+import PageNavigation from "../../src/components/atoms/PageNavigation";
 
 const About = () => {
   const router = useRouter();
@@ -139,6 +140,7 @@ const About = () => {
           {error && <Typography>{error}</Typography>}
           {document && (
             <Stack spacing={1}>
+              <PageNavigation path={"/discussion"} />
               <Box
                 sx={{
                   display: "flex",
