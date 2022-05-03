@@ -4,9 +4,7 @@ import React from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { IconButton } from "@mui/material";
 
-const EditButton = (props) => {
-  const { onClick } = props;
-
+const EditButton = ({ onClick }) => {
   return (
     <>
       <IconButton disableRipple onClick={onClick}>

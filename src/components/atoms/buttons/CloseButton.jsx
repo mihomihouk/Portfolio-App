@@ -4,9 +4,7 @@ import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
 
-const CloseButton = (props) => {
-  const { onClick } = props;
-
+const CloseButton = ({ onClick }) => {
   return (
     <>
       <IconButton disableRipple onClick={onClick}>

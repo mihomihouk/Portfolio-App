@@ -32,10 +32,8 @@ import EventTime from "../../modules/EventTime";
 
 const labelsClasses = ["indigo", "gray", "green", "blue", "red", "purple"];
 
-const CalendarEditModal = (props) => {
+const CalendarEditModal = ({ open, handleClose, eventToEdit }) => {
   const user = auth.currentUser;
-
-  const { open, handleClose, eventToEdit } = props;
 
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState("");

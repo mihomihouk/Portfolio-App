@@ -12,10 +12,8 @@ import { Avatar, Box, Paper, Typography } from "@mui/material";
 import EditButton from "../atoms/buttons/EditButton";
 import DeleteButton from "../atoms/buttons/DeleteButton";
 
-const DiscussionCard = (props) => {
+const DiscussionCard = ({ onClick, document }) => {
   const router = useRouter();
-
-  const { onClick, document } = props;
 
   const user = auth.currentUser;
 

@@ -4,8 +4,7 @@ import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { IconButton } from "@mui/material";
 
-const DeleteButton = (props) => {
-  const { onClick } = props;
+const DeleteButton = ({ onClick }) => {
   return (
     <>
       <IconButton disableRipple onClick={onClick}>

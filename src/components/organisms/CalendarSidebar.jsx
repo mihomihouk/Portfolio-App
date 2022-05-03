@@ -40,8 +40,7 @@ const BpCheckedIcon = styled(BpIcon)(({ label }) => ({
   },
 }));
 
-const BpCheckbox = (props) => {
-  const { label } = props;
+const BpCheckbox = ({ label }) => {
   return (
     <Checkbox
       disableRipple
@@ -53,9 +52,7 @@ const BpCheckbox = (props) => {
   );
 };
 
-const CalendarSidebar = (props) => {
-  const { documents, isPending, error } = props;
-
+const CalendarSidebar = ({ documents, isPending, error }) => {
   const [labels, setLabels] = useRecoilState(labelState);
 
   useEffect(() => {

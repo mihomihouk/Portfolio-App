@@ -6,9 +6,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 
-const EventTime = (props) => {
-  const { date, onChange } = props;
-
+const EventTime = ({ date, onChange }) => {
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDateFns}>

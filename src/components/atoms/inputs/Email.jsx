@@ -3,8 +3,7 @@ import React from "react";
 //styles
 import { TextField } from "@mui/material";
 
-const Email = (props) => {
-  const { value, onChange } = props;
+const Email = ({ value, onChange }) => {
   return (
     <>
       <TextField

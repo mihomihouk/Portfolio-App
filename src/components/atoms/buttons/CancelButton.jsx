@@ -3,9 +3,7 @@ import React from "react";
 //styles
 import { Button } from "@mui/material";
 
-const CancelButton = (props) => {
-  const { onClick } = props;
-
+const CancelButton = ({ onClick }) => {
   return (
     <>
       <Button

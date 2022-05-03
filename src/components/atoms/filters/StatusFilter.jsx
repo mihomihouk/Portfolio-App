@@ -5,9 +5,7 @@ import React, { useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
-const StatusFilter = (props) => {
-  const { changeStatusFilter, currentStatus } = props;
-
+const StatusFilter = ({ changeStatusFilter, currentStatus }) => {
   return (
     <>
       <Select

@@ -4,9 +4,7 @@ import React from "react";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
-const CreateButton = (props) => {
-  const { onClick, title } = props;
-
+const CreateButton = ({ onClick, title }) => {
   return (
     <>
       <Button

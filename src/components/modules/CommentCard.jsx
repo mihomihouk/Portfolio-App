@@ -25,9 +25,7 @@ import Detail from "../atoms/inputs/Detail";
 import CancelButton from "../atoms/buttons/CancelButton";
 import UpdateButton from "../atoms/buttons/UpdateButton";
 
-const CommentCard = (props) => {
-  const { document, isPending, error } = props;
-
+const CommentCard = ({ document, isPending, error }) => {
   const [isEditingComment, setIsEditingComment] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [editingCommentId, setEditingCommentId] = useState("");

@@ -3,9 +3,7 @@ import React from "react";
 //styled
 import { Typography } from "@mui/material";
 
-const DiscussionIcon = (props) => {
-  const { document } = props;
-
+const DiscussionIcon = ({ document }) => {
   switch (document.category) {
     case "Announcement":
       return <Typography>📢</Typography>;

@@ -4,9 +4,7 @@ import React from "react";
 import { Typography, ListItem, ListItemText } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 
-const TagSelector = (props) => {
-  const { lblClass, label, onClick } = props;
-
+const TagSelector = ({ lblClass, label, onClick }) => {
   return (
     <>
       <ListItem onClick={onClick}>

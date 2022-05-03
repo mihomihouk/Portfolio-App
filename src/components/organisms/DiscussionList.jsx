@@ -16,9 +16,7 @@ import {
 //components
 import DiscussionIcon from "../atoms/DiscussionIcon";
 
-const DiscussionList = (props) => {
-  const { discussions, error, isPending } = props;
-
+const DiscussionList = ({ discussions, error, isPending }) => {
   return (
     <>
       {isPending && <Typography>Loading...</Typography>}

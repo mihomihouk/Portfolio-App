@@ -15,8 +15,7 @@ import {
 import CloseButton from "../../atoms/buttons/CloseButton";
 import CancelButton from "../../atoms/buttons/CancelButton";
 
-const RotaEditModal = (props) => {
-  const { open, handleClose, user } = props;
+const RotaEditModal = ({ open, handleClose, user }) => {
   const [newCategory, setNewCategory] = useState("");
 
   const handleSaveRota = async () => {

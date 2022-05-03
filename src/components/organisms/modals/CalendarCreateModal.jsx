@@ -34,8 +34,7 @@ const labelsClasses = [
   { color: "purple", category: "Other" },
 ];
 
-const CalendarModal = (props) => {
-  const { open, handleClose } = props;
+const CalendarModal = ({ open, handleClose }) => {
   const currentUser = auth.currentUser;
 
   const [title, setTitle] = useState("");

@@ -3,9 +3,7 @@ import React from "react";
 //styles
 import { MenuItem, Select } from "@mui/material";
 
-const CategorySelector = (props) => {
-  const { onChange, category } = props;
-
+const CategorySelector = ({ onChange, category }) => {
   return (
     <>
       <Select

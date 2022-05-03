@@ -3,8 +3,7 @@ import React from "react";
 //styles
 import { TextField } from "@mui/material";
 
-const UserName = (props) => {
-  const { value, onChange } = props;
+const UserName = ({ value, onChange }) => {
   return (
     <>
       <TextField

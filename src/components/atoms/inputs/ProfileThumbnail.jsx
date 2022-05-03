@@ -3,8 +3,7 @@ import React from "react";
 //styles
 import { TextField } from "@mui/material";
 
-const ProfileThumbnail = (props) => {
-  const { onChange } = props;
+const ProfileThumbnail = ({ onChange }) => {
   return (
     <>
       <TextField

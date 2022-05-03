@@ -3,9 +3,7 @@ import React from "react";
 //styles
 import { Button } from "@mui/material";
 
-const AddButton = (props) => {
-  const { onClick } = props;
-
+const AddButton = ({ onClick }) => {
   return (
     <>
       <Button type="submit" fullWidth variant="contained" onClick={onClick}>

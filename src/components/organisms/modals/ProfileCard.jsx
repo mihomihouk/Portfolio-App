@@ -6,9 +6,8 @@ import { auth } from "../../../firebase/config";
 import { Avatar, Box, Modal, Stack, Typography, Button } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-const ProfileCard = (props) => {
+const ProfileCard = ({ open, handleClose }) => {
   const user = auth.currentUser;
-  const { open, handleClose } = props;
   const { logout, isPending } = useLogout();
 
   return (

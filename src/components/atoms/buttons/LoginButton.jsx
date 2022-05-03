@@ -1,8 +1,7 @@
 import React from "react";
 import { Button } from "@mui/material";
 
-const LoginButton = (props) => {
-  const { isPending, action, onClick } = props;
+const LoginButton = ({ isPending, action, onClick }) => {
   return (
     <>
       {isPending ? (

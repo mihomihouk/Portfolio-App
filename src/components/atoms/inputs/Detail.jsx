@@ -3,9 +3,7 @@ import React from "react";
 //styles
 import { TextField } from "@mui/material";
 
-const Detail = (props) => {
-  const { size, rows, text, value, onChange } = props;
-
+const Detail = ({ size, rows, text, value, onChange }) => {
   return (
     <>
       <TextField

@@ -1,9 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
 
-const UpdateButton = (props) => {
-  const { onClick } = props;
-
+const UpdateButton = ({ onClick }) => {
   return (
     <>
       <Button
