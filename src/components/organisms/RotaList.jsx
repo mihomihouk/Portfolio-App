@@ -21,7 +21,6 @@ import EditButton from "../atoms/buttons/EditButton";
 //hooks
 import { useCollection } from "../../hooks/useCollection";
 import { Box } from "@mui/system";
-import CancelButton from "../atoms/buttons/CancelButton";
 import RotaEditModal from "./modals/RotaEditModal";
 
 const RotaList = () => {
@@ -60,7 +59,10 @@ const RotaList = () => {
         user={rotaToEdit}
       />
       <Card raised sx={{ borderRadius: "25px" }}>
-        <CardHeader title="This Week" subheader={formattedCurrentWeek} />
+        <CardHeader
+          title="Rota of This Week"
+          subheader={formattedCurrentWeek}
+        />
         <CardContent>
           {error && <Typography>{error}</Typography>}
           {isPending && <Typography>...Loading</Typography>}

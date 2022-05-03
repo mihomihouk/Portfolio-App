@@ -7,6 +7,7 @@ import FullCalendar, { EventClickArg } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import Link from "../../Link";
+import format from "date-fns/format";
 
 //hooks
 import { useCollection } from "../../hooks/useCollection";
@@ -14,6 +15,8 @@ import { useCollection } from "../../hooks/useCollection";
 const CalendarCard = () => {
   const { documents, error, isPending } = useCollection("events");
   const [events, setEvents] = useState([]);
+
+  const thisMonth = format(new Date(), "MMMM yyyy");
 
   useEffect(() => {
     if (!documents) {
@@ -47,7 +50,7 @@ const CalendarCard = () => {
           }}
         >
           <Typography variant="h5" component="h2">
-            Events
+            Events in {thisMonth}
           </Typography>
           <Link href="/calendar" sx={{ textDecoration: "none" }}>
             <Button
