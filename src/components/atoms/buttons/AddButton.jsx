@@ -3,7 +3,7 @@ import React from "react";
 //styles
 import { Button } from "@mui/material";
 
-function AddButton(props) {
+const AddButton = (props) => {
   const { onClick } = props;
 
   return (
@@ -13,6 +13,6 @@ function AddButton(props) {
       </Button>
     </>
   );
-}
+};
 
 export default AddButton;

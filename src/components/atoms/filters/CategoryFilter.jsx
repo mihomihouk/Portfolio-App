@@ -4,7 +4,7 @@ import React from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
-function CategoryFilter(props) {
+const CategoryFilter = (props) => {
   const { currentCategory, changeCategoryFilter } = props;
 
   return (
@@ -26,6 +26,6 @@ function CategoryFilter(props) {
       </Select>
     </>
   );
-}
+};
 
 export default CategoryFilter;

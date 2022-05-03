@@ -3,7 +3,7 @@ import React from "react";
 //styles
 import { Button } from "@mui/material";
 
-function CancelButton(props) {
+const CancelButton = (props) => {
   const { onClick } = props;
 
   return (
@@ -22,6 +22,6 @@ function CancelButton(props) {
       </Button>
     </>
   );
-}
+};
 
 export default CancelButton;

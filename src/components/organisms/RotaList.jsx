@@ -24,7 +24,7 @@ import { Box } from "@mui/system";
 import CancelButton from "../atoms/buttons/CancelButton";
 import RotaEditModal from "./modals/RotaEditModal";
 
-function RotaList() {
+const RotaList = () => {
   const { documents, isPending, error } = useCollection("users");
 
   const [rotaToEdit, setRotaToEdit] = useState("");
@@ -98,6 +98,6 @@ function RotaList() {
       </Card>
     </>
   );
-}
+};
 
 export default RotaList;

@@ -12,7 +12,7 @@ import { Avatar, Box, Paper, Typography } from "@mui/material";
 import EditButton from "../atoms/buttons/EditButton";
 import DeleteButton from "../atoms/buttons/DeleteButton";
 
-function DiscussionCard(props) {
+const DiscussionCard = (props) => {
   const router = useRouter();
 
   const { onClick, document } = props;
@@ -64,6 +64,6 @@ function DiscussionCard(props) {
       )}
     </>
   );
-}
+};
 
 export default DiscussionCard;

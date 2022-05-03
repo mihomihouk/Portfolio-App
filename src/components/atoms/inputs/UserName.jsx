@@ -3,7 +3,7 @@ import React from "react";
 //styles
 import { TextField } from "@mui/material";
 
-function UserName(props) {
+const UserName = (props) => {
   const { value, onChange } = props;
   return (
     <>
@@ -19,6 +19,6 @@ function UserName(props) {
       />
     </>
   );
-}
+};
 
 export default UserName;

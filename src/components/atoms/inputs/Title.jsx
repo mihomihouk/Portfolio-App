@@ -3,7 +3,7 @@ import React from "react";
 //styles
 import { TextField } from "@mui/material";
 
-function Title(props) {
+const Title = (props) => {
   const { title, size, onChange } = props;
 
   return (
@@ -20,6 +20,6 @@ function Title(props) {
       />
     </>
   );
-}
+};
 
 export default Title;

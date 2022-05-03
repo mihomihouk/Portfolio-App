@@ -13,7 +13,7 @@ import Email from "../src/components/atoms/inputs/Email";
 import ProfileThumbnail from "../src/components/atoms/inputs/ProfileThumbnail";
 import Link from "../src/Link";
 
-function Signup() {
+const Signup = () => {
   const { error, isPending, signup } = useSignup();
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
@@ -114,6 +114,6 @@ function Signup() {
       </Grid>
     </>
   );
-}
+};
 
 export default Signup;

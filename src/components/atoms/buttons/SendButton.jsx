@@ -4,7 +4,7 @@ import React from "react";
 import SendIcon from "@mui/icons-material/Send";
 import { Fab } from "@mui/material";
 
-function SendButton() {
+const SendButton = () => {
   return (
     <>
       <Fab>
@@ -12,6 +12,6 @@ function SendButton() {
       </Fab>
     </>
   );
-}
+};
 
 export default SendButton;

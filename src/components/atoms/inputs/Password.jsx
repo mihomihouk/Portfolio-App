@@ -3,7 +3,7 @@ import React from "react";
 //styles
 import { TextField } from "@mui/material";
 
-function Password(props) {
+const Password = (props) => {
   const { value, onChange } = props;
 
   return (
@@ -22,6 +22,6 @@ function Password(props) {
       />
     </>
   );
-}
+};
 
 export default Password;

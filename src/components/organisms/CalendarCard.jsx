@@ -11,7 +11,7 @@ import Link from "../../Link";
 //hooks
 import { useCollection } from "../../hooks/useCollection";
 
-function CalendarCard() {
+const CalendarCard = () => {
   const { documents, error, isPending } = useCollection("events");
   const [events, setEvents] = useState([]);
 
@@ -79,6 +79,6 @@ function CalendarCard() {
       </Box>
     </>
   );
-}
+};
 
 export default CalendarCard;

@@ -13,7 +13,7 @@ import Detail from "../../atoms/inputs/Detail";
 import AddButton from "../../atoms/buttons/AddButton";
 import CreateButton from "../../atoms/buttons/CreateButton";
 
-function DiscussionModal(props) {
+const DiscussionModal = (props) => {
   const { document } = props;
 
   const [open, setOpen] = useState(false);
@@ -93,6 +93,6 @@ function DiscussionModal(props) {
       </Modal>
     </>
   );
-}
+};
 
 export default DiscussionModal;

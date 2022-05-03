@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <Box sx={{ bgcolor: "primary.main" }}>
@@ -78,4 +78,6 @@ export default function Home() {
       </Box>
     </>
   );
-}
+};
+
+export default Home;

@@ -21,7 +21,7 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { useCollection } from "../../hooks/useCollection";
 import DiscussionIcon from "../atoms/DiscussionIcon";
 
-function CalendarCard() {
+const CalendarCard = () => {
   const { documents, error, isPending } = useCollection(
     "discussions",
     ["createdAt", "desc"],
@@ -105,6 +105,6 @@ function CalendarCard() {
       </Box>
     </>
   );
-}
+};
 
 export default CalendarCard;

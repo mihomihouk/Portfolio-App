@@ -11,7 +11,7 @@ import Password from "../src/components/atoms/inputs/Password";
 import Email from "../src/components/atoms/inputs/Email";
 import Link from "../src/Link";
 
-function Login() {
+const Login = () => {
   const { error, isPending, login } = useLogin();
 
   const [email, setEmail] = useState("");
@@ -83,6 +83,6 @@ function Login() {
       </Grid>
     </>
   );
-}
+};
 
 export default Login;

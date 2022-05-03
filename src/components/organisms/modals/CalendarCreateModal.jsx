@@ -34,7 +34,7 @@ const labelsClasses = [
   { color: "purple", category: "Other" },
 ];
 
-function CalendarModal(props) {
+const CalendarModal = (props) => {
   const { open, handleClose } = props;
   const currentUser = auth.currentUser;
 
@@ -177,6 +177,6 @@ function CalendarModal(props) {
       </Modal>
     </>
   );
-}
+};
 
 export default CalendarModal;

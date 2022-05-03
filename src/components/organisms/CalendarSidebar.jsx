@@ -53,7 +53,7 @@ const BpCheckbox = (props) => {
   );
 };
 
-function CalendarSidebar(props) {
+const CalendarSidebar = (props) => {
   const { documents, isPending, error } = props;
 
   const [labels, setLabels] = useRecoilState(labelState);
@@ -121,6 +121,6 @@ function CalendarSidebar(props) {
       </Stack>
     </>
   );
-}
+};
 
 export default CalendarSidebar;

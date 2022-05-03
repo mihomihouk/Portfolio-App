@@ -32,7 +32,7 @@ import EventTime from "../../modules/EventTime";
 
 const labelsClasses = ["indigo", "gray", "green", "blue", "red", "purple"];
 
-function CalendarEditModal(props) {
+const CalendarEditModal = (props) => {
   const user = auth.currentUser;
 
   const { open, handleClose, eventToEdit } = props;
@@ -275,6 +275,6 @@ function CalendarEditModal(props) {
       </Modal>
     </>
   );
-}
+};
 
 export default CalendarEditModal;

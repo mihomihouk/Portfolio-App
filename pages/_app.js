@@ -26,7 +26,7 @@ const theme = createTheme({
   },
 });
 
-function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }) => {
   return (
     <RecoilRoot>
       <ThemeProvider theme={theme}>
@@ -40,6 +40,6 @@ function MyApp({ Component, pageProps }) {
       </ThemeProvider>
     </RecoilRoot>
   );
-}
+};
 
 export default MyApp;

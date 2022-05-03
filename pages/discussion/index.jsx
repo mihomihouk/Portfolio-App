@@ -15,7 +15,7 @@ import DiscussionList from "../../src/components/organisms/DiscussionList";
 import Sidebar from "../../src/components/organisms/Sidebar";
 import { areArraysEqual } from "@mui/lab/node_modules/@mui/base";
 
-function Main() {
+const Main = () => {
   const router = useRouter();
 
   const [currentCategory, setCurrentCategory] = useState("");
@@ -179,6 +179,6 @@ function Main() {
       </Box>
     </>
   );
-}
+};
 
 export default Main;

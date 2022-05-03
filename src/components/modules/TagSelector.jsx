@@ -4,7 +4,7 @@ import React from "react";
 import { Typography, ListItem, ListItemText } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 
-function TagSelector(props) {
+const TagSelector = (props) => {
   const { lblClass, label, onClick } = props;
 
   return (
@@ -35,6 +35,6 @@ function TagSelector(props) {
       </ListItem>
     </>
   );
-}
+};
 
 export default TagSelector;

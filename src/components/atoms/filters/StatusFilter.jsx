@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
-function StatusFilter(props) {
+const StatusFilter = (props) => {
   const { changeStatusFilter, currentStatus } = props;
 
   return (
@@ -26,6 +26,6 @@ function StatusFilter(props) {
       </Select>
     </>
   );
-}
+};
 
 export default StatusFilter;

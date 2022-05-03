@@ -15,7 +15,7 @@ import {
 import CloseButton from "../../atoms/buttons/CloseButton";
 import CancelButton from "../../atoms/buttons/CancelButton";
 
-function RotaEditModal(props) {
+const RotaEditModal = (props) => {
   const { open, handleClose, user } = props;
   const [newCategory, setNewCategory] = useState("");
 
@@ -108,6 +108,6 @@ function RotaEditModal(props) {
       </Modal>
     </>
   );
-}
+};
 
 export default RotaEditModal;

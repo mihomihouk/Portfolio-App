@@ -3,7 +3,7 @@ import React from "react";
 //styles
 import { TextField } from "@mui/material";
 
-function Email(props) {
+const Email = (props) => {
   const { value, onChange } = props;
   return (
     <>
@@ -19,6 +19,6 @@ function Email(props) {
       />
     </>
   );
-}
+};
 
 export default Email;

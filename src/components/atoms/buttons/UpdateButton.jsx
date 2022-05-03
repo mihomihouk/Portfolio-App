@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
 
-function UpdateButton(props) {
+const UpdateButton = (props) => {
   const { onClick } = props;
 
   return (
@@ -17,6 +17,6 @@ function UpdateButton(props) {
       </Button>
     </>
   );
-}
+};
 
 export default UpdateButton;

@@ -3,7 +3,7 @@ import React from "react";
 //styles
 import { MenuItem, Select } from "@mui/material";
 
-function CategorySelector(props) {
+const CategorySelector = (props) => {
   const { onChange, category } = props;
 
   return (
@@ -24,6 +24,6 @@ function CategorySelector(props) {
       </Select>
     </>
   );
-}
+};
 
 export default CategorySelector;

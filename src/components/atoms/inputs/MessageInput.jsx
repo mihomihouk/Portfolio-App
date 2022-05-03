@@ -3,7 +3,7 @@ import React from "react";
 //styles
 import { TextField } from "@mui/material";
 
-function MessageInput() {
+const MessageInput = () => {
   return (
     <>
       <TextField
@@ -13,6 +13,6 @@ function MessageInput() {
       />
     </>
   );
-}
+};
 
 export default MessageInput;

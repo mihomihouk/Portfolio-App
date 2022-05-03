@@ -17,7 +17,7 @@ import {
 //components
 import HomeIcon from "../atoms/icons/HomeIcon";
 
-function OnlineUsers() {
+const OnlineUsers = () => {
   const { documents, isPending, error } = useCollection("users");
 
   return (
@@ -54,6 +54,6 @@ function OnlineUsers() {
       </List>
     </>
   );
-}
+};
 
 export default OnlineUsers;

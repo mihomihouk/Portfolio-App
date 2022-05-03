@@ -23,7 +23,7 @@ import Sidebar from "../../src/components/organisms/Sidebar";
 import CancelButton from "../../src/components/atoms/buttons/CancelButton";
 import CategorySelector from "../../src/components/atoms/selectors/CategorySelector";
 
-function New() {
+const New = () => {
   const router = useRouter();
 
   const [newTitle, setNewTitle] = useState("");
@@ -166,6 +166,6 @@ function New() {
       </Box>
     </>
   );
-}
+};
 
 export default New;

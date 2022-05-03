@@ -4,7 +4,7 @@ import React from "react";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
-function CreateButton(props) {
+const CreateButton = (props) => {
   const { onClick, title } = props;
 
   return (
@@ -27,6 +27,6 @@ function CreateButton(props) {
       </Button>
     </>
   );
-}
+};
 
 export default CreateButton;

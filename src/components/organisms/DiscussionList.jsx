@@ -16,7 +16,7 @@ import {
 //components
 import DiscussionIcon from "../atoms/DiscussionIcon";
 
-function DiscussionList(props) {
+const DiscussionList = (props) => {
   const { discussions, error, isPending } = props;
 
   return (
@@ -60,6 +60,6 @@ function DiscussionList(props) {
       )}
     </>
   );
-}
+};
 
 export default DiscussionList;

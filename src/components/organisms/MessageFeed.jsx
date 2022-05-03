@@ -8,7 +8,7 @@ import Messages from "../modules/Messages";
 import MessageInput from "../atoms/inputs/MessageInput";
 import SendButton from "../atoms/buttons/SendButton";
 
-function MessageFeed() {
+const MessageFeed = () => {
   return (
     <>
       <Grid item sx={{ height: "80vh" }}>
@@ -25,6 +25,6 @@ function MessageFeed() {
       </Grid>
     </>
   );
-}
+};
 
 export default MessageFeed;

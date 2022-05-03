@@ -4,7 +4,7 @@ import React from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { IconButton } from "@mui/material";
 
-function EditButton(props) {
+const EditButton = (props) => {
   const { onClick } = props;
 
   return (
@@ -14,6 +14,6 @@ function EditButton(props) {
       </IconButton>
     </>
   );
-}
+};
 
 export default EditButton;

@@ -47,7 +47,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function Searchbar(props) {
+const Searchbar = (props) => {
   const { onChange, currentSearch } = props;
   const [searched, setSearched] = useState("");
 
@@ -70,6 +70,6 @@ function Searchbar(props) {
       </Search>
     </>
   );
-}
+};
 
 export default Searchbar;

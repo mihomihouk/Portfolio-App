@@ -18,7 +18,7 @@ import CalendarCreateModal from "../src/components/organisms/modals/CalendarCrea
 import CalendarEditModal from "../src/components/organisms/modals/CalendarEditModal";
 import CalendarSidebar from "../src/components/organisms/CalendarSidebar";
 
-function Calendar() {
+const Calendar = () => {
   const { documents, error, isPending } = useCollection("events");
   const [labels, setLabels] = useRecoilState(labelState);
   const [events, setEvents] = useState([]);
@@ -125,6 +125,6 @@ function Calendar() {
       </Box>
     </>
   );
-}
+};
 
 export default Calendar;
