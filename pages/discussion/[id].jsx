@@ -34,11 +34,17 @@ import CategorySelector from "../../src/components/atoms/selectors/CategorySelec
 import DiscussionIcon from "../../src/components/atoms/DiscussionIcon";
 import PageNavigation from "../../src/components/atoms/PageNavigation";
 
+//hooks
+import { useUpdateDocument } from "../../src/hooks/useUpdateDocument";
+
 const About = () => {
   const router = useRouter();
   const { id } = router.query;
 
   const { document, isPending, error } = useDocument("discussions", id);
+
+  const { handleUpdate, isUpdatePending, updateError } =
+    useUpdateDocument("discussions");
 
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [isEditingDetail, setIsEditingDetail] = useState(false);
@@ -55,13 +61,19 @@ const About = () => {
 
   const handleUpdateTitle = async (e) => {
     e.preventDefault();
+    console.log(id);
 
-    const docRef = doc(db, "discussions", id);
+    // const docRef = doc(db, "discussions", id);
 
-    await updateDoc(docRef, {
+    // await updateDoc(docRef, {
+    //   title: newTitle,
+    //   category: newCategory,
+    // });
+    const newData = {
       title: newTitle,
       category: newCategory,
-    });
+    };
+    await handleUpdate(id, newData);
 
     setIsEditingTitle(false);
 
