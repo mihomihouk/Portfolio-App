@@ -109,7 +109,7 @@ const CommentCard = ({ document, isPending, error }) => {
                           />
                         </Box>
                         <Box>
-                          {user.uid == document.user.id && (
+                          {user.uid === comment.user.id && (
                             <DeleteButton
                               onClick={() => handleDelete(comment.id)}
                             />
