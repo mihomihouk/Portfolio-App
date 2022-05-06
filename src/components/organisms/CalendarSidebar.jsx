@@ -40,14 +40,14 @@ const BpCheckedIcon = styled(BpIcon)(({ label }) => ({
   },
 }));
 
-const BpCheckbox = ({ label }) => {
+const BpCheckbox = ({ label, onChange }) => {
   return (
     <Checkbox
       disableRipple
       color="default"
       checkedIcon={<BpCheckedIcon label={label} />}
       icon={<BpIcon label={label} />}
-      {...props}
+      onChange={onChange}
     />
   );
 };

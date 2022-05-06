@@ -90,7 +90,7 @@ const Calendar = () => {
           <Header />
         </Box>
         <Box>
-          <Sidebar labels={labels} setLabels={setLabels} />
+          <Sidebar />
         </Box>
         <Grid
           container
@@ -103,7 +103,11 @@ const Calendar = () => {
           }}
         >
           <Grid item xs={2}>
-            <CalendarSidebar documents={documents} />
+            <CalendarSidebar
+              documents={documents}
+              labels={labels}
+              setLabels={setLabels}
+            />
           </Grid>
           <Grid item xs={10} sx={{ pl: 2 }}>
             <Stack>
