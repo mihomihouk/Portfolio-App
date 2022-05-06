@@ -7,13 +7,11 @@ import { Container, Box, Stack } from "@mui/material";
 
 //components
 import Header from "../../src/components/organisms/Header";
-import CategoryFilter from "../../src/components/atoms/filters/CategoryFilter";
-import StatusFilter from "../../src/components/atoms/filters/StatusFilter";
 import CreateButton from "../../src/components/atoms/buttons/CreateButton";
 import Searchbar from "../../src/components/atoms/Searchbar";
 import DiscussionList from "../../src/components/organisms/DiscussionList";
 import Sidebar from "../../src/components/organisms/Sidebar";
-import { areArraysEqual } from "@mui/lab/node_modules/@mui/base";
+import Filter from "../../src/components/atoms/filters/Filter";
 
 const Main = () => {
   const router = useRouter();
@@ -36,6 +34,12 @@ const Main = () => {
     setCurrentCategory(e.target.value);
   };
 
+  //menu list for category filter
+  const categoryList = ["Categories", "Announcement", "Idea", "Question"];
+
+  //menu list fro status filter
+  const statusList = ["Status", "Open", "Settled"];
+
   //category filtering
   const filterByCategory = (array) => {
     if (!array) {
@@ -44,7 +48,7 @@ const Main = () => {
     const filteredArray = array.filter((item) => {
       switch (currentCategory) {
         case "All":
-          return areArraysEqual;
+          return array;
         case "Announcement":
         case "Idea":
         case "Question":
@@ -65,8 +69,8 @@ const Main = () => {
       switch (currentStatus) {
         case "All":
           return array;
-        case "open":
-        case "settled":
+        case "Open":
+        case "Settled":
           return item.status === currentStatus;
         default:
           return array;
@@ -81,7 +85,7 @@ const Main = () => {
     setCurrentSearch(formattedSearch);
   };
 
-  // //searchbar filtering
+  //searchbar filtering
   const filterBySearch = (array) => {
     if (!array) {
       return;
@@ -142,15 +146,17 @@ const Main = () => {
               <Box sx={{ display: "flex" }}>
                 <>
                   <Box sx={{ px: 1 }}>
-                    <CategoryFilter
-                      currentCategory={currentCategory}
-                      changeCategoryFilter={changeCategoryFilter}
+                    <Filter
+                      menuItemList={categoryList}
+                      value={currentCategory}
+                      onChange={changeCategoryFilter}
                     />
                   </Box>
                   <Box>
-                    <StatusFilter
-                      currentStatus={currentStatus}
-                      changeStatusFilter={changeStatusFilter}
+                    <Filter
+                      menuItemList={statusList}
+                      value={currentStatus}
+                      onChange={changeStatusFilter}
                     />
                   </Box>
                 </>
