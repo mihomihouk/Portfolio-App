@@ -13,15 +13,24 @@ import Detail from "../../atoms/inputs/Detail";
 import AddButton from "../../atoms/buttons/AddButton";
 import CreateButton from "../../atoms/buttons/CreateButton";
 
+//hooks
+import useForm from "../../../hooks/useForm";
+
 const DiscussionModal = ({ document }) => {
   const [open, setOpen] = useState(false);
-  const [newComment, setNewComment] = useState("");
 
   const user = auth.currentUser;
 
+  //call useForm hook
+  const { formData, handleInputChange, resetForm } = useForm({
+    newComment: "",
+  });
+
+  const { newComment } = formData;
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
-    setNewComment("");
+    resetForm();
     setOpen(false);
   };
 
@@ -45,7 +54,7 @@ const DiscussionModal = ({ document }) => {
       comments: [...document.comments, commentToAdd],
     });
 
-    setNewComment("");
+    resetForm();
     setOpen(false);
   };
 
@@ -79,8 +88,9 @@ const DiscussionModal = ({ document }) => {
               <Detail
                 rows={5}
                 text="Comment"
+                name="newComment"
                 value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
+                onChange={handleInputChange}
               />
             </Box>
             <Box>

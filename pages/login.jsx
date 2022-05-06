@@ -11,15 +11,20 @@ import Password from "../src/components/atoms/inputs/Password";
 import Email from "../src/components/atoms/inputs/Email";
 import Link from "../src/Link";
 
+//hooks
+import useForm from "../src/hooks/useForm";
+
 const Login = () => {
   const { error, isPending, login } = useLogin();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { formData, handleInputChange } = useForm({
+    email: "",
+    password: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(email, password);
+    login(formData.email, formData.password);
   };
 
   return (
@@ -55,10 +60,10 @@ const Login = () => {
               Log in
             </Typography>
             <Box component="form" noValidate sx={{ mt: 1 }}>
-              <Email onChange={(e) => setEmail(e.target.value)} value={email} />
+              <Email value={formData.email} onChange={handleInputChange} />
               <Password
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
+                value={formData.password}
+                onChange={handleInputChange}
               />
               {!isPending && (
                 <LoginButton action="Login" onClick={handleSubmit} />

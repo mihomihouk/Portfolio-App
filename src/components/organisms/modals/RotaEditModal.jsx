@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { db } from "../../../firebase/config";
 import { doc, updateDoc } from "firebase/firestore";
 
 //styles
@@ -15,14 +13,21 @@ import {
 import CloseButton from "../../atoms/buttons/CloseButton";
 import CancelButton from "../../atoms/buttons/CancelButton";
 
+//hooks
+import useForm from "../../../hooks/useForm";
+
 const RotaEditModal = ({ open, handleClose, user }) => {
-  const [newCategory, setNewCategory] = useState("");
+  // call useForm
+  const { formData, handleInputChange } = useForm({
+    category: "",
+  });
+  const { category } = formData;
 
   const handleSaveRota = async () => {
     try {
       const docRef = doc(db, "users", user.id);
       const unsub = await updateDoc(docRef, {
-        duty: newCategory,
+        duty: category,
       });
       handleClose();
       return () => unsub();
@@ -70,11 +75,12 @@ const RotaEditModal = ({ open, handleClose, user }) => {
             <Box>
               <Select
                 sx={{ width: 170, height: 30 }}
-                value={newCategory}
+                value={category}
                 displayEmpty
                 defaultValue="Area"
                 instanceId="selector"
-                onChange={(e) => setNewCategory(e.target.value)}
+                onChange={handleInputChange}
+                name="category"
               >
                 <MenuItem disabled value="">
                   Area
@@ -92,7 +98,7 @@ const RotaEditModal = ({ open, handleClose, user }) => {
               <CancelButton onClick={handleClose} />
             </Box>
             <Box>
-              {!newCategory ? (
+              {!category ? (
                 <Button variant="contained" disabled>
                   save
                 </Button>

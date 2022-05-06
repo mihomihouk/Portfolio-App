@@ -4,51 +4,37 @@ import { auth, db } from "../../../firebase/config";
 //firebase
 import { addDoc, collection } from "firebase/firestore";
 
-//styles
-import {
-  Button,
-  Grid,
-  TextField,
-  Typography,
-  Box,
-  Stack,
-  List,
-} from "@mui/material";
-import Modal from "@mui/material/Modal";
-import NotesIcon from "@mui/icons-material/Notes";
-import LocalOfferIcon from "@mui/icons-material/LocalOffer";
-
-//components
-import Title from "../../atoms/inputs/Title";
-import CloseButton from "../../atoms/buttons/CloseButton";
-import AddButton from "../../atoms/buttons/AddButton";
-import EventTime from "../../modules/EventTime";
-import TagSelector from "../../modules/TagSelector";
-
-const labelsClasses = [
-  { color: "indigo", category: "Work" },
-  { color: "gray", category: "Family" },
-  { color: "green", category: "Friends" },
-  { color: "blue", category: "Study" },
-  { color: "red", category: "Hobby" },
-  { color: "purple", category: "Other" },
-];
+//hooks
+import useDatePicker from "../../../hooks/useDatepicker";
+import useForm from "../../../hooks/useForm";
+import CalendarForm from "../../modules/CalendarForm";
 
 const CalendarModal = ({ open, handleClose }) => {
   const currentUser = auth.currentUser;
 
-  const [title, setTitle] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [detail, setDetail] = useState("");
   const [label, setLabel] = useState();
+
+  //call useForm
+  const { formData, handleInputChange, resetForm } = useForm({
+    title: "",
+    detail: "",
+  });
+
+  const { title, detail } = formData;
+
+  //call useDatePicker
+  const {
+    startDate,
+    endDate,
+    handleStartDateChange,
+    handleEndDateChange,
+    resetDates,
+  } = useDatePicker();
 
   const handleClickClose = () => {
     handleClose();
-    setTitle("");
-    setStartDate("");
-    setEndDate("");
-    setDetail("");
+    resetDates();
+    resetForm();
     setLabel("");
   };
 
@@ -72,10 +58,8 @@ const CalendarModal = ({ open, handleClose }) => {
     });
 
     handleClose();
-    setTitle("");
-    setStartDate("");
-    setEndDate("");
-    setDetail("");
+    resetDates();
+    resetForm();
     setLabel("");
 
     return () => unsub();
@@ -83,97 +67,21 @@ const CalendarModal = ({ open, handleClose }) => {
 
   return (
     <>
-      <Modal open={open} onClose={handleClose}>
-        <Stack
-          spacing={1}
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%,-50%)",
-            width: "40%",
-            height: "70%",
-            bgcolor: "background.paper",
-            border: "2px solid #000",
-            boxShadow: 24,
-            p: "3%",
-          }}
-        >
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-            <CloseButton onClick={handleClickClose} />
-          </Box>
-          <Box>
-            <Title title={title} onChange={(e) => setTitle(e.target.value)} />
-          </Box>
-          <Box fullWidth sx={{ display: "flex", alignItems: "center" }}>
-            <Grid container sx={{ alignItems: "center" }}>
-              <Grid item xs={2}>
-                <Typography>From</Typography>
-              </Grid>
-              <Grid item sx={{ width: "100%" }} xs={10}>
-                <EventTime
-                  onChange={(newValue) => setStartDate(newValue)}
-                  date={startDate}
-                />
-              </Grid>
-            </Grid>
-          </Box>
-          <Box fullWidth sx={{ display: "flex", alignItems: "center" }}>
-            <Grid container sx={{ alignItems: "center" }}>
-              <Grid item xs={2}>
-                <Typography>To</Typography>
-              </Grid>
-              <Grid item sx={{ width: "100%" }} xs={10}>
-                <EventTime
-                  onChange={(newValue) => setEndDate(newValue)}
-                  date={endDate}
-                />
-              </Grid>
-            </Grid>
-          </Box>
-          <Box sx={{ display: "flex" }}>
-            <Grid container sx={{ alignItems: "center" }}>
-              <Grid item xs={1}>
-                <NotesIcon />
-              </Grid>
-              <Grid item xs={11}>
-                <TextField
-                  label="Description"
-                  fullWidth
-                  value={detail}
-                  onChange={(e) => setDetail(e.target.value)}
-                />
-              </Grid>
-            </Grid>
-          </Box>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Box>
-              <LocalOfferIcon />
-            </Box>
-            <Box sx={{ overflow: "scroll" }}>
-              <List sx={{ display: "flex" }}>
-                {labelsClasses.map((lblClass, i) => (
-                  <TagSelector
-                    lblClass={lblClass}
-                    key={i}
-                    label={label}
-                    onClick={() => setLabel(lblClass)}
-                  />
-                ))}
-              </List>
-            </Box>
-          </Box>
-          <Box>
-            {!title || !startDate || !endDate || !detail || !label ? (
-              <Button type="submit" fullWidth variant="contained" disabled>
-                ADD
-              </Button>
-            ) : (
-              <AddButton onClick={handleSubmit} />
-            )}
-          </Box>
-        </Stack>
-      </Modal>
+      <CalendarForm
+        open={open}
+        handleClose={handleClose}
+        title={title}
+        detail={detail}
+        startDate={startDate}
+        endDate={endDate}
+        label={label}
+        setLabel={setLabel}
+        handleClickClose={handleClickClose}
+        handleInputChange={handleInputChange}
+        handleStartDateChange={handleStartDateChange}
+        handleEndDateChange={handleEndDateChange}
+        handleSubmit={handleSubmit}
+      />
     </>
   );
 };

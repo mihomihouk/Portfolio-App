@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 
 //firebase imports
@@ -23,46 +23,48 @@ import Sidebar from "../../src/components/organisms/Sidebar";
 import CancelButton from "../../src/components/atoms/buttons/CancelButton";
 import CategorySelector from "../../src/components/atoms/selectors/CategorySelector";
 
+//hooks
+import useForm from "../../src/hooks/useForm";
+
 const New = () => {
   const router = useRouter();
 
-  const [newTitle, setNewTitle] = useState("");
-  const [newDetail, setNewDetail] = useState("");
-  const [newCategory, setNewCategory] = useState("");
-
   const user = auth.currentUser;
 
+  // call useForm
+  const { formData, handleInputChange } = useForm({
+    category: "",
+    title: "",
+    detail: "",
+  });
+  const { category, title, detail } = formData;
+
+  //Add a new discussion doc
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const ref = collection(db, "discussions");
 
     const unsub = await addDoc(ref, {
-      title: newTitle,
-      detail: newDetail,
+      title,
+      detail,
       user: {
         id: user.uid,
         displayName: user.displayName,
         photoURL: user.photoURL,
       },
-      category: newCategory,
+      category,
       createdAt: Timestamp.fromDate(new Date()),
-      status: "open",
+      status: "Open",
       comments: [],
     });
 
-    setNewTitle("");
-    setNewDetail("");
-    setNewCategory("");
     router.push("/discussion");
 
     return () => unsub();
   };
 
   const handleCancel = () => {
-    setNewTitle("");
-    setNewDetail("");
-    setNewCategory("");
     router.push("/discussion");
   };
 
@@ -100,15 +102,17 @@ const New = () => {
             >
               <Box>
                 <CategorySelector
-                  onChange={(e) => setNewCategory(e.target.value)}
-                  category={newCategory}
+                  onChange={handleInputChange}
+                  category={category}
+                  name="category"
                 />
               </Box>
               <Box sx={{ width: "70%" }}>
                 <FormControl required size="small" sx={{ width: "100%" }}>
                   <Input
                     placeholder="Title"
-                    onChange={(e) => setNewTitle(e.target.value)}
+                    onChange={handleInputChange}
+                    name="title"
                   />
                 </FormControl>
               </Box>
@@ -120,7 +124,8 @@ const New = () => {
                   rows={7}
                   placeholder="Description"
                   variant="filled"
-                  onChange={(e) => setNewDetail(e.target.value)}
+                  name="detail"
+                  onChange={handleInputChange}
                 />
               </FormControl>
             </Box>
@@ -129,7 +134,7 @@ const New = () => {
                 <CancelButton onClick={handleCancel} />
               </Box>
               <Box>
-                {!newTitle || !newCategory || !newDetail ? (
+                {!title || !category || !detail ? (
                   <Button
                     type="submit"
                     sx={{

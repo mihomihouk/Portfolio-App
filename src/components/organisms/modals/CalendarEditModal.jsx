@@ -11,36 +11,46 @@ import {
   Box,
   Divider,
   Modal,
-  List,
   Stack,
-  TextField,
   Typography,
-  Button,
 } from "@mui/material";
 import NotesIcon from "@mui/icons-material/Notes";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import PersonIcon from "@mui/icons-material/Person";
 
 //components
-import Title from "../../atoms/inputs/Title";
 import EditButton from "../../atoms/buttons/EditButton";
 import DeleteButton from "../../atoms/buttons/DeleteButton";
 import CloseButton from "../../atoms/buttons/CloseButton";
-import AddButton from "../../atoms/buttons/AddButton";
-import TagSelector from "../../modules/TagSelector";
-import EventTime from "../../modules/EventTime";
 
-const labelsClasses = ["indigo", "gray", "green", "blue", "red", "purple"];
+//hooks
+import useDatePicker from "../../../hooks/useDatepicker";
+import useForm from "../../../hooks/useForm";
+import CalendarForm from "../../modules/CalendarForm";
 
 const CalendarEditModal = ({ open, handleClose, eventToEdit }) => {
   const user = auth.currentUser;
 
   const [isEditing, setIsEditing] = useState(false);
-  const [title, setTitle] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [detail, setDetail] = useState("");
+
   const [label, setLabel] = useState();
+
+  //call useForm
+  const { formData, handleInputChange, resetForm } = useForm({
+    title: "",
+    detail: "",
+  });
+
+  const { title, detail } = formData;
+
+  //call useDatePicker
+  const {
+    startDate,
+    endDate,
+    handleStartDateChange,
+    handleEndDateChange,
+    resetDates,
+  } = useDatePicker();
 
   const handleDelete = () => {
     if (
@@ -56,20 +66,18 @@ const CalendarEditModal = ({ open, handleClose, eventToEdit }) => {
     }
   };
 
-  const handleCloseEdit = () => {
+  const handleClickClose = () => {
     setIsEditing(false);
-    setTitle("");
-    setStartDate("");
-    setEndDate("");
-    setDetail("");
+    resetForm();
+    resetDates();
     setLabel("");
     handleClose();
   };
 
-  const handleUpdate = async () => {
+  const handleSubmit = async () => {
     const docRef = doc(db, "events", eventToEdit.id);
 
-    await updateDoc(docRef, {
+    const unsub = await updateDoc(docRef, {
       title,
       description: detail,
       start: startDate,
@@ -78,17 +86,17 @@ const CalendarEditModal = ({ open, handleClose, eventToEdit }) => {
     });
 
     setIsEditing(false);
-    setTitle("");
-    setStartDate("");
-    setEndDate("");
-    setDetail("");
+    resetForm();
+    resetDates();
     setLabel("");
     handleClose();
+
+    return () => unsub();
   };
 
   return (
     <>
-      <Modal open={open} onClose={handleCloseEdit}>
+      <Modal open={open} onClose={handleClickClose}>
         <Stack
           spacing={1}
           sx={{
@@ -191,82 +199,21 @@ const CalendarEditModal = ({ open, handleClose, eventToEdit }) => {
             </>
           ) : (
             <>
-              <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                <CloseButton onClick={handleCloseEdit} />
-              </Box>
-              <Box>
-                <Title
-                  title={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-              </Box>
-              <Box fullWidth sx={{ display: "flex", alignItems: "center" }}>
-                <Grid container sx={{ alignItems: "center" }}>
-                  <Grid item xs={2}>
-                    <Typography>From</Typography>
-                  </Grid>
-                  <Grid item sx={{ width: "100%" }} xs={10}>
-                    <EventTime
-                      onChange={(newValue) => setStartDate(newValue)}
-                      date={startDate}
-                    />
-                  </Grid>
-                </Grid>
-              </Box>
-              <Box fullWidth sx={{ display: "flex", alignItems: "center" }}>
-                <Grid container sx={{ alignItems: "center" }}>
-                  <Grid item xs={2}>
-                    <Typography>To</Typography>
-                  </Grid>
-                  <Grid item sx={{ width: "100%" }} xs={10}>
-                    <EventTime
-                      onChange={(newValue) => setEndDate(newValue)}
-                      date={endDate}
-                    />
-                  </Grid>
-                </Grid>
-              </Box>
-              <Box sx={{ display: "flex" }}>
-                <Grid container sx={{ alignItems: "center" }}>
-                  <Grid item xs={1}>
-                    <NotesIcon />
-                  </Grid>
-                  <Grid item xs={11}>
-                    <TextField
-                      label="Description"
-                      fullWidth
-                      value={detail}
-                      onChange={(e) => setDetail(e.target.value)}
-                    />
-                  </Grid>
-                </Grid>
-              </Box>
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Box>
-                  <LocalOfferIcon />
-                </Box>
-                <Box sx={{ overflow: "scroll" }}>
-                  <List sx={{ display: "flex" }}>
-                    {labelsClasses.map((lblClass, i) => (
-                      <TagSelector
-                        lblClass={lblClass}
-                        key={i}
-                        label={label}
-                        onClick={() => setLabel(lblClass)}
-                      />
-                    ))}
-                  </List>
-                </Box>
-              </Box>
-              <Box>
-                {!title || !startDate || !endDate || !detail || !label ? (
-                  <Button type="submit" fullWidth variant="contained" disabled>
-                    ADD
-                  </Button>
-                ) : (
-                  <AddButton onClick={handleSUpdate} />
-                )}
-              </Box>
+              <CalendarForm
+                open={open}
+                handleClose={handleClose}
+                title={title}
+                detail={detail}
+                startDate={startDate}
+                endDate={endDate}
+                label={label}
+                setLabel={setLabel}
+                handleClickClose={handleClickClose}
+                handleInputChange={handleInputChange}
+                handleStartDateChange={handleStartDateChange}
+                handleEndDateChange={handleEndDateChange}
+                handleSubmit={handleSubmit}
+              />
             </>
           )}
         </Stack>

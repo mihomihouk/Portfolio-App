@@ -25,12 +25,20 @@ import Detail from "../atoms/inputs/Detail";
 import CancelButton from "../atoms/buttons/CancelButton";
 import UpdateButton from "../atoms/buttons/UpdateButton";
 
+//hooks
+import useForm from "../../hooks/useForm";
+
 const CommentCard = ({ document, isPending, error }) => {
   const [isEditingComment, setIsEditingComment] = useState(false);
-  const [newComment, setNewComment] = useState("");
   const [editingCommentId, setEditingCommentId] = useState("");
 
   const user = auth.currentUser;
+
+  // call useForm
+  const { formData, handleInputChange, resetForm } = useForm({
+    newComment: "",
+  });
+  const { newComment } = formData;
 
   const handleEditComment = (id) => {
     setEditingCommentId(id);
@@ -50,7 +58,7 @@ const CommentCard = ({ document, isPending, error }) => {
 
   const handleCancelComment = () => {
     setEditingCommentId("");
-    setNewComment("");
+    resetForm();
     setIsEditingComment(false);
   };
 
@@ -71,7 +79,7 @@ const CommentCard = ({ document, isPending, error }) => {
     });
 
     setEditingCommentId("");
-    setNewComment("");
+    resetForm();
     setIsEditingComment(false);
   };
 
@@ -143,7 +151,12 @@ const CommentCard = ({ document, isPending, error }) => {
       ) : (
         <Stack spacing={2}>
           <Box>
-            <Detail onChange={(e) => setNewComment(e.target.value)} rows={5} />
+            <Detail
+              onChange={handleInputChange}
+              value={newComment}
+              name="newComment"
+              rows={5}
+            />
           </Box>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Box>

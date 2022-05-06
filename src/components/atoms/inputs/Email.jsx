@@ -11,6 +11,7 @@ const Email = ({ value, onChange }) => {
         fullWidth
         label="Email Address"
         name="email"
+        type="email"
         autoComplete="email"
         helperText=""
         value={value}

@@ -9,8 +9,9 @@ const UserName = ({ value, onChange }) => {
       <TextField
         required
         fullWidth
-        label="User Name"
-        name="userName"
+        label="Display Name"
+        name="displayName"
+        type="displayName"
         helperText=""
         autoFocus
         value={value}

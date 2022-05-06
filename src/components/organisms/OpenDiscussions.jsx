@@ -26,7 +26,7 @@ const CalendarCard = () => {
     "discussions",
     ["createdAt", "desc"],
     "3",
-    ["status", "==", "open"]
+    ["status", "==", "Open"]
   );
 
   return (
@@ -65,7 +65,7 @@ const CalendarCard = () => {
                 {documents.map((item) => (
                   <ListItem
                     key={item.id}
-                    sx={{ opacity: item.status === "settled" && 0.4 }}
+                    sx={{ opacity: item.status === "Settled" && 0.4 }}
                   >
                     <Paper sx={{ height: "100%", width: "100%" }}>
                       <ListItemText>

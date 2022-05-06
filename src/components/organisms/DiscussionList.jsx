@@ -29,9 +29,9 @@ const DiscussionList = ({ discussions, error, isPending }) => {
           {discussions.map((item) => (
             <ListItem
               key={item.id}
-              sx={{ opacity: item.status === "settled" && 0.4 }}
+              sx={{ opacity: item.status === "Settled" && 0.4 }}
             >
-              <Link href={`/discussion/${item.id}`}>
+              <Link href={`/discussion/${item.id}`} passHref>
                 <Paper sx={{ height: "100%", width: "100%" }}>
                   <ListItemText>
                     <Box sx={{ display: "flex", pl: 1, alignItems: "center" }}>

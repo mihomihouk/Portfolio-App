@@ -13,17 +13,22 @@ import Email from "../src/components/atoms/inputs/Email";
 import ProfileThumbnail from "../src/components/atoms/inputs/ProfileThumbnail";
 import Link from "../src/Link";
 
+//hooks
+import useForm from "../src/hooks/useForm";
+
 const Signup = () => {
   const { error, isPending, signup } = useSignup();
-  const [displayName, setDisplayName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
   const [thumbnailError, setThumbnailError] = useState("");
 
+  const { formData, handleInputChange } = useForm({
+    displayName: "",
+    email: "",
+    password: "",
+  });
+
   const handleFileChange = (e) => {
     let selected = e.target.files[0];
-    console.log(selected);
 
     if (!selected) {
       setThumbnailError("Please select a file");
@@ -44,7 +49,7 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signup(email, password, displayName, thumbnail);
+    signup(formData.email, formData.password, formData.displayName, thumbnail);
   };
 
   return (
@@ -81,13 +86,13 @@ const Signup = () => {
             </Typography>
             <Stack component="form" spacing={2} noValidate sx={{ mt: 2 }}>
               <UserName
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
+                value={formData.displayName}
+                onChange={handleInputChange}
               />
-              <Email value={email} onChange={(e) => setEmail(e.target.value)} />
+              <Email value={formData.email} onChange={handleInputChange} />
               <Password
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={formData.password}
+                onChange={handleInputChange}
               />
               <ProfileThumbnail onChange={handleFileChange} />
               {thumbnailError && <Typography>{thumbnailError}</Typography>}

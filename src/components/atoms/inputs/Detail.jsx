@@ -3,7 +3,7 @@ import React from "react";
 //styles
 import { TextField } from "@mui/material";
 
-const Detail = ({ size, rows, text, value, onChange }) => {
+const Detail = ({ size, rows, text, value, name, onChange }) => {
   return (
     <>
       <TextField
@@ -13,6 +13,7 @@ const Detail = ({ size, rows, text, value, onChange }) => {
         rows={rows}
         fullWidth
         value={value}
+        name={name}
         onChange={onChange}
       />
     </>
