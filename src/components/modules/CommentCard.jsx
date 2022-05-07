@@ -27,8 +27,9 @@ import UpdateButton from "../atoms/buttons/UpdateButton";
 
 //hooks
 import useForm from "../../hooks/useForm";
+import { useUpdateDocument } from "../../hooks/useUpdateDocument";
 
-const CommentCard = ({ document, isPending, error }) => {
+const CommentCard = ({ document, isPending }) => {
   const [isEditingComment, setIsEditingComment] = useState(false);
   const [editingCommentId, setEditingCommentId] = useState("");
 
@@ -39,6 +40,9 @@ const CommentCard = ({ document, isPending, error }) => {
     newComment: "",
   });
   const { newComment } = formData;
+
+  // call useUpdateDocument
+  const { handleUpdate, error } = useUpdateDocument();
 
   const handleEditComment = (id) => {
     setEditingCommentId(id);
@@ -51,7 +55,7 @@ const CommentCard = ({ document, isPending, error }) => {
       (comment) => comment.id !== id
     );
 
-    await updateDoc(ref, {
+    await handleUpdate(ref, {
       comments: newComments,
     });
   };
@@ -74,7 +78,7 @@ const CommentCard = ({ document, isPending, error }) => {
         : comment
     );
 
-    await updateDoc(ref, {
+    await handleUpdate(ref, {
       comments: newComments,
     });
 

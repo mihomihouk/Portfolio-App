@@ -43,8 +43,7 @@ const About = () => {
 
   const { document, isPending, error } = useDocument("discussions", id);
 
-  const { handleUpdate, isUpdatePending, updateError } =
-    useUpdateDocument("discussions");
+  const { handleUpdate, updateError } = useUpdateDocument();
 
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [isEditingDetail, setIsEditingDetail] = useState(false);
@@ -53,27 +52,19 @@ const About = () => {
   const [newCategory, setNewCategory] = useState("");
   const [newDetail, setNewDetail] = useState("");
 
-  const [open, setOpen] = useState(true);
-
   const handleChangeCategory = (event) => {
     setNewCategory(event.target.value);
   };
 
   const handleUpdateTitle = async (e) => {
     e.preventDefault();
-    console.log(id);
 
-    // const docRef = doc(db, "discussions", id);
+    const docRef = doc(db, "discussions", id);
 
-    // await updateDoc(docRef, {
-    //   title: newTitle,
-    //   category: newCategory,
-    // });
-    const newData = {
+    await handleUpdate(docRef, {
       title: newTitle,
       category: newCategory,
-    };
-    await handleUpdate(id, newData);
+    });
 
     setIsEditingTitle(false);
 
@@ -92,7 +83,7 @@ const About = () => {
 
     const docRef = doc(db, "discussions", id);
 
-    await updateDoc(docRef, {
+    await handleUpdate(docRef, {
       detail: newDetail,
     });
 
@@ -108,24 +99,20 @@ const About = () => {
   const handleCloseDiscussion = async (e) => {
     e.preventDefault();
 
-    setOpen(!open);
-
     const docRef = doc(db, "discussions", id);
 
-    await updateDoc(docRef, {
-      status: "settled",
+    await handleUpdate(docRef, {
+      status: "Settled",
     });
   };
 
   const handleReopenDiscussion = async (e) => {
     e.preventDefault();
 
-    setOpen(!open);
-
     const docRef = doc(db, "discussions", id);
 
-    await updateDoc(docRef, {
-      status: "open",
+    await handleUpdate(docRef, {
+      status: "Open",
     });
   };
 
@@ -150,6 +137,7 @@ const About = () => {
           </Box>
           {isPending && <Typography>Loading...</Typography>}
           {error && <Typography>{error}</Typography>}
+          {updateError && <Typography>{updateError}</Typography>}
           {document && (
             <Stack spacing={1}>
               <PageNavigation path={"/discussion"} />
@@ -235,6 +223,7 @@ const About = () => {
               ) : (
                 <>
                   <Stack spacing={2}>
+                    {updateError && <Typography>{updateError}</Typography>}
                     <Box>
                       <Detail
                         rows={5}
@@ -253,7 +242,7 @@ const About = () => {
                 </>
               )}
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                {open ? (
+                {document.status === "Open" ? (
                   <Button onClick={handleCloseDiscussion}>
                     Close This Discussion
                   </Button>
@@ -268,11 +257,7 @@ const About = () => {
               </Divider>
               <Box container sx={{ pt: 3, height: "60%", width: "100%" }}>
                 <List sx={{ width: "100%" }}>
-                  <CommentCard
-                    document={document}
-                    error={error}
-                    isPending={isPending}
-                  />
+                  <CommentCard document={document} isPending={isPending} />
                 </List>
               </Box>
             </Stack>

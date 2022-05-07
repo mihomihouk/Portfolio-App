@@ -10,8 +10,9 @@ const CategorySelector = ({ onChange, category }) => {
         sx={{ width: 170, height: 30 }}
         value={category}
         displayEmpty
-        defaultValue="All"
+        defaultValue=""
         onChange={onChange}
+        name="category"
       >
         <MenuItem value="" disabled>
           Categories

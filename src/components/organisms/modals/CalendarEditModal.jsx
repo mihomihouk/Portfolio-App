@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 //firebase
 import { db, auth } from "../../../firebase/config";
-import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+import { doc, deleteDoc } from "firebase/firestore";
 
 //styles
 import {
@@ -22,11 +22,12 @@ import PersonIcon from "@mui/icons-material/Person";
 import EditButton from "../../atoms/buttons/EditButton";
 import DeleteButton from "../../atoms/buttons/DeleteButton";
 import CloseButton from "../../atoms/buttons/CloseButton";
+import CalendarForm from "../../modules/CalendarForm";
 
 //hooks
 import useDatePicker from "../../../hooks/useDatepicker";
 import useForm from "../../../hooks/useForm";
-import CalendarForm from "../../modules/CalendarForm";
+import { useUpdateDocument } from "../../../hooks/useUpdateDocument";
 
 const CalendarEditModal = ({ open, handleClose, eventToEdit }) => {
   const user = auth.currentUser;
@@ -42,6 +43,9 @@ const CalendarEditModal = ({ open, handleClose, eventToEdit }) => {
   });
 
   const { title, detail } = formData;
+
+  //call useUpdateDocument
+  const { handleUpdate, error } = useUpdateDocument();
 
   //call useDatePicker
   const {
@@ -77,7 +81,7 @@ const CalendarEditModal = ({ open, handleClose, eventToEdit }) => {
   const handleSubmit = async () => {
     const docRef = doc(db, "events", eventToEdit.id);
 
-    const unsub = await updateDoc(docRef, {
+    handleUpdate(docRef, {
       title,
       description: detail,
       start: startDate,
@@ -90,8 +94,6 @@ const CalendarEditModal = ({ open, handleClose, eventToEdit }) => {
     resetDates();
     setLabel("");
     handleClose();
-
-    return () => unsub();
   };
 
   return (

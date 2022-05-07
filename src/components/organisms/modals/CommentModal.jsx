@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { auth, db } from "../../../firebase/config";
 
 //firebase
-import { doc, Timestamp, updateDoc } from "firebase/firestore";
+import { doc, Timestamp } from "firebase/firestore";
 
 //styles
 import { Box, Modal, Stack } from "@mui/material";
@@ -15,6 +15,7 @@ import CreateButton from "../../atoms/buttons/CreateButton";
 
 //hooks
 import useForm from "../../../hooks/useForm";
+import { useUpdateDocument } from "../../../hooks/useUpdateDocument";
 
 const DiscussionModal = ({ document }) => {
   const [open, setOpen] = useState(false);
@@ -27,6 +28,9 @@ const DiscussionModal = ({ document }) => {
   });
 
   const { newComment } = formData;
+
+  //call useUpdateDocument hook
+  const { handleUpdate, updateError } = useUpdateDocument();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -50,7 +54,7 @@ const DiscussionModal = ({ document }) => {
 
     const docRef = doc(db, "discussions", document.id);
 
-    await updateDoc(docRef, {
+    await handleUpdate(docRef, {
       comments: [...document.comments, commentToAdd],
     });
 

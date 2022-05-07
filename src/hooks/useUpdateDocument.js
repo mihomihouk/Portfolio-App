@@ -1,30 +1,20 @@
 import { useState } from "react";
-
 //firebase imports
-import { db, auth } from "../firebase/config";
-import { doc, updateDoc } from "firebase/firestore";
+import { updateDoc } from "firebase/firestore";
 
-export const useUpdateDocument = (collection) => {
+export const useUpdateDocument = () => {
   const [error, setError] = useState(null);
-  const [isPending, setIsPending] = useState(true);
 
-  const handleUpdate = async (id, data) => {
-    setIsPending(true);
-    setError(null);
+  const handleUpdate = async (ref, data) => {
     try {
-      let docRef = doc(db, collection);
-      if (id) {
-        docRef = doc(db, collection, id);
-      }
-      const unsub = await updateDoc(docRef, {
-        data,
+      const res = await updateDoc(ref, {
+        ...data,
       });
-      return () => unsub();
     } catch (error) {
       setError("Could not update the data");
-      console.error;
+      console.error(error);
     }
   };
 
-  return { handleUpdate, isPending, error };
+  return { handleUpdate, error };
 };
