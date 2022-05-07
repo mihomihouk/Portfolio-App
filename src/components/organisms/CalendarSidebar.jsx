@@ -42,13 +42,15 @@ const BpCheckedIcon = styled(BpIcon)(({ label }) => ({
 
 const BpCheckbox = ({ label, onChange }) => {
   return (
-    <Checkbox
-      disableRipple
-      color="default"
-      checkedIcon={<BpCheckedIcon label={label} />}
-      icon={<BpIcon label={label} />}
-      onChange={onChange}
-    />
+    <>
+      <Checkbox
+        disableRipple
+        color="default"
+        checkedIcon={<BpCheckedIcon />}
+        icon={<BpIcon label={label} />}
+        onChange={onChange}
+      />
+    </>
   );
 };
 
@@ -56,17 +58,24 @@ const CalendarSidebar = ({ documents, isPending, error }) => {
   const [labels, setLabels] = useRecoilState(labelState);
 
   useEffect(() => {
+    if (!documents) {
+      return;
+    }
     let newArray = [];
-    documents &&
-      documents.forEach((item) => {
-        if (!newArray.includes(item.label)) {
-          newArray.push({
-            color: item.label.color,
-            category: item.label.category,
-            checked: true,
-          });
-        }
+    const filterUniqueItemsByColor = (array) => {
+      const itemColor = array.map((item) => item.label.color);
+      return array.filter((item, index) => {
+        return itemColor.indexOf(item.label.color) === index;
       });
+    };
+    const uniqueItems = filterUniqueItemsByColor(documents);
+    uniqueItems.forEach((item) => {
+      newArray.push({
+        color: item.label.color,
+        category: item.label.category,
+        checked: true,
+      });
+    });
     setLabels(newArray);
   }, [documents]);
 
@@ -99,14 +108,14 @@ const CalendarSidebar = ({ documents, isPending, error }) => {
           {labels &&
             labels.map((label) => (
               <ListItem key={label.color}>
-                <ListItemText>
+                <ListItemText onChange={() => handleChangeLabels(label)}>
                   <FormControlLabel
                     color={label.color}
                     control={
                       <BpCheckbox
                         defaultChecked
                         label={label.color}
-                        onChange={() => handleChangeLabels(label)}
+                        checked={label.checked}
                       />
                     }
                     label={label.category}
