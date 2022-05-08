@@ -16,26 +16,25 @@ import CreateButton from "../../atoms/buttons/CreateButton";
 //hooks
 import useForm from "../../../hooks/useForm";
 import { useUpdateDocument } from "../../../hooks/useUpdateDocument";
+import { useModal } from "../../../hooks/useModal";
 
 const DiscussionModal = ({ document }) => {
-  const [open, setOpen] = useState(false);
-
   const user = auth.currentUser;
 
-  //call useForm hook
   const { formData, handleInputChange, resetForm } = useForm({
     newComment: "",
   });
 
   const { newComment } = formData;
 
-  //call useUpdateDocument hook
   const { handleUpdate, updateError } = useUpdateDocument();
 
-  const handleOpen = () => setOpen(true);
+  const { handleOpenCreateModal, handleCloseCreateModal, openCreateModal } =
+    useModal();
+
   const handleClose = () => {
     resetForm();
-    setOpen(false);
+    handleCloseCreateModal();
   };
 
   const handleSubmit = async (e) => {
@@ -59,13 +58,13 @@ const DiscussionModal = ({ document }) => {
     });
 
     resetForm();
-    setOpen(false);
+    handleCloseCreateModal();
   };
 
   return (
     <>
-      <CreateButton onClick={handleOpen} title="New Comment" />
-      <Modal open={open} onClose={handleClose}>
+      <CreateButton onClick={handleOpenCreateModal} title="New Comment" />
+      <Modal open={openCreateModal} onClose={handleClose}>
         <Box
           container
           sx={{

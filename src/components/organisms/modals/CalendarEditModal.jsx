@@ -98,7 +98,7 @@ const CalendarEditModal = ({ open, handleClose, eventToEdit }) => {
 
   return (
     <>
-      <Modal open={open} onClose={handleClickClose}>
+      <Modal open={open} onClose={handleClose}>
         <Stack
           spacing={1}
           sx={{
@@ -203,7 +203,6 @@ const CalendarEditModal = ({ open, handleClose, eventToEdit }) => {
             <>
               <CalendarForm
                 open={open}
-                handleClose={handleClose}
                 title={title}
                 detail={detail}
                 startDate={startDate}

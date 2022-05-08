@@ -32,14 +32,13 @@ const labelsClasses = [
 
 const CalendarForm = ({
   open,
-  handleClose,
+  handleClickClose,
   title,
   detail,
   startDate,
   endDate,
   label,
   setLabel,
-  handleClickClose,
   handleInputChange,
   handleStartDateChange,
   handleEndDateChange,
@@ -47,7 +46,7 @@ const CalendarForm = ({
 }) => {
   return (
     <>
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={open} onClose={handleClickClose}>
         <Stack
           spacing={1}
           sx={{

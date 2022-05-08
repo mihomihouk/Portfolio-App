@@ -17,17 +17,20 @@ import format from "date-fns/format";
 
 //components
 import EditButton from "../atoms/buttons/EditButton";
+import RotaEditModal from "./modals/RotaEditModal";
 
 //hooks
 import { useCollection } from "../../hooks/useCollection";
 import { Box } from "@mui/system";
-import RotaEditModal from "./modals/RotaEditModal";
+import { useModal } from "../../hooks/useModal";
 
 const RotaList = () => {
   const { documents, isPending, error } = useCollection("users");
 
   const [rotaToEdit, setRotaToEdit] = useState("");
-  const [openEditModal, setOpenEditModal] = useState(false);
+  // const [openEditModal, setOpenEditModal] = useState(false);
+  const { handleOpenEditModal, handleCloseEditModal, openEditModal } =
+    useModal();
 
   const firstDay = format(startOfWeek(new Date(), { weekStartsOn: 1 }), "dd");
   const lastDay = format(
@@ -36,18 +39,19 @@ const RotaList = () => {
   );
   const formattedCurrentWeek = `${firstDay} - ${lastDay}`;
 
-  const handleOpenEditModal = () => {
-    setOpenEditModal(true);
-  };
+  // const handleOpenEditModal = () => {
+  //   setOpenEditModal(true);
+  // };
 
   //Click to open edit modal
   const handleClickEdit = (targetUser) => {
-    handleOpenEditModal(true);
+    // handleOpenEditModal(true);
+    handleOpenEditModal();
     setRotaToEdit(targetUser);
   };
 
-  const handleCloseEditModal = () => {
-    setOpenEditModal(false);
+  const handleClose = () => {
+    handleCloseEditModal();
     setRotaToEdit("");
   };
 
@@ -55,7 +59,7 @@ const RotaList = () => {
     <>
       <RotaEditModal
         open={openEditModal}
-        handleClose={handleCloseEditModal}
+        handleClose={handleClose}
         user={rotaToEdit}
       />
       <Card raised sx={{ borderRadius: "25px" }}>

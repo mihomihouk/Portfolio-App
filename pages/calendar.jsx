@@ -18,17 +18,22 @@ import CalendarCreateModal from "../src/components/organisms/modals/CalendarCrea
 import CalendarEditModal from "../src/components/organisms/modals/CalendarEditModal";
 import CalendarSidebar from "../src/components/organisms/CalendarSidebar";
 
+//hooks
+import { useModal } from "../src/hooks/useModal";
+
 const Calendar = () => {
   const { documents, error, isPending } = useCollection("events");
   const [labels, setLabels] = useRecoilState(labelState);
   const [events, setEvents] = useState([]);
-  const [openCreateModal, setOpenCreateModal] = useState(false);
-  const [openEditModal, setOpenEditModal] = useState(false);
   const [eventToEdit, setEventToEdit] = useState("");
-
-  const handleOpenCreateModal = () => setOpenCreateModal(true);
-  const handleCloseCreateModal = () => setOpenCreateModal(false);
-  const handleOpenEditModal = () => setOpenEditModal(true);
+  const {
+    handleOpenCreateModal,
+    handleCloseCreateModal,
+    openCreateModal,
+    handleOpenEditModal,
+    handleCloseEditModal,
+    openEditModal,
+  } = useModal();
 
   useEffect(() => {
     if (!documents) {
@@ -56,20 +61,10 @@ const Calendar = () => {
     setEvents(formattedEvents);
   }, [documents, labels]);
 
-  //Click date to open modal
-  const handleDateClick = () => {
-    handleOpenCreateModal();
-  };
-
   //Click event created
   const handleEventClick = (EventClickArg) => {
     setEventToEdit(EventClickArg.event);
     handleOpenEditModal();
-  };
-
-  const handleCloseEditModal = () => {
-    setOpenEditModal(false);
-    setEventToEdit("");
   };
 
   return (
@@ -114,7 +109,7 @@ const Calendar = () => {
               <FullCalendar
                 plugins={[dayGridPlugin, interactionPlugin]}
                 initialView="dayGridMonth"
-                dateClick={handleDateClick}
+                dateClick={handleOpenCreateModal}
                 editable={true}
                 eventClick={handleEventClick}
                 selectable={true}
