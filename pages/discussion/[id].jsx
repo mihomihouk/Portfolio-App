@@ -36,6 +36,7 @@ import PageNavigation from "../../src/components/atoms/PageNavigation";
 
 //hooks
 import { useUpdateDocument } from "../../src/hooks/useUpdateDocument";
+import useForm from "../../src/hooks/useForm";
 
 const About = () => {
   const router = useRouter();
@@ -48,33 +49,29 @@ const About = () => {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [isEditingDetail, setIsEditingDetail] = useState(false);
 
-  const [newTitle, setNewTitle] = useState("");
-  const [newCategory, setNewCategory] = useState("");
-  const [newDetail, setNewDetail] = useState("");
+  // call useForm
+  const { formData, handleInputChange, resetForm } = useForm({
+    category: "",
+    title: "",
+    detail: "",
+  });
+  const { category, title, detail } = formData;
 
-  const handleChangeCategory = (event) => {
-    setNewCategory(event.target.value);
-  };
-
-  const handleUpdateTitle = async (e) => {
+  const handleUpdateTitle = (e) => {
     e.preventDefault();
 
     const docRef = doc(db, "discussions", id);
 
-    await handleUpdate(docRef, {
-      title: newTitle,
-      category: newCategory,
+    handleUpdate(docRef, {
+      title: title,
+      category: category,
     });
 
     setIsEditingTitle(false);
-
-    setNewTitle("");
-    setNewCategory("");
   };
 
   const handleCancelTitle = () => {
-    setNewTitle("");
-    setNewCategory("");
+    resetForm();
     setIsEditingTitle(false);
   };
 
@@ -84,15 +81,13 @@ const About = () => {
     const docRef = doc(db, "discussions", id);
 
     await handleUpdate(docRef, {
-      detail: newDetail,
+      detail: detail,
     });
 
-    setNewDetail("");
     setIsEditingDetail(false);
   };
 
   const handleCancelDetail = () => {
-    setNewDetail("");
     setIsEditingDetail(false);
   };
 
@@ -168,12 +163,12 @@ const About = () => {
                     <>
                       <Stack spacing={1} sx={{ width: "100%" }}>
                         <Box>
-                          <FormControl required>
-                            <CategorySelector
-                              onChange={handleChangeCategory}
-                              category={newCategory}
-                            />
-                          </FormControl>
+                          {/* <FormControl required> */}
+                          <CategorySelector
+                            onChange={handleInputChange}
+                            category={category}
+                          />
+                          {/* </FormControl> */}
                         </Box>
                         <Box sx={{ display: "flex", alignItems: "center" }}>
                           <Box sx={{ width: "100%" }}>
@@ -184,7 +179,8 @@ const About = () => {
                             >
                               <Input
                                 placeholder="Title"
-                                onChange={(e) => setNewTitle(e.target.value)}
+                                onChange={handleInputChange}
+                                name="title"
                               />
                             </FormControl>
                           </Box>
@@ -227,7 +223,8 @@ const About = () => {
                     <Box>
                       <Detail
                         rows={5}
-                        onChange={(e) => setNewDetail(e.target.value)}
+                        name="detail"
+                        onChange={handleInputChange}
                       />
                     </Box>
                     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
