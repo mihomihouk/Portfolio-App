@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSignup } from "../src/hooks/useSignup";
 
 //styles
@@ -15,11 +15,10 @@ import Link from "../src/Link";
 
 //hooks
 import useForm from "../src/hooks/useForm";
+import { useThumbnail } from "../src/hooks/useThumbnail";
 
 const Signup = () => {
   const { error, isPending, signup } = useSignup();
-  const [thumbnail, setThumbnail] = useState(null);
-  const [thumbnailError, setThumbnailError] = useState("");
 
   const { formData, handleInputChange } = useForm({
     displayName: "",
@@ -27,25 +26,7 @@ const Signup = () => {
     password: "",
   });
 
-  const handleFileChange = (e) => {
-    let selected = e.target.files[0];
-
-    if (!selected) {
-      setThumbnailError("Please select a file");
-      return;
-    }
-    if (!selected.type.includes("image")) {
-      setThumbnailError("Selected file must be an image");
-      return;
-    }
-    if (selected.size > 100000) {
-      setThumbnailError("Image file size must be less than 100kb");
-      return;
-    }
-
-    setThumbnailError(null);
-    setThumbnail(selected);
-  };
+  const { thumbnail, handleFileChange, thumbnailError } = useThumbnail();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -94,7 +75,7 @@ const Signup = () => {
                 value={formData.password}
                 onChange={handleInputChange}
               />
-              <ProfileThumbnail onChange={handleFileChange} />
+              <ProfileThumbnail onChange={(e) => handleFileChange(e)} />
               {thumbnailError && <Typography>{thumbnailError}</Typography>}
               {!isPending && (
                 <LoginButton action="Sign up" onClick={handleSubmit} />
