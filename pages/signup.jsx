@@ -26,11 +26,13 @@ const Signup = () => {
     password: "",
   });
 
+  const { displayName, email, password } = formData;
+
   const { thumbnail, handleFileChange, thumbnailError } = useThumbnail();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signup(formData.email, formData.password, formData.displayName, thumbnail);
+    signup(email, password, displayName, thumbnail);
   };
 
   return (
@@ -66,15 +68,9 @@ const Signup = () => {
               Sign up
             </Typography>
             <Stack component="form" spacing={2} noValidate sx={{ mt: 2 }}>
-              <UserName
-                value={formData.displayName}
-                onChange={handleInputChange}
-              />
-              <Email value={formData.email} onChange={handleInputChange} />
-              <Password
-                value={formData.password}
-                onChange={handleInputChange}
-              />
+              <UserName value={displayName} onChange={handleInputChange} />
+              <Email value={email} onChange={handleInputChange} />
+              <Password value={password} onChange={handleInputChange} />
               <ProfileThumbnail onChange={(e) => handleFileChange(e)} />
               {thumbnailError && <Typography>{thumbnailError}</Typography>}
               {!isPending && (

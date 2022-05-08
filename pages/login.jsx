@@ -22,9 +22,11 @@ const Login = () => {
     password: "",
   });
 
+  const { email, password } = formData;
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(formData.email, formData.password);
+    login(email, password);
   };
 
   return (
@@ -60,11 +62,8 @@ const Login = () => {
               Log in
             </Typography>
             <Box component="form" noValidate sx={{ mt: 1 }}>
-              <Email value={formData.email} onChange={handleInputChange} />
-              <Password
-                value={formData.password}
-                onChange={handleInputChange}
-              />
+              <Email value={email} onChange={handleInputChange} />
+              <Password value={password} onChange={handleInputChange} />
               {!isPending && (
                 <LoginButton action="Login" onClick={handleSubmit} />
               )}
