@@ -28,7 +28,6 @@ const RotaList = () => {
   const { documents, isPending, error } = useCollection("users");
 
   const [rotaToEdit, setRotaToEdit] = useState("");
-  // const [openEditModal, setOpenEditModal] = useState(false);
   const { handleOpenEditModal, handleCloseEditModal, openEditModal } =
     useModal();
 
@@ -39,13 +38,7 @@ const RotaList = () => {
   );
   const formattedCurrentWeek = `${firstDay} - ${lastDay}`;
 
-  // const handleOpenEditModal = () => {
-  //   setOpenEditModal(true);
-  // };
-
-  //Click to open edit modal
   const handleClickEdit = (targetUser) => {
-    // handleOpenEditModal(true);
     handleOpenEditModal();
     setRotaToEdit(targetUser);
   };

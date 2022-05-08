@@ -33,7 +33,6 @@ const CalendarEditModal = ({ open, handleClose, eventToEdit }) => {
   const user = auth.currentUser;
 
   const [isEditing, setIsEditing] = useState(false);
-
   const [label, setLabel] = useState();
 
   //call useForm
