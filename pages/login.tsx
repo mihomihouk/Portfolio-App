@@ -24,7 +24,7 @@ const Login = () => {
 
   const { email, password } = formData;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     login(email, password);
   };
@@ -65,7 +65,11 @@ const Login = () => {
               <Email value={email} onChange={handleInputChange} />
               <Password value={password} onChange={handleInputChange} />
               {!isPending && (
-                <LoginButton action="Login" onClick={handleSubmit} />
+                <LoginButton
+                  isPending={isPending}
+                  action="Login"
+                  onClick={handleSubmit}
+                />
               )}
               {isPending && (
                 <LoginButton isPending={isPending} action="Logging in" />
