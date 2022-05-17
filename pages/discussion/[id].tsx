@@ -57,9 +57,9 @@ const About = () => {
   });
   const { category, title, detail } = formData;
 
-  const handleUpdateTitle = (e) => {
+  const handleUpdateTitle = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
+    // @ts-ignore
     const docRef = doc(db, "discussions", id);
 
     handleUpdate(docRef, {
@@ -75,9 +75,9 @@ const About = () => {
     setIsEditingTitle(false);
   };
 
-  const handleUpdateDetail = async (e) => {
+  const handleUpdateDetail = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
+    // @ts-ignore
     const docRef = doc(db, "discussions", id);
 
     await handleUpdate(docRef, {
@@ -91,9 +91,11 @@ const About = () => {
     setIsEditingDetail(false);
   };
 
-  const handleCloseDiscussion = async (e) => {
+  const handleCloseDiscussion = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
-
+    // @ts-ignore
     const docRef = doc(db, "discussions", id);
 
     await handleUpdate(docRef, {
@@ -101,9 +103,11 @@ const About = () => {
     });
   };
 
-  const handleReopenDiscussion = async (e) => {
+  const handleReopenDiscussion = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
-
+    // @ts-ignore
     const docRef = doc(db, "discussions", id);
 
     await handleUpdate(docRef, {
@@ -163,12 +167,10 @@ const About = () => {
                     <>
                       <Stack spacing={1} sx={{ width: "100%" }}>
                         <Box>
-                          {/* <FormControl required> */}
                           <CategorySelector
                             onChange={handleInputChange}
                             category={category}
                           />
-                          {/* </FormControl> */}
                         </Box>
                         <Box sx={{ display: "flex", alignItems: "center" }}>
                           <Box sx={{ width: "100%" }}>
@@ -225,6 +227,7 @@ const About = () => {
                         rows={5}
                         name="detail"
                         onChange={handleInputChange}
+                        value={detail}
                       />
                     </Box>
                     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -252,7 +255,7 @@ const About = () => {
               <Divider variant="middle" sx={{ pt: 2 }}>
                 <Chip label="COMMENT" />
               </Divider>
-              <Box container sx={{ pt: 3, height: "60%", width: "100%" }}>
+              <Box sx={{ pt: 3, height: "60%", width: "100%" }}>
                 <List sx={{ width: "100%" }}>
                   <CommentCard document={document} isPending={isPending} />
                 </List>
