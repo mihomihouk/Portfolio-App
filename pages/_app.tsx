@@ -19,6 +19,7 @@ const theme = createTheme({
   },
   components: {
     MuiTypography: {
+      // @ts-ignore
       style: {
         fontFamily: "Poppins",
       },
