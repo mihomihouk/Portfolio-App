@@ -71,12 +71,10 @@ const Calendar = () => {
     <>
       <CalendarCreateModal
         open={openCreateModal}
-        handleOpen={handleOpenCreateModal}
         handleClose={handleCloseCreateModal}
       />
       <CalendarEditModal
         open={openEditModal}
-        handleOpen={handleOpenEditModal}
         handleClose={handleCloseEditModal}
         eventToEdit={eventToEdit}
       />
@@ -100,8 +98,8 @@ const Calendar = () => {
           <Grid item xs={2}>
             <CalendarSidebar
               documents={documents}
-              labels={labels}
-              setLabels={setLabels}
+              error={error}
+              isPending={isPending}
             />
           </Grid>
           <Grid item xs={10} sx={{ pl: 2 }}>
