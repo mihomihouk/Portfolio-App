@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "@mui/material";
 interface LoginButtonProps {
-  isPending: boolean;
-  action: string;
+  isPending?: boolean;
+  action?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
