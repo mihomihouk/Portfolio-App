@@ -45,7 +45,7 @@ const New = () => {
 
     const ref = collection(db, "discussions");
 
-    const unsub = await addDoc(ref, {
+    await addDoc(ref, {
       title,
       detail,
       user: {
@@ -60,8 +60,6 @@ const New = () => {
     });
 
     router.push("/discussion");
-
-    return () => unsub();
   };
 
   const handleCancel = () => {
@@ -104,7 +102,6 @@ const New = () => {
                 <CategorySelector
                   onChange={handleInputChange}
                   category={category}
-                  name="category"
                 />
               </Box>
               <Box sx={{ width: "70%" }}>
@@ -118,8 +115,9 @@ const New = () => {
               </Box>
             </Box>
             <Box>
-              <FormControl required size="large" sx={{ width: "100%" }}>
+              <FormControl required sx={{ width: "100%" }}>
                 <TextField
+                  size="medium"
                   multiline
                   rows={7}
                   placeholder="Description"
