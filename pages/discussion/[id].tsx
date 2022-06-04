@@ -77,14 +77,15 @@ const About = () => {
 
   const handleUpdateDetail = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    // @ts-ignore
-    const docRef = doc(db, "discussions", id);
+    if (typeof id === "string") {
+      const docRef = doc(db, "discussions", id);
 
-    await handleUpdate(docRef, {
-      detail: detail,
-    });
+      await handleUpdate(docRef, {
+        detail: detail,
+      });
 
-    setIsEditingDetail(false);
+      setIsEditingDetail(false);
+    }
   };
 
   const handleCancelDetail = () => {
@@ -95,24 +96,26 @@ const About = () => {
     e: React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
-    // @ts-ignore
-    const docRef = doc(db, "discussions", id);
+    if (typeof id === "string") {
+      const docRef = doc(db, "discussions", id);
 
-    await handleUpdate(docRef, {
-      status: "Settled",
-    });
+      await handleUpdate(docRef, {
+        status: "Settled",
+      });
+    }
   };
 
   const handleReopenDiscussion = async (
     e: React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
-    // @ts-ignore
-    const docRef = doc(db, "discussions", id);
+    if (typeof id === "string") {
+      const docRef = doc(db, "discussions", id);
 
-    await handleUpdate(docRef, {
-      status: "Open",
-    });
+      await handleUpdate(docRef, {
+        status: "Open",
+      });
+    }
   };
 
   return (
