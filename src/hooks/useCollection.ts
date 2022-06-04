@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { db } from "../../src/firebase/config";
+import { db } from "../firebase/config";
 
 //firebase imports
 import {
@@ -9,9 +9,24 @@ import {
   limit,
   query,
   where,
+  CollectionReference,
+  DocumentData,
+  Query,
 } from "firebase/firestore";
 
-export const useCollection = (c, newOrder, newLimit, newQuery) => {
+interface QueryProps {
+  c: string;
+  newOrder?: [any, any];
+  newLimit?: number;
+  newQuery?: [string, "==", string];
+}
+
+export const useCollection = ({
+  c,
+  newOrder,
+  newLimit,
+  newQuery,
+}: QueryProps) => {
   const [documents, setDocuments] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
@@ -25,7 +40,7 @@ export const useCollection = (c, newOrder, newLimit, newQuery) => {
       setIsPending(true);
       setError(null);
       try {
-        let ref = collection(db, c);
+        let ref: Query<DocumentData> = collection(db, c);
         if (order) {
           ref = query(ref, orderBy(...order));
         }
