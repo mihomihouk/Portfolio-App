@@ -1,9 +1,14 @@
 import { useState } from "react";
 
+type InputData = {
+  email?: string;
+  password?: string;
+  displayName?: string;
+};
 const useForm = (initialState = {}) => {
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState<InputData>(initialState);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
