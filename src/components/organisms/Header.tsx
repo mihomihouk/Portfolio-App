@@ -10,7 +10,7 @@ import { Avatar, AppBar, Box, IconButton, Toolbar } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
 //components
-import ProfileCard from "../organisms/modals/ProfileCard";
+import ProfileCard from "./modals/ProfileCard";
 
 const Header = () => {
   const user = auth.currentUser;
