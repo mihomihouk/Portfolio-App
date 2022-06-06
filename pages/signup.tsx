@@ -71,7 +71,11 @@ const Signup = () => {
               <UserName value={displayName} onChange={handleInputChange} />
               <Email value={email} onChange={handleInputChange} />
               <Password value={password} onChange={handleInputChange} />
-              <ProfileThumbnail onChange={(e) => handleFileChange(e)} />
+              <ProfileThumbnail
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleFileChange(e)
+                }
+              />
               {thumbnailError && <Typography>{thumbnailError}</Typography>}
               {!isPending && (
                 <LoginButton action="Sign up" onClick={handleSubmit} />
