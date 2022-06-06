@@ -4,7 +4,12 @@ import { useRouter } from "next/router";
 //firebase
 import { auth, storage, db } from "../firebase/config";
 import { setDoc, doc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  StorageReference,
+} from "firebase/storage";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 export const useSignup = () => {
@@ -12,7 +17,12 @@ export const useSignup = () => {
   const [isPending, setIsPending] = useState(false);
   const router = useRouter();
 
-  const signup = async (email, password, displayName, thumbnail) => {
+  const signup = async (
+    email: string,
+    password: string,
+    displayName: string,
+    thumbnail: any
+  ) => {
     setError(null);
     setIsPending(true);
 
