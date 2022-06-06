@@ -25,7 +25,7 @@ const CalendarCard = () => {
   const { documents, error, isPending } = useCollection(
     "discussions",
     ["createdAt", "desc"],
-    "3",
+    3,
     ["status", "==", "Open"]
   );
 
