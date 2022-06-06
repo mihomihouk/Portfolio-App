@@ -1,7 +1,6 @@
 //styles
 import Link from "../src/Link";
-import { Button, Divider, Container, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Box, Button, Container, Typography } from "@mui/material";
 import Header from "../src/components/organisms/Header";
 
 const NotFound = () => {
@@ -17,7 +16,6 @@ const NotFound = () => {
         <Typography mb={2}>
           The page you&apos;re looking for was not found.
         </Typography>
-        <Divider my={6} />
         <Box sx={{ mt: 3 }}>
           <Link href="/dashboard" sx={{ textDecoration: "none" }}>
             <Button variant="contained" color="secondary">
