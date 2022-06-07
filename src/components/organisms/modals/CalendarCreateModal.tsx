@@ -38,7 +38,7 @@ const CalendarModal = ({ open, handleClose }) => {
     setLabel("");
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLInputElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     const ref = collection(db, "events");

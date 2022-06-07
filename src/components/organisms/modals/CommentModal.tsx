@@ -37,7 +37,7 @@ const DiscussionModal = ({ document }) => {
     handleCloseCreateModal();
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLInputElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     const commentToAdd = {
