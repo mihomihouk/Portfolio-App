@@ -17,17 +17,16 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-const BpIcon = styled("span")(({ label }) => ({
+const BpIcon = styled("span")(({ color }) => ({
   borderRadius: 3,
   width: 16,
   height: 16,
   boxShadow:
     "inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)",
-  backgroundColor: label,
+  backgroundColor: color,
 }));
 
-const BpCheckedIcon = styled(BpIcon)(({ label }) => ({
-  backgroundColor: label,
+const BpCheckedIcon = styled(BpIcon)({
   "&:before": {
     display: "block",
     width: 16,
@@ -38,7 +37,7 @@ const BpCheckedIcon = styled(BpIcon)(({ label }) => ({
       "1.003 0 00-1.42 1.42l3 3c.18.18.43.29.71.29s.53-.11.71-.29l5-5A1.003 1.003 0 0012 5z' fill='%23fff'/%3E%3C/svg%3E\")",
     content: '""',
   },
-}));
+});
 
 const BpCheckbox = ({ label, onChange }) => {
   return (
@@ -47,7 +46,7 @@ const BpCheckbox = ({ label, onChange }) => {
         disableRipple
         color="default"
         checkedIcon={<BpCheckedIcon />}
-        icon={<BpIcon label={label} />}
+        icon={<BpIcon color={label} />}
         onChange={onChange}
       />
     </>
@@ -108,14 +107,13 @@ const CalendarSidebar = ({ documents, isPending, error }) => {
           {labels &&
             labels.map((label) => (
               <ListItem key={label.color}>
-                <ListItemText onChange={() => handleChangeLabels(label)}>
+                <ListItemText>
                   <FormControlLabel
                     color={label.color}
                     control={
                       <BpCheckbox
-                        defaultChecked
                         label={label.color}
-                        checked={label.checked}
+                        onChange={() => handleChangeLabels(label)}
                       />
                     }
                     label={label.category}
