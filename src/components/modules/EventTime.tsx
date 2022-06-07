@@ -11,7 +11,6 @@ const EventTime = ({ date, onChange }) => {
     <>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
-          sx={{ width: "100%" }}
           value={date}
           onChange={onChange}
           renderInput={(params) => (
