@@ -9,8 +9,6 @@ const TagSelector = ({ lblClass, label, onClick }) => {
     <>
       <ListItem onClick={onClick}>
         <ListItemText
-          variant="body2"
-          component="span"
           sx={{
             bgcolor: `${lblClass.color}`,
             width: "24px",
@@ -23,7 +21,7 @@ const TagSelector = ({ lblClass, label, onClick }) => {
         >
           {label === lblClass && (
             <Typography>
-              <CheckIcon size="sm" sx={{ color: "white" }} />
+              <CheckIcon sx={{ color: "white", size: "sm" }} />
             </Typography>
           )}
         </ListItemText>
