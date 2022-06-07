@@ -15,11 +15,11 @@ import NotesIcon from "@mui/icons-material/Notes";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 
 //components
-import Title from "../../components/atoms/inputs/Title";
-import CloseButton from "../../components/atoms/buttons/CloseButton";
-import AddButton from "../../components/atoms/buttons/AddButton";
-import EventTime from "../../components/modules/EventTime";
-import TagSelector from "../../components/modules/TagSelector";
+import Title from "../atoms/inputs/Title";
+import CloseButton from "../atoms/buttons/CloseButton";
+import AddButton from "../atoms/buttons/AddButton";
+import EventTime from "./EventTime";
+import TagSelector from "./TagSelector";
 
 const labelsClasses = [
   { color: "indigo", category: "Work" },
@@ -68,7 +68,10 @@ const CalendarForm = ({
           <Box>
             <Title title={title} onChange={handleInputChange} />
           </Box>
-          <Box fullWidth sx={{ display: "flex", alignItems: "center" }}>
+          <Box
+            component="div"
+            sx={{ width: "100%", display: "flex", alignItems: "center" }}
+          >
             <Grid container sx={{ alignItems: "center" }}>
               <Grid item xs={2}>
                 <Typography>From</Typography>
@@ -78,7 +81,10 @@ const CalendarForm = ({
               </Grid>
             </Grid>
           </Box>
-          <Box fullWidth sx={{ display: "flex", alignItems: "center" }}>
+          <Box
+            component="div"
+            sx={{ width: "100%", display: "flex", alignItems: "center" }}
+          >
             <Grid container sx={{ alignItems: "center" }}>
               <Grid item xs={2}>
                 <Typography>To</Typography>
