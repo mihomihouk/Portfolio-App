@@ -40,9 +40,8 @@ const New = () => {
   const { category, title, detail } = formData;
 
   //Add a new discussion doc
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
-
     const ref = collection(db, "discussions");
 
     await addDoc(ref, {
