@@ -34,19 +34,21 @@ export const useSignup = () => {
       const uploadPath = `thumbnails/${res.user.uid}/${thumbnail.name}`;
       const thumbnailRef = ref(storage, uploadPath);
       await uploadBytes(thumbnailRef, thumbnail);
-      const imgUrl = await getDownloadURL(ref(storage, thumbnailRef));
+      if (typeof thumbnailRef === "string") {
+        const imgUrl = await getDownloadURL(ref(storage, thumbnailRef));
+        //add display name and photoURL to user
+        await updateProfile(res.user, { displayName, photoURL: imgUrl });
 
-      //add display name and photoURL to user
-      await updateProfile(res.user, { displayName, photoURL: imgUrl });
+        //crete a user document
+        const userData = {
+          online: true,
+          displayName,
+          id: res.user.uid,
+          photoURL: imgUrl,
+        };
+        await setDoc(doc(db, "users", res.user.uid), userData);
+      }
 
-      //crete a user document
-      const userData = {
-        online: true,
-        displayName,
-        id: res.user.uid,
-        photoURL: imgUrl,
-      };
-      await setDoc(doc(db, "users", res.user.uid), userData);
       setIsPending(false);
       setError(null);
       await router.push("/dashboard");
