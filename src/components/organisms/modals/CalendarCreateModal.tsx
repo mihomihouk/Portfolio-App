@@ -12,7 +12,7 @@ import CalendarForm from "../../modules/CalendarForm";
 const CalendarModal = ({ open, handleClose }) => {
   const currentUser = auth.currentUser;
 
-  const [label, setLabel] = useState();
+  const [label, setLabel] = useState("");
 
   //call useForm
   const { formData, handleInputChange, resetForm } = useForm({
@@ -38,12 +38,12 @@ const CalendarModal = ({ open, handleClose }) => {
     setLabel("");
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     const ref = collection(db, "events");
 
-    const unsub = await addDoc(ref, {
+    await addDoc(ref, {
       title,
       description: detail,
       start: startDate,
@@ -61,15 +61,12 @@ const CalendarModal = ({ open, handleClose }) => {
     resetDates();
     resetForm();
     setLabel("");
-
-    return () => unsub();
   };
 
   return (
     <>
       <CalendarForm
         open={open}
-        handleClose={handleClose}
         title={title}
         detail={detail}
         startDate={startDate}
