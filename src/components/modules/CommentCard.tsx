@@ -167,9 +167,7 @@ const CommentCard = ({ document, isPending }) => {
               <CancelButton onClick={handleCancelComment} />
             </Box>
             <Box>
-              <UpdateButton
-                onClick={() => handleUpdateComment(document.comments.id)}
-              />
+              <UpdateButton onClick={handleUpdateComment} />
             </Box>
           </Box>
         </Stack>
