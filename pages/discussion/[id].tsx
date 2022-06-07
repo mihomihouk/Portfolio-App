@@ -59,15 +59,16 @@ const About = () => {
 
   const handleUpdateTitle = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    // @ts-ignore
-    const docRef = doc(db, "discussions", id);
+    if (typeof id === "string") {
+      const docRef = doc(db, "discussions", id);
 
-    handleUpdate(docRef, {
-      title: title,
-      category: category,
-    });
+      handleUpdate(docRef, {
+        title: title,
+        category: category,
+      });
 
-    setIsEditingTitle(false);
+      setIsEditingTitle(false);
+    }
   };
 
   const handleCancelTitle = () => {
