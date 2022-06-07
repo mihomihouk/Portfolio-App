@@ -27,7 +27,7 @@ const DiscussionModal = ({ document }) => {
 
   const { newComment } = formData;
 
-  const { handleUpdate, updateError } = useUpdateDocument();
+  const { handleUpdate } = useUpdateDocument();
 
   const { handleOpenCreateModal, handleCloseCreateModal, openCreateModal } =
     useModal();
@@ -37,7 +37,7 @@ const DiscussionModal = ({ document }) => {
     handleCloseCreateModal();
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     const commentToAdd = {
@@ -53,11 +53,12 @@ const DiscussionModal = ({ document }) => {
 
     const docRef = doc(db, "discussions", document.id);
 
+    resetForm();
+
     await handleUpdate(docRef, {
       comments: [...document.comments, commentToAdd],
     });
 
-    resetForm();
     handleCloseCreateModal();
   };
 
@@ -66,7 +67,7 @@ const DiscussionModal = ({ document }) => {
       <CreateButton onClick={handleOpenCreateModal} title="New Comment" />
       <Modal open={openCreateModal} onClose={handleClose}>
         <Box
-          container
+          component="div"
           sx={{
             position: "absolute",
             top: "50%",
