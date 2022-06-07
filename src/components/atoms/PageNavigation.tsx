@@ -8,7 +8,7 @@ const PageNavigation = ({ path }) => {
     <Box display="flex" pt={2}>
       <Box mr={2}>
         <Link href={path}>
-          <ArrowBackIosNewIcon size="lg" />
+          <ArrowBackIosNewIcon sx={{ size: "lg" }} />
         </Link>
       </Box>
       <Typography>Discussion List</Typography>
