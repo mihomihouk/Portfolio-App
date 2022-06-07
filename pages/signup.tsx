@@ -30,7 +30,7 @@ const Signup = () => {
 
   const { thumbnail, handleFileChange, thumbnailError } = useThumbnail();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
     signup(email, password, displayName, thumbnail);
   };
