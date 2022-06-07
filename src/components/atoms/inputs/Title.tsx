@@ -3,7 +3,12 @@ import React from "react";
 //styles
 import { TextField } from "@mui/material";
 
-const Title = ({ title, size, onChange }) => {
+type TitleType = {
+  title: any;
+  size?: any;
+  onChange: any;
+};
+const Title = ({ title, size, onChange }: TitleType) => {
   return (
     <>
       <TextField
