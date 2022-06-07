@@ -44,7 +44,7 @@ const About = () => {
 
   const { document, isPending, error } = useDocument("discussions", id);
 
-  const { handleUpdate, updateError } = useUpdateDocument();
+  const { handleUpdate } = useUpdateDocument();
 
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [isEditingDetail, setIsEditingDetail] = useState(false);
@@ -139,7 +139,6 @@ const About = () => {
           </Box>
           {isPending && <Typography>Loading...</Typography>}
           {error && <Typography>{error}</Typography>}
-          {updateError && <Typography>{updateError}</Typography>}
           {document && (
             <Stack spacing={1}>
               <PageNavigation path={"/discussion"} />
@@ -224,7 +223,6 @@ const About = () => {
               ) : (
                 <>
                   <Stack spacing={2}>
-                    {updateError && <Typography>{updateError}</Typography>}
                     <Box>
                       <Detail
                         rows={5}
