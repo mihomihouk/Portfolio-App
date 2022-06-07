@@ -27,11 +27,10 @@ const RotaEditModal = ({ open, handleClose, user }) => {
   const handleSaveRota = async () => {
     try {
       const docRef = doc(db, "users", user.id);
-      const unsub = await updateDoc(docRef, {
+      await updateDoc(docRef, {
         duty: category,
       });
       handleClose();
-      return () => unsub();
     } catch (error) {
       console.error(error);
       handleClose();
@@ -79,7 +78,6 @@ const RotaEditModal = ({ open, handleClose, user }) => {
                 value={category}
                 displayEmpty
                 defaultValue="Area"
-                instanceId="selector"
                 onChange={handleInputChange}
                 name="category"
               >
