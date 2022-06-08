@@ -10,25 +10,32 @@ export const useDocument = (c, id) => {
   const [isPending, setIsPending] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
     const fetchData = async () => {
       setError(null);
       setIsPending(true);
 
-      const unsub = onSnapshot(
+      onSnapshot(
         doc(db, c, id),
         (doc) => {
-          setDocument({ ...doc.data(), id: doc.id });
-          setError(null);
-          setIsPending(false);
+          if (isMounted) {
+            setDocument({ ...doc.data(), id: doc.id });
+            setError(null);
+            setIsPending(false);
+          }
         },
         (err) => {
-          setError("failed to get document");
-          setIsPending(false);
+          if (isMounted) {
+            setError("failed to get document");
+            setIsPending(false);
+          }
         }
       );
-      return () => unsub();
     };
     fetchData();
+    return () => {
+      isMounted = false;
+    };
   }, [c, id]);
 
   return { document, isPending, error };

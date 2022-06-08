@@ -28,6 +28,7 @@ export const useCollection = (
   const q = useRef(newQuery).current;
 
   useEffect(() => {
+    let isMounted = true;
     const fetchData = async () => {
       setIsPending(true);
       setError(null);
@@ -50,16 +51,23 @@ export const useCollection = (
           snapshot.docs.forEach((doc) => {
             results.push({ ...doc.data(), id: doc.id });
           });
-          setDocuments(results);
-          setError(null);
-          setIsPending(false);
+          if (isMounted) {
+            setDocuments(results);
+            setError(null);
+            setIsPending(false);
+          }
         });
       } catch (error) {
-        setIsPending(false);
-        setError("Could not fetch the data");
+        if (isMounted) {
+          setIsPending(false);
+          setError("Could not fetch the data");
+        }
       }
     };
     fetchData();
+    return () => {
+      isMounted = false;
+    };
   }, [c, order, q, l]);
 
   return { documents, isPending, error };
