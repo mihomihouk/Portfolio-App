@@ -33,21 +33,21 @@ export const useSignup = () => {
       // upload user thumbnail
       const uploadPath = `thumbnails/${res.user.uid}/${thumbnail.name}`;
       const thumbnailRef = ref(storage, uploadPath);
+      console.log(thumbnailRef);
       await uploadBytes(thumbnailRef, thumbnail);
-      if (typeof thumbnailRef === "string") {
-        const imgUrl = await getDownloadURL(ref(storage, thumbnailRef));
-        //add display name and photoURL to user
-        await updateProfile(res.user, { displayName, photoURL: imgUrl });
+      const imgUrl = await getDownloadURL(ref(thumbnailRef));
 
-        //crete a user document
-        const userData = {
-          online: true,
-          displayName,
-          id: res.user.uid,
-          photoURL: imgUrl,
-        };
-        await setDoc(doc(db, "users", res.user.uid), userData);
-      }
+      //add display name and photoURL to user
+      await updateProfile(res.user, { displayName, photoURL: imgUrl });
+
+      //create a user document
+      const userData = {
+        online: true,
+        displayName,
+        id: res.user.uid,
+        photoURL: imgUrl,
+      };
+      await setDoc(doc(db, "users", res.user.uid), userData);
 
       setIsPending(false);
       setError(null);
